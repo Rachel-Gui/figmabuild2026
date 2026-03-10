@@ -7,6 +7,8 @@ import doodle from '@/assets/c66905e9277bdd045c5911a8ef1f9bc6131f4a00.png';
 
 export const LoginView = () => {
   const navigate = useNavigate();
+  const [mode, setMode] = useState<'guided' | 'self'>('self');
+  const [prompt, setPrompt] = useState('');
   const [topic, setTopic] = useState('');
   const [goal, setGoal] = useState('');
   const [time, setTime] = useState('');
@@ -14,11 +16,11 @@ export const LoginView = () => {
   const handleNext = () => {
     navigate('/app/workspace', {
       state: {
-        isFreeMode: false,
-        topic,
-        goal,
-        time,
-        freeText: '',
+        isFreeMode: mode === 'self',
+        topic: mode === 'guided' ? topic : '',
+        goal: mode === 'guided' ? goal : '',
+        time: mode === 'guided' ? time : '',
+        freeText: mode === 'self' ? prompt : '',
       },
     });
   };
@@ -37,58 +39,86 @@ export const LoginView = () => {
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-5xl items-center justify-center">
+      <div className="relative mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-6xl items-center justify-center">
         <motion.section
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="relative w-full max-w-6xl rounded-[44px] p-4 sm:p-5 lg:p-6"
+          className="relative w-full max-w-[76rem] rounded-[44px] p-4 sm:p-5 lg:p-6"
         >
           <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-10 sm:py-10">
-            <div className="mb-8 flex justify-center">
+            <div className="mb-8 flex flex-col items-center gap-4">
+              <div className="inline-flex rounded-full bg-[#ebe7e1] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+                {[
+                  ['guided', 'Guided'],
+                  ['self', 'Self-directed'],
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setMode(value as 'guided' | 'self')}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                      mode === value
+                        ? 'bg-[#202127] text-white shadow-[0_10px_18px_rgba(49,50,56,0.14)]'
+                        : 'text-[#7a7063] hover:text-[#313238]'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
               <div className="rounded-full bg-white/88 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-[#8b857f] shadow-[0_8px_18px_rgba(49,50,56,0.04)]">
-                Quick learning brief
+                {mode === 'self' ? 'Self-directed learning mode' : 'Quick learning brief'}
               </div>
             </div>
 
-            <div className="mx-auto max-w-5xl text-center text-[1.6rem] font-medium leading-[1.4] tracking-[-0.035em] text-[#5a4638] sm:text-[2.15rem]">
-              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
-                <span>Hi Cogi, I want to learn</span>
-                <InlineField
-                  value={topic}
-                  onChange={setTopic}
-                  placeholder="Topic"
-                  widthClass="w-[210px] sm:w-[250px]"
+            {mode === 'self' ? (
+              <div className="mx-auto max-w-5xl">
+                <textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  placeholder="Describe what you want to learn, your goal, what feels difficult, and how you want to study."
+                  className="min-h-[220px] w-full resize-none rounded-[30px] bg-[#ece7e1] px-6 py-6 text-[1.15rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#938b82] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.35rem]"
                 />
-                <span>.</span>
               </div>
+            ) : (
+              <div className="mx-auto max-w-5xl text-center text-[1.6rem] font-medium leading-[1.4] tracking-[-0.035em] text-[#5a4638] sm:text-[2.15rem]">
+                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
+                  <span>Hi Cogi, I want to learn</span>
+                  <InlineField
+                    value={topic}
+                    onChange={setTopic}
+                    placeholder="Topic"
+                    widthClass="w-[210px] sm:w-[250px]"
+                  />
+                  <span>.</span>
+                </div>
 
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
-                <span>My goal is to</span>
-                <InlineField
-                  value={goal}
-                  onChange={setGoal}
-                  placeholder="Learning Goal"
-                  widthClass="w-[240px] sm:w-[300px]"
-                />
-                <span>, and I plan to study for</span>
-                <InlineField
-                  value={time}
-                  onChange={setTime}
-                  placeholder="Time"
-                  widthClass="w-[170px] sm:w-[210px]"
-                />
-                <span>.</span>
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 whitespace-nowrap">
+                  <span>My goal is to</span>
+                  <InlineField
+                    value={goal}
+                    onChange={setGoal}
+                    placeholder="Learning Goal"
+                    widthClass="w-[210px] sm:w-[260px]"
+                  />
+                  <span>, and I plan to study for</span>
+                  <InlineField
+                    value={time}
+                    onChange={setTime}
+                    placeholder="Time"
+                    widthClass="w-[150px] sm:w-[180px]"
+                  />
+                  <span>.</span>
+                </div>
               </div>
-            </div>
+            )}
 
-            <div className="mt-10 flex flex-col gap-4 border-t border-[#313238]/8 pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm leading-6 text-[#8b857f]">
-                Fill in one sentence to open your workspace.
-              </div>
+            <div className="mt-10 flex justify-end border-t border-[#313238]/8 pt-5">
               <button
                 onClick={handleNext}
-                className="inline-flex items-center justify-center gap-2 self-end rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white shadow-[0_18px_28px_rgba(49,50,56,0.16)] transition hover:bg-[#313238] sm:self-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white shadow-[0_18px_28px_rgba(49,50,56,0.16)] transition hover:bg-[#313238]"
               >
                 Continue
                 <ArrowRight size={18} />
