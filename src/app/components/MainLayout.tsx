@@ -79,9 +79,13 @@ export const MainLayout = () => {
           <div className="pointer-events-none absolute inset-x-4 top-0 h-24 rounded-b-[30px] bg-[linear-gradient(180deg,rgba(208,198,184,0.22)_0%,rgba(208,198,184,0)_100%)]" />
           <div className={clsx('mb-8 flex px-2 pt-2', isSidebarCollapsed ? 'justify-center' : 'items-start justify-between')}>
             <div className={clsx(isSidebarCollapsed && 'hidden lg:block')}>
-              <div className="mb-3 inline-flex items-center rounded-full bg-[#313238] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-[#f4f1eb] shadow-[0_10px_18px_rgba(49,50,56,0.16)]">
+              <NavLink
+                to="/"
+                onClick={() => setIsSidebarOpen(false)}
+                className="mb-3 inline-flex items-center rounded-full bg-[#313238] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-[#f4f1eb] shadow-[0_10px_18px_rgba(49,50,56,0.16)] transition hover:bg-[#7a7063]"
+              >
                 <span className={clsx(isSidebarCollapsed && 'hidden')}>CogniSense</span>
-              </div>
+              </NavLink>
               {!isSidebarCollapsed && (
                 <>
                   <h2 className="text-[1.7rem] font-semibold leading-tight text-[#313238]">Adaptive Learning Studio</h2>

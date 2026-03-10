@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
-import { ArrowRight, BookOpenCheck, Compass, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 import doodle from '@/assets/c66905e9277bdd045c5911a8ef1f9bc6131f4a00.png';
 
@@ -10,26 +10,18 @@ export const LoginView = () => {
   const [topic, setTopic] = useState('');
   const [goal, setGoal] = useState('');
   const [time, setTime] = useState('');
-  const [isFreeMode, setIsFreeMode] = useState(false);
-  const [freeText, setFreeText] = useState('');
 
   const handleNext = () => {
     navigate('/app/workspace', {
       state: {
-        isFreeMode,
+        isFreeMode: false,
         topic,
         goal,
         time,
-        freeText,
+        freeText: '',
       },
     });
   };
-
-  const samplePrompts = [
-    'Build a 2-week IELTS speaking plan',
-    'Help me understand probability from zero',
-    'Design a biology revision path for finals',
-  ];
 
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
@@ -45,175 +37,63 @@ export const LoginView = () => {
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-2.5rem)] max-w-7xl gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="app-surface flex flex-col justify-between rounded-[34px] px-6 py-8 sm:px-8 sm:py-10 lg:px-10"
-        >
-          <div>
-            <div className="inline-flex items-center rounded-full bg-[#313238] px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-[#f4f1eb] shadow-[0_12px_22px_rgba(49,50,56,0.14)]">
-              CogniSense
-            </div>
-
-            <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-tight text-[#313238] sm:text-5xl lg:text-6xl">
-              A study interface that feels calm, clear, and actually usable.
-            </h1>
-
-            <p className="mt-5 max-w-xl text-base leading-7 text-[#7a7063] sm:text-lg">
-              Tell the system what you want to learn and it will shape the workspace around your goal,
-              time, and pace instead of dumping everything on one screen.
-            </p>
-
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <FeatureCard
-                icon={Compass}
-                title="Guided path"
-                description="Turn a topic and timeline into a structured next step."
-              />
-              <FeatureCard
-                icon={BookOpenCheck}
-                title="Focused workspace"
-                description="Keep chat, plan, and follow-up prompts in one place."
-              />
-              <FeatureCard
-                icon={Sparkles}
-                title="Low-noise UI"
-                description="Readable hierarchy, softer surfaces, and better spacing."
-              />
-            </div>
-          </div>
-
-          <div className="mt-10 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="app-panel rounded-[28px] p-5 sm:p-6">
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#7a7063]">
-                Prompt examples
-              </div>
-              <div className="mt-4 flex flex-wrap gap-3">
-                {samplePrompts.map((prompt) => (
-                  <button
-                    key={prompt}
-                    onClick={() => {
-                      setIsFreeMode(true);
-                      setFreeText(prompt);
-                    }}
-                    className="rounded-full bg-[#f3efe8] px-4 py-2 text-sm font-semibold text-[#313238] transition hover:bg-[#313238] hover:text-[#f4f1eb]"
-                  >
-                    {prompt}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="app-panel rounded-[28px] p-5 sm:p-6">
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#7a7063]">
-                Current design goal
-              </div>
-              <p className="mt-3 text-lg font-bold text-[#313238]">
-                Replace clutter with a single, readable learning flow.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-[#7a7063]">
-                This version prioritizes spacing, contrast, and visual rhythm over decorative outlines.
-              </p>
-            </div>
-          </div>
-        </motion.section>
-
+      <div className="relative mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-5xl items-center justify-center">
         <motion.section
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="app-surface relative rounded-[34px] p-5 sm:p-6 lg:p-8"
+          className="app-surface relative w-full max-w-4xl rounded-[40px] p-4 sm:p-6 lg:p-7"
         >
-          <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
-          <div className="pointer-events-none absolute inset-x-6 top-0 h-24 rounded-b-[28px] bg-[linear-gradient(180deg,rgba(208,198,184,0.18)_0%,rgba(208,198,184,0)_100%)]" />
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#7a7063]">
-                Start session
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+          <div className="pointer-events-none absolute inset-x-8 top-0 h-20 rounded-b-[30px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
+          <div className="rounded-[34px] border border-[#313238]/10 bg-[#f3efe8] px-5 py-8 shadow-[0_18px_32px_rgba(49,50,56,0.05)] sm:px-8 sm:py-10">
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-white/65 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#7a7063]">
+                Quick learning brief
               </div>
-              <h2 className="mt-2 text-2xl font-semibold text-[#313238] sm:text-3xl">
-                Shape your learning brief
-              </h2>
             </div>
 
-            <div className="rounded-full bg-[#e5e0d7] p-1">
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4 text-center text-[1.85rem] font-medium leading-[1.4] text-[#5a4638] sm:text-[2.55rem]">
+              <span>Hi Cogi, I want to learn</span>
+              <InlineField
+                value={topic}
+                onChange={setTopic}
+                placeholder="Topic"
+                widthClass="w-[220px] sm:w-[260px]"
+              />
+              <span>.</span>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-4 text-center text-[1.85rem] font-medium leading-[1.4] text-[#5a4638] sm:text-[2.55rem]">
+              <span>My goal is to</span>
+              <InlineField
+                value={goal}
+                onChange={setGoal}
+                placeholder="Learning Goal"
+                widthClass="w-[260px] sm:w-[320px]"
+              />
+              <span>, and I plan to study for</span>
+              <InlineField
+                value={time}
+                onChange={setTime}
+                placeholder="Time"
+                widthClass="w-[180px] sm:w-[220px]"
+              />
+              <span>.</span>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4 border-t border-[#313238]/8 pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-center text-sm leading-6 text-[#7a7063] sm:text-left">
+                Fill in one sentence to open your workspace.
+              </div>
               <button
-                onClick={() => setIsFreeMode(false)}
-                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                  isFreeMode ? 'text-[#7a7063]' : 'bg-[#313238] text-[#f4f1eb]'
-                }`}
+                onClick={handleNext}
+                className="inline-flex items-center justify-center gap-2 self-center rounded-full bg-[#313238] px-6 py-3 text-sm font-bold text-[#f4f1eb] shadow-[0_14px_24px_rgba(49,50,56,0.14)] transition hover:bg-[#7a7063] sm:self-auto"
               >
-                Guided
-              </button>
-              <button
-                onClick={() => setIsFreeMode(true)}
-                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                  isFreeMode ? 'bg-[#313238] text-[#f4f1eb]' : 'text-[#7a7063]'
-                }`}
-              >
-                Free ask
+                Continue
+                <ArrowRight size={18} />
               </button>
             </div>
-          </div>
-
-          <div className="mt-6 app-panel rounded-[30px] p-5 sm:p-6">
-            {isFreeMode ? (
-              <div>
-                <label className="text-sm font-bold uppercase tracking-[0.2em] text-[#7a7063]">
-                  What do you want to learn?
-                </label>
-                <textarea
-                  placeholder="Describe the topic, your situation, and what kind of help you want."
-                  value={freeText}
-                  onChange={(e) => setFreeText(e.target.value)}
-                  className="mt-4 min-h-[280px] w-full rounded-[28px] border border-[#313238]/10 bg-[#f3efe8] px-5 py-5 text-lg leading-8 text-[#313238] outline-none transition placeholder:text-[#8f857a] focus:border-[#313238]/20 focus:bg-white"
-                />
-              </div>
-            ) : (
-              <div className="grid gap-4">
-                <Field
-                  label="Topic"
-                  value={topic}
-                  onChange={setTopic}
-                  placeholder="Examples: algebra, French speaking, climate science"
-                />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    label="Goal"
-                    value={goal}
-                    onChange={setGoal}
-                    placeholder="Examples: pass an exam, build confidence, finish a project"
-                  />
-                  <Field
-                    label="Study time"
-                    value={time}
-                    onChange={setTime}
-                    placeholder="Examples: 20 min/day, 3 weeks, weekends only"
-                  />
-                </div>
-                <div className="rounded-[24px] bg-[#313238] px-5 py-4 text-sm leading-6 text-[#f4f1eb]/90 shadow-[0_16px_26px_rgba(49,50,56,0.14)]">
-                  The workspace will use this brief to generate a cleaner plan, suggested questions, and
-                  a more relevant chat context.
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-md text-sm leading-6 text-[#7a7063]">
-              Start with a rough prompt if needed. The next screen is designed to refine it rather than
-              punish incomplete input.
-            </p>
-
-            <button
-              onClick={handleNext}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#313238] px-6 py-3 text-sm font-bold text-[#f4f1eb] shadow-[0_14px_24px_rgba(49,50,56,0.14)] transition hover:bg-[#7a7063]"
-            >
-              Continue to workspace
-              <ArrowRight size={18} />
-            </button>
           </div>
         </motion.section>
       </div>
@@ -221,43 +101,24 @@ export const LoginView = () => {
   );
 };
 
-const FeatureCard = ({
-  icon: Icon,
-  title,
-  description,
-}: {
-  icon: typeof Compass;
-  title: string;
-  description: string;
-}) => (
-  <div className="app-panel rounded-[28px] p-5">
-    <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#313238] text-[#f4f1eb]">
-      <Icon size={18} />
-    </div>
-    <h3 className="mt-4 text-lg font-semibold text-[#313238]">{title}</h3>
-    <p className="mt-2 text-sm leading-6 text-[#7a7063]">{description}</p>
-  </div>
-);
-
-const Field = ({
-  label,
+const InlineField = ({
   value,
   onChange,
   placeholder,
+  widthClass,
 }: {
-  label: string;
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
+  widthClass: string;
 }) => (
-  <label className="app-panel block rounded-[26px] p-5">
-    <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#7a7063]">{label}</span>
+  <label className={`inline-flex min-h-[58px] items-center rounded-full border border-[#313238]/6 bg-[#d9d7d5] px-5 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_8px_18px_rgba(49,50,56,0.04)] ${widthClass}`}>
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="mt-3 w-full rounded-[18px] border border-[#313238]/10 bg-[#f3efe8] px-4 py-4 text-base text-[#313238] outline-none transition placeholder:text-[#8f857a] focus:border-[#313238]/20 focus:bg-white"
+      className="w-full bg-transparent text-center text-base font-semibold text-[#313238] outline-none placeholder:text-[#a9a6a3] sm:text-[1.05rem]"
     />
   </label>
 );
