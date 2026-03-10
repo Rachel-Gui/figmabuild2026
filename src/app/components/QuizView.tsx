@@ -205,8 +205,8 @@ export const QuizView = () => {
               </div>
             )}
 
-            <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
-              <section className="relative overflow-hidden rounded-[26px] bg-[#d9d0c3] p-3">
+            <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
+              <section className="relative h-full overflow-hidden rounded-[26px] bg-[#d9d0c3] p-3">
                 <div className="max-w-[190px]">
                   <div className="text-[12px] font-semibold text-[#313238]">Today&apos;s learning condition</div>
                   <div className="mt-1 text-[12px] leading-4.5 text-[#5f564c]">
@@ -260,8 +260,8 @@ export const QuizView = () => {
                 </div>
               </section>
 
-              <section className="grid gap-4">
-                <div className="rounded-[32px] bg-[#1f2229] p-5 text-white">
+              <section className="grid h-full gap-4">
+                <div className="flex h-full flex-col rounded-[32px] bg-[#1f2229] p-5 text-white">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold">Mental state summary</div>
@@ -274,7 +274,7 @@ export const QuizView = () => {
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-3">
+                  <div className="mt-5 flex-1 space-y-3">
                     {stateSummaryCards.map((item) => {
                       const Icon = item.icon;
 

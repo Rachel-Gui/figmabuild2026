@@ -409,49 +409,49 @@ export const WorkspaceView = () => {
       animate={{ opacity: 1, y: 0 }}
       className="grid h-full min-h-0 items-start gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
     >
-      <div className="flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col gap-3 overflow-hidden">
-        <section className="app-surface relative shrink-0 overflow-hidden rounded-[32px] p-3.5">
+      <div className="flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col gap-2.5 overflow-hidden">
+        <section className="app-surface relative shrink-0 overflow-hidden rounded-[32px] p-3">
           <div className="pointer-events-none absolute right-[-1.5rem] top-[-1.5rem] h-20 w-20 rounded-full bg-white/20 blur-2xl" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(190,125,98,0.18)_0%,rgba(208,198,184,0.08)_100%)]" />
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#7a7063]">Auto record</div>
-              <h3 className="mt-1 text-[1.08rem] font-semibold text-[#313238]">Learning progress</h3>
+              <h3 className="mt-1 text-[1rem] font-semibold text-[#313238]">Learning progress</h3>
             </div>
             <div className="app-frost rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
               To do list
             </div>
           </div>
 
-          <div className="app-frost mt-3 rounded-[22px] p-2.5">
+          <div className="app-frost mt-2.5 rounded-[20px] p-2">
             <div className="grid gap-2 sm:grid-cols-2">
-              <div className="rounded-[18px] bg-white/38 px-3 py-2.5 backdrop-blur-xl">
+              <div className="rounded-[16px] bg-white/38 px-3 py-2 backdrop-blur-xl">
                 <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
                   Current progress
                 </div>
-                <div className="mt-1 text-[1.4rem] font-semibold leading-none text-[#313238]">
+                <div className="mt-1 text-[1.25rem] font-semibold leading-none text-[#313238]">
                   {progressValue}%
                 </div>
               </div>
-              <div className="rounded-[18px] bg-white/38 px-3 py-2.5 backdrop-blur-xl sm:text-right">
+              <div className="rounded-[16px] bg-white/38 px-3 py-2 backdrop-blur-xl sm:text-right">
                 <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
                   Estimated time
                 </div>
-                <div className="mt-1 text-[1.08rem] font-semibold leading-none text-[#313238]">
+                <div className="mt-1 text-[0.98rem] font-semibold leading-none text-[#313238]">
                   {estimatedTime}
                 </div>
               </div>
             </div>
 
-            <div className="mt-2.5 h-2 rounded-full bg-[#e5e0d7]">
+            <div className="mt-2 h-1.5 rounded-full bg-[#e5e0d7]">
               <div
-                className="h-2 rounded-full bg-gradient-to-r from-[#313238] via-[#d0c6b8] to-[#be7d62]"
+                className="h-1.5 rounded-full bg-gradient-to-r from-[#313238] via-[#d0c6b8] to-[#be7d62]"
                 style={{ width: `${progressValue}%` }}
               />
             </div>
           </div>
 
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          <div className="mt-2.5 grid gap-2 sm:grid-cols-2">
             {recordItems.map((item) => (
               <RecordRow
                 key={item.label}
@@ -470,7 +470,7 @@ export const WorkspaceView = () => {
             className="pointer-events-none absolute right-[-2rem] top-[-3rem] w-64 rotate-[10deg] opacity-[0.05]"
           />
 
-          <div className="border-b border-[#313238]/8 bg-[linear-gradient(180deg,rgba(208,198,184,0.12)_0%,rgba(208,198,184,0)_100%)] px-5 py-5">
+          <div className="border-b border-[#313238]/8 bg-[linear-gradient(180deg,rgba(208,198,184,0.12)_0%,rgba(208,198,184,0)_100%)] px-5 py-4">
             <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#7a7063]">
               Live conversation
             </div>
