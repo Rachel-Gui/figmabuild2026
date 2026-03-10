@@ -2,6 +2,9 @@
 
 :root {
   --font-size: 16px;
+  --page-max-width: 1720px;
+  --shell-padding: clamp(14px, 1.2vw, 20px);
+  --panel-radius: clamp(26px, 2vw, 34px);
   --background: #ece9e4;
   --foreground: #313238;
   --card: rgba(243, 239, 232, 0.92);
@@ -150,6 +153,8 @@
     font-size: var(--font-size);
     min-height: 100%;
     height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body,
@@ -230,6 +235,11 @@
 }
 
 @layer utilities {
+  .app-page-frame {
+    width: min(100%, var(--page-max-width));
+    margin-inline: auto;
+  }
+
   .app-surface {
     background: rgba(245, 242, 236, 0.9);
     backdrop-filter: blur(10px);

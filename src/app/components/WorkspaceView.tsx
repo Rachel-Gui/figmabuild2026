@@ -407,16 +407,16 @@ export const WorkspaceView = () => {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid h-full min-h-0 items-start gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
+      className="grid h-full min-h-0 items-start gap-4 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
     >
       <div className="flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col gap-3 overflow-hidden">
-        <section className="app-surface relative shrink-0 overflow-hidden rounded-[32px] p-3.5">
+        <section className="app-surface relative shrink-0 overflow-hidden rounded-[30px] p-3">
           <div className="pointer-events-none absolute right-[-1.5rem] top-[-1.5rem] h-20 w-20 rounded-full bg-white/20 blur-2xl" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(190,125,98,0.18)_0%,rgba(208,198,184,0.08)_100%)]" />
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#7a7063]">Auto record</div>
-              <h3 className="mt-1 text-[1.2rem] font-semibold text-[#313238]">Learning progress</h3>
+              <h3 className="mt-1 text-[1.08rem] font-semibold text-[#313238]">Learning progress</h3>
             </div>
             <div className="app-frost rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
               To do list
@@ -463,7 +463,7 @@ export const WorkspaceView = () => {
           </div>
         </section>
 
-        <section className="app-surface relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-[32px]">
+        <section className="app-surface relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-[30px]">
           <img
             src={doodle}
             alt=""
@@ -474,7 +474,7 @@ export const WorkspaceView = () => {
             <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#7a7063]">
               Live conversation
             </div>
-            <h2 className="mt-2 text-2xl font-semibold text-[#313238]">Learning workspace</h2>
+            <h2 className="mt-2 text-[1.55rem] font-semibold text-[#313238]">Learning workspace</h2>
             <p className="mt-2 text-sm leading-6 text-[#7a7063]">
               This area is only for questions, follow-ups, and clarification.
             </p>
@@ -619,7 +619,7 @@ export const WorkspaceView = () => {
         </section>
       </div>
 
-      <section className="app-surface relative flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col overflow-hidden rounded-[32px]">
+      <section className="app-surface relative flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col overflow-hidden rounded-[30px]">
         <img
           src={doodle}
           alt=""

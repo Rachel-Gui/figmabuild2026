@@ -53,7 +53,7 @@ export const MainLayout = () => {
         <div className="app-grid absolute inset-0 opacity-35" />
       </div>
 
-      <div className="relative flex min-h-[100dvh]">
+      <div className="app-page-frame relative flex min-h-[100dvh]">
         <button
           onClick={() => setIsSidebarOpen(true)}
           className="app-frost fixed left-4 top-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-[#313238] lg:hidden"
@@ -71,7 +71,7 @@ export const MainLayout = () => {
 
         <aside
           className={clsx(
-            'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[30px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
+            'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[30px] p-[var(--shell-padding)] transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
             isSidebarCollapsed ? 'w-[92px]' : 'w-[290px]',
             isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
           )}
@@ -88,7 +88,7 @@ export const MainLayout = () => {
               </NavLink>
               {!isSidebarCollapsed && (
                 <>
-                  <h2 className="text-[1.7rem] font-semibold leading-tight text-[#313238]">Adaptive Learning Studio</h2>
+                  <h2 className="text-[clamp(1.45rem,1.2rem+0.45vw,1.65rem)] font-semibold leading-tight text-[#313238]">Adaptive Learning Studio</h2>
                   <p className="mt-2 max-w-[18rem] text-sm leading-6 text-[#7a7063]">
                     A cleaner control center for planning lessons, chatting with AI, and tracking progress.
                   </p>
@@ -145,7 +145,7 @@ export const MainLayout = () => {
                       </div>
                       {!isSidebarCollapsed && (
                         <div>
-                          <div className="text-base font-bold">{item.label}</div>
+                          <div className="text-[0.97rem] font-bold">{item.label}</div>
                           <div
                             className={clsx(
                               'mt-1 text-sm leading-5',
@@ -192,7 +192,7 @@ export const MainLayout = () => {
                     </div>
                     {!isSidebarCollapsed && (
                       <div>
-                        <div className="text-base font-bold">{profileNavItem.label}</div>
+                        <div className="text-[0.97rem] font-bold">{profileNavItem.label}</div>
                         <div
                           className={clsx(
                             'mt-1 text-sm leading-5',
@@ -211,8 +211,8 @@ export const MainLayout = () => {
 
         </aside>
 
-        <div className="flex min-w-0 flex-1 flex-col p-4 pt-20 lg:p-4 lg:pl-0 lg:pt-4">
-          <main className="min-h-0 flex-1 overflow-hidden rounded-[34px]">
+        <div className="flex min-w-0 flex-1 flex-col p-[var(--shell-padding)] pt-20 lg:p-[var(--shell-padding)] lg:pl-0 lg:pt-[var(--shell-padding)]">
+          <main className="min-h-0 flex-1 overflow-hidden rounded-[var(--panel-radius)]">
             <Outlet />
           </main>
         </div>
