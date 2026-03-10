@@ -26,7 +26,7 @@ export const LoginView = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
+    <div className="relative min-h-[100dvh] overflow-hidden px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0">
         <img
           src={doodle}
@@ -39,14 +39,14 @@ export const LoginView = () => {
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-6xl items-center justify-center">
+      <div className="relative mx-auto flex min-h-[calc(100dvh-2.5rem)] max-w-[min(96vw,84rem)] items-center justify-center">
         <motion.section
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="relative w-full max-w-[76rem] rounded-[44px] p-4 sm:p-5 lg:p-6"
+          className="relative w-full max-w-[min(92vw,78rem)] rounded-[44px] p-3 sm:p-5 lg:p-6"
         >
-          <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-10 sm:py-10">
+          <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-9 sm:py-9 lg:px-10 lg:py-10">
             <div className="mb-8 flex flex-col items-center gap-4">
               <div className="inline-flex rounded-full bg-[#ebe7e1] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
                 {[
@@ -74,7 +74,7 @@ export const LoginView = () => {
             </div>
 
             {mode === 'self' ? (
-              <div className="mx-auto max-w-5xl">
+              <div className="mx-auto max-w-[min(100%,64rem)]">
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
@@ -83,7 +83,7 @@ export const LoginView = () => {
                 />
               </div>
             ) : (
-              <div className="mx-auto max-w-5xl text-center text-[1.6rem] font-medium leading-[1.4] tracking-[-0.035em] text-[#5a4638] sm:text-[2.15rem]">
+              <div className="mx-auto max-w-[min(100%,66rem)] text-center text-[clamp(1.35rem,1.1rem+1.05vw,2.1rem)] font-medium leading-[1.4] tracking-[-0.035em] text-[#5a4638]">
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
                   <span>Hi Cogi, I want to learn</span>
                   <InlineField
@@ -115,7 +115,7 @@ export const LoginView = () => {
               </div>
             )}
 
-            <div className="mt-10 flex justify-end border-t border-[#313238]/8 pt-5">
+            <div className="mt-8 flex justify-end border-t border-[#313238]/8 pt-5 sm:mt-10">
               <button
                 onClick={handleNext}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white shadow-[0_18px_28px_rgba(49,50,56,0.16)] transition hover:bg-[#313238]"

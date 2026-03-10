@@ -409,7 +409,7 @@ export const WorkspaceView = () => {
       animate={{ opacity: 1, y: 0 }}
       className="grid h-full min-h-0 items-start gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
     >
-      <div className="flex h-[calc(100vh-6.5rem)] min-h-0 self-start flex-col gap-3 overflow-hidden">
+      <div className="flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col gap-3 overflow-hidden">
         <section className="app-surface relative shrink-0 overflow-hidden rounded-[32px] p-3.5">
           <div className="pointer-events-none absolute right-[-1.5rem] top-[-1.5rem] h-20 w-20 rounded-full bg-white/20 blur-2xl" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(190,125,98,0.18)_0%,rgba(208,198,184,0.08)_100%)]" />
@@ -619,7 +619,7 @@ export const WorkspaceView = () => {
         </section>
       </div>
 
-      <section className="app-surface relative flex h-[calc(100vh-6.5rem)] min-h-0 self-start flex-col overflow-hidden rounded-[32px]">
+      <section className="app-surface relative flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col overflow-hidden rounded-[32px]">
         <img
           src={doodle}
           alt=""

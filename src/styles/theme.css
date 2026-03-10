@@ -128,10 +128,17 @@
     @apply bg-background text-foreground;
     background:
       linear-gradient(180deg, #dfe5e5 0%, #ece8e2 34%, #e8e2da 100%);
-    font-family: 'Manrope', sans-serif;
-    min-height: 100vh;
+    font-family:
+      'Manrope',
+      'Avenir Next',
+      'Segoe UI',
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   /**
@@ -142,18 +149,26 @@
   html {
     font-size: var(--font-size);
     min-height: 100%;
+    height: 100%;
   }
 
   body,
   #root {
     min-height: 100%;
+    height: 100%;
   }
 
   h1 {
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: 'Manrope', sans-serif;
+    font-family:
+      'Manrope',
+      'Avenir Next',
+      'Segoe UI',
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
     letter-spacing: -0.03em;
   }
 
@@ -161,7 +176,13 @@
     font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: 'Manrope', sans-serif;
+    font-family:
+      'Manrope',
+      'Avenir Next',
+      'Segoe UI',
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
     letter-spacing: -0.03em;
   }
 
@@ -169,7 +190,13 @@
     font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: 'Manrope', sans-serif;
+    font-family:
+      'Manrope',
+      'Avenir Next',
+      'Segoe UI',
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
   }
 
   h4 {

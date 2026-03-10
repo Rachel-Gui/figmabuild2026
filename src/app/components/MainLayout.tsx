@@ -45,7 +45,7 @@ export const MainLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   return (
-    <div className="relative min-h-screen overflow-hidden text-[#313238]">
+    <div className="relative min-h-[100dvh] overflow-hidden text-[#313238]">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-8rem] top-[-6rem] h-72 w-72 rounded-full bg-[#e5e0d7]/30 blur-3xl" />
         <div className="absolute right-[-4rem] top-20 h-80 w-80 rounded-full bg-[#ceb3a1]/24 blur-3xl" />
@@ -53,7 +53,7 @@ export const MainLayout = () => {
         <div className="app-grid absolute inset-0 opacity-35" />
       </div>
 
-      <div className="relative flex min-h-screen">
+      <div className="relative flex min-h-[100dvh]">
         <button
           onClick={() => setIsSidebarOpen(true)}
           className="app-frost fixed left-4 top-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-[#313238] lg:hidden"
@@ -71,7 +71,7 @@ export const MainLayout = () => {
 
         <aside
           className={clsx(
-            'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-[30px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100vh-2rem)] lg:self-start lg:translate-x-0',
+            'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[30px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
             isSidebarCollapsed ? 'w-[92px]' : 'w-[290px]',
             isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
           )}
