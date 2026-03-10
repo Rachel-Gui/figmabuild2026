@@ -5,7 +5,9 @@ import {
   Bot,
   BookOpenCheck,
   Dna,
+  ExternalLink,
   FlaskConical,
+  Globe,
   Check,
   Leaf,
   Lightbulb,
@@ -48,6 +50,9 @@ interface KnowledgePage {
   keyPoints: string[];
 }
 
+const isHealthScienceTopic = (topicName: string) =>
+  /knowledge topic|bio|health|brain|neuro|cell|disease|science/i.test(topicName);
+
 const buildKnowledgePages = (
   topicName: string,
   goalText: string,
@@ -56,20 +61,36 @@ const buildKnowledgePages = (
   {
     id: 'overview',
     title: topicName,
-    subtitle: 'Core concept overview',
+    subtitle: isHealthScienceTopic(topicName)
+      ? 'Scientific biology and health overview'
+      : 'Core concept overview',
     definition:
-      `This page explains ${topicName} in plain language so the learner can understand the big idea before asking detailed questions.`,
-    focus: goalText,
+      isHealthScienceTopic(topicName)
+        ? 'Neuroinflammation is a biological state in which immune signaling inside the nervous system remains active for too long or at the wrong intensity. In the short term, inflammation helps protect tissue. In the long term, persistent activation of microglia, astrocytes, stress hormones, and inflammatory cytokines can interfere with synaptic plasticity, sleep regulation, memory formation, and emotional stability.'
+        : `This page explains ${topicName} in plain language so the learner can understand the big idea before asking detailed questions.`,
+    focus: isHealthScienceTopic(topicName)
+      ? 'Understand how inflammation, stress, sleep, and neural repair influence brain health.'
+      : goalText,
     mistake:
-      'Do not jump straight to exercises. Read the concept once, restate it, and then test your understanding.',
-    exampleTitle: 'Worked example',
+      isHealthScienceTopic(topicName)
+        ? 'Do not treat inflammation as purely harmful. Acute immune signaling can be protective; the clinical concern is persistent dysregulation that disrupts neural repair and cognition.'
+        : 'Do not jump straight to exercises. Read the concept once, restate it, and then test your understanding.',
+    exampleTitle: isHealthScienceTopic(topicName) ? 'Clinical interpretation' : 'Worked example',
     exampleBody:
-      `Start with one simple case, explain each step slowly, and use ${estimatedTime} to move from explanation to practice and review.`,
-    keyPoints: [
-      `Understand the main idea behind ${topicName}.`,
-      'Connect the idea to one concrete use case.',
-      'End with a short retrieval check.',
-    ],
+      isHealthScienceTopic(topicName)
+        ? `Use ${estimatedTime} to move from mechanism to application: read the pathway once, compare inflammatory vs recovery markers, and then explain how sleep, stress, and exercise alter brain resilience.`
+        : `Start with one simple case, explain each step slowly, and use ${estimatedTime} to move from explanation to practice and review.`,
+    keyPoints: isHealthScienceTopic(topicName)
+      ? [
+          'Microglia and astrocytes coordinate the immune response inside the brain.',
+          'Stress, poor sleep, and metabolic strain can amplify inflammatory signaling.',
+          'Recovery depends on reducing inflammatory load while preserving neural repair.',
+        ]
+      : [
+          `Understand the main idea behind ${topicName}.`,
+          'Connect the idea to one concrete use case.',
+          'End with a short retrieval check.',
+        ],
   },
   {
     id: 'summary',
@@ -169,38 +190,58 @@ const buildNewKnowledgePage = (
   };
 };
 
-const scienceVisualNodes = [
+const embeddedArticle = {
+  title: 'How does age standardization make health metrics comparable?',
+  url: 'https://ourworldindata.org/age-standardization',
+  domain: 'ourworldindata.org',
+  note: 'Embedded article for guided reading and knowledge analysis',
+  summary:
+    'This article explains how age standardization adjusts disease rates and other health indicators to a standard population so comparisons across countries or over time are not distorted by different age structures.',
+};
+
+const articleKnowledgeGaps = [
   {
-    label: 'Observation',
-    detail: 'Notice structure, color, and change over time.',
-    icon: Microscope,
-    tone: 'bg-[#e5e0d7] text-[#313238]',
+    title: 'Age standardization',
+    body: 'A statistical method that adjusts health rates to a standard population so comparisons are not distorted by different age structures.',
+    icon: AlertCircle,
   },
   {
-    label: 'Cell process',
-    detail: 'Track what moves, transforms, or reacts.',
+    title: 'Crude rate',
+    body: 'The unadjusted rate of a health outcome before any age standardization is applied.',
     icon: Dna,
-    tone: 'bg-[#d0c6b8] text-[#313238]',
   },
   {
-    label: 'Environment',
-    detail: 'Connect the organism to habitat and conditions.',
-    icon: Leaf,
-    tone: 'bg-[#ceb3a1] text-[#313238]',
-  },
-  {
-    label: 'Experiment',
-    detail: 'Change one factor and compare the outcome.',
+    title: 'Standard population',
+    body: 'A reference population with a defined age structure used to recalculate age-specific rates into one comparable summary rate.',
     icon: FlaskConical,
-    tone: 'bg-[#ceb3a1] text-[#313238]',
+  },
+  {
+    title: 'Age-specific rate',
+    body: 'The rate of a health outcome within one age group, such as people aged 60-64, before combining groups into an age-standardized rate.',
+    icon: Microscope,
+  },
+  {
+    title: 'Why comparability changes',
+    body: 'Countries with older populations can have higher crude death rates even when the underlying health risk is not worse, so standardization helps separate age structure from outcome patterns.',
+    icon: Microscope,
   },
 ];
+
+const normalizeTopicName = (value?: string) => {
+  if (!value?.trim()) return 'Knowledge topic';
+
+  const compact = value.replace(/\s+/g, ' ').trim();
+  const shortClause = compact.split(/[,.!?]/)[0]?.trim() || compact;
+
+  if (shortClause.length <= 42) return shortClause;
+  return `${shortClause.slice(0, 39).trim()}...`;
+};
 
 export const WorkspaceView = () => {
   const location = useLocation();
   const state = location.state as LocationState | null;
   const estimatedTime = state?.time || '15-20 minutes';
-  const topicName = state?.topic || 'Knowledge topic';
+  const topicName = normalizeTopicName(state?.topic || state?.freeText);
   const goalText = state?.goal || 'Build understanding step by step';
   const progressValue = state?.isFreeMode ? 32 : state?.topic || state?.goal || state?.time ? 46 : 24;
   const completedSteps = state?.isFreeMode ? 1 : 2;
@@ -320,13 +361,55 @@ export const WorkspaceView = () => {
     'Quiz me on the most important ideas',
   ];
 
+  const resourceCards = [
+    {
+      title: `Starter guide to ${topicName}`,
+      source: 'Learning brief',
+      summary: 'A short overview that frames the topic, the key language, and what to look for first.',
+      icon: BookOpenCheck,
+      tone: 'bg-[#f3efe8]',
+    },
+    {
+      title: 'Visual breakdown',
+      source: 'Concept map',
+      summary: 'A diagram-first explanation that turns the lesson into nodes, steps, and relationships.',
+      icon: Orbit,
+      tone: 'bg-[#e8e2da]',
+    },
+    {
+      title: 'Practice checkpoint',
+      source: 'Self-check',
+      summary: 'Three small prompts to confirm understanding before moving into deeper practice.',
+      icon: FlaskConical,
+      tone: 'bg-[#d6c9b4]',
+    },
+  ];
+
+  const examplePanels = [
+    {
+      title: 'Case review',
+      text: 'Start from one concrete case and identify the biological mechanism that best explains it.',
+      icon: Microscope,
+    },
+    {
+      title: 'Mechanism link',
+      text: 'Connect the symptom, the tissue-level process, and the broader system effect in one chain.',
+      icon: Dna,
+    },
+    {
+      title: 'Self-check',
+      text: 'Explain the pathway back in your own words before moving on to the next concept.',
+      icon: FlaskConical,
+    },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid h-full min-h-[calc(100vh-14rem)] gap-5 xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
+      className="grid h-full min-h-0 items-start gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
     >
-      <div className="flex min-h-0 flex-col gap-3">
+      <div className="flex h-[calc(100vh-6.5rem)] min-h-0 self-start flex-col gap-3 overflow-hidden">
         <section className="app-surface relative shrink-0 overflow-hidden rounded-[32px] p-3.5">
           <div className="pointer-events-none absolute right-[-1.5rem] top-[-1.5rem] h-20 w-20 rounded-full bg-white/20 blur-2xl" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(190,125,98,0.18)_0%,rgba(208,198,184,0.08)_100%)]" />
@@ -397,54 +480,100 @@ export const WorkspaceView = () => {
             </p>
           </div>
 
-          <div className="flex min-h-0 flex-1 flex-col px-4 py-4">
-            <div className="mb-4 flex flex-wrap gap-2">
-              {quickPrompts.map((prompt) => (
-                <button
-                  key={prompt}
-                  onClick={() => setInputText(prompt)}
-                  className="rounded-full bg-[#e5e0d7] px-4 py-2 text-sm font-semibold text-[#313238] shadow-[0_8px_16px_rgba(49,50,56,0.05)] transition hover:bg-[#313238] hover:text-[#f4f1eb]"
-                >
-                  {prompt}
-                </button>
-              ))}
-            </div>
-
-            <div className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1">
-              {messages.map((msg) => (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={clsx('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}
-                >
-                  {msg.role === 'bot' && (
-                    <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#313238] text-[#f4f1eb]">
-                      <Bot size={18} />
-                    </div>
-                  )}
-
-                  <div
-                    className={clsx(
-                      'max-w-[85%] rounded-[24px] px-5 py-4 text-[15px] leading-7 shadow-[0_16px_34px_rgba(18,38,34,0.06)] sm:text-base',
-                      msg.role === 'user'
-                        ? 'rounded-br-[10px] bg-[#313238] text-[#f4f1eb]'
-                        : 'rounded-bl-[10px] bg-[#f3efe8] text-[#313238]'
-                    )}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-4 py-4">
+            <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+              <div className="mb-4 flex flex-wrap gap-2">
+                {quickPrompts.map((prompt) => (
+                  <button
+                    key={prompt}
+                    onClick={() => setInputText(prompt)}
+                    className="rounded-full bg-[#e5e0d7] px-4 py-2 text-sm font-semibold text-[#313238] shadow-[0_8px_16px_rgba(49,50,56,0.05)] transition hover:bg-[#313238] hover:text-[#f4f1eb]"
                   >
-                    {msg.text}
-                  </div>
+                    {prompt}
+                  </button>
+                ))}
+              </div>
 
-                  {msg.role === 'user' && (
-                    <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#be7d62] text-[#f4f1eb]">
-                      <User size={18} />
+              <div className="mb-4 rounded-[26px] bg-[linear-gradient(180deg,rgba(243,239,232,0.96)_0%,rgba(232,226,218,0.92)_100%)] p-4 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#7a7063]">
+                      Recommended resources
                     </div>
-                  )}
-                </motion.div>
-              ))}
+                    <div className="mt-1 text-lg font-semibold text-[#313238]">
+                      Start with one clear explanation, then compare examples
+                    </div>
+                  </div>
+                  <div className="rounded-full bg-[#455763] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#f4f1eb]">
+                    Ready to open
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-3">
+                  {resourceCards.map((card) => {
+                    const Icon = card.icon;
+
+                    return (
+                      <div
+                        key={card.title}
+                        className={`flex items-center gap-4 rounded-[22px] p-4 shadow-[0_10px_18px_rgba(49,50,56,0.04)] ${card.tone}`}
+                      >
+                        <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-white/70 text-[#313238]">
+                          <Icon size={22} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                            {card.source}
+                          </div>
+                          <div className="mt-1 text-base font-semibold text-[#313238]">{card.title}</div>
+                          <div className="mt-1 text-sm leading-6 text-[#7a7063]">{card.summary}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <button className="mt-4 inline-flex w-full items-center justify-center rounded-[18px] bg-[#d8d2ee] px-4 py-3 text-sm font-semibold text-[#455763] transition hover:bg-[#cbc4ea]">
+                  Open all resources
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {messages.map((msg) => (
+                  <motion.div
+                    key={msg.id}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={clsx('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}
+                  >
+                    {msg.role === 'bot' && (
+                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#313238] text-[#f4f1eb]">
+                        <Bot size={18} />
+                      </div>
+                    )}
+
+                    <div
+                      className={clsx(
+                        'max-w-[85%] rounded-[24px] px-5 py-4 text-[15px] leading-7 shadow-[0_16px_34px_rgba(18,38,34,0.06)] sm:text-base',
+                        msg.role === 'user'
+                          ? 'rounded-br-[10px] bg-[#313238] text-[#f4f1eb]'
+                          : 'rounded-bl-[10px] bg-[#f3efe8] text-[#313238]'
+                      )}
+                    >
+                      {msg.text}
+                    </div>
+
+                    {msg.role === 'user' && (
+                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#be7d62] text-[#f4f1eb]">
+                        <User size={18} />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
-            <div className="app-frost mt-4 rounded-[28px] p-2">
+            <div className="app-frost sticky bottom-0 z-10 mt-4 rounded-[28px] p-2">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -490,7 +619,7 @@ export const WorkspaceView = () => {
         </section>
       </div>
 
-      <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[32px]">
+      <section className="app-surface relative flex h-[calc(100vh-6.5rem)] min-h-0 self-start flex-col overflow-hidden rounded-[32px]">
         <img
           src={doodle}
           alt=""
@@ -564,84 +693,63 @@ export const WorkspaceView = () => {
           </div>
         </div>
 
-        <div className="min-h-0 flex-1 bg-[linear-gradient(180deg,rgba(242,239,232,0.84)_0%,rgba(255,250,240,0.76)_100%)] p-4">
-          <div className="rounded-[28px] bg-[#f3efe8] p-5 shadow-[0_18px_34px_rgba(49,50,56,0.06)]">
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#7a7063]">
-              Knowledge board
-            </div>
-            <h2 className="mt-2 text-3xl font-semibold text-[#313238] sm:text-4xl">
-              {activePage.title}
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-[#7a7063]">{activePage.subtitle}</p>
-
-            <div className="mt-6 rounded-[24px] bg-[linear-gradient(180deg,#e5e0d7_0%,#f3efe8_100%)] p-5">
+        <div className="min-h-0 flex-1 overflow-hidden bg-[linear-gradient(180deg,rgba(242,239,232,0.84)_0%,rgba(255,250,240,0.76)_100%)] p-4">
+          <div className="h-full overflow-y-auto rounded-[28px] bg-[#f3efe8] p-5 shadow-[0_18px_34px_rgba(49,50,56,0.06)]">
+            <div className="rounded-[24px] bg-[linear-gradient(180deg,#e5e0d7_0%,#f3efe8_100%)] p-5">
               {activeBoardSection === 'definition' && (
                 <>
-                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#7a7063]">
-                    <Lightbulb size={16} />
-                    Core idea
-                  </div>
-                  <div className="mt-4 rounded-[20px] bg-[#f3efe8] p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
-                    <div className="text-lg font-semibold text-[#313238]">Plain-language explanation</div>
-                    <div className="mt-2 text-sm leading-7 text-[#7a7063]">{activePage.definition}</div>
-                  </div>
+                  <div className="grid gap-4 xl:grid-cols-[minmax(0,1.45fr)_320px]">
+                    <div className="overflow-hidden rounded-[24px] bg-[#f6f4f1] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                      <div className="border-b border-[#313238]/8 bg-[#f3efe8] px-4 py-3">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e8e2da] text-[#455763]">
+                              <Globe size={18} />
+                            </div>
+                            <div>
+                              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                                Learning browser
+                              </div>
+                              <div className="text-sm font-semibold text-[#313238]">
+                                {embeddedArticle.title}
+                              </div>
+                            </div>
+                          </div>
 
-                  <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_320px]">
-                    <div className="rounded-[24px] bg-[#f3efe8] p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
-                      <div className="flex items-center justify-between gap-4">
-                        <div>
-                          <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#7a7063]">
-                            Science visual case
-                          </div>
-                          <div className="mt-2 text-xl font-semibold text-[#313238]">
-                            Biology concept map
-                          </div>
+                          <a
+                            href={embeddedArticle.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full bg-[#455763] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[#f4f1eb]"
+                          >
+                            Open source
+                            <ExternalLink size={14} />
+                          </a>
                         </div>
-                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#313238] text-[#f4f1eb]">
-                          <Orbit size={20} />
+
+                        <div className="mt-3 rounded-full bg-white px-4 py-3 text-sm text-[#7a7063] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+                          {embeddedArticle.url}
                         </div>
                       </div>
 
-                      <div className="mt-6 grid gap-4 sm:grid-cols-[minmax(0,1fr)_220px]">
-                        <div className="grid gap-3 sm:grid-cols-2">
-                          {scienceVisualNodes.map((node) => {
-                            const Icon = node.icon;
-
-                            return (
-                              <div
-                                key={node.label}
-                                className={`rounded-[20px] p-4 shadow-[0_8px_18px_rgba(49,50,56,0.05)] ${node.tone}`}
-                              >
-                                <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/55">
-                                  <Icon size={18} />
-                                </div>
-                                <div className="mt-3 text-sm font-semibold">{node.label}</div>
-                                <div className="mt-2 text-sm leading-6 text-[#7a7063]">
-                                  {node.detail}
-                                </div>
-                              </div>
-                            );
-                          })}
+                      <div className="p-4">
+                        <div className="overflow-hidden rounded-[22px] border border-[#313238]/8 bg-white">
+                          <iframe
+                            src={embeddedArticle.url}
+                            title={embeddedArticle.title}
+                            className="h-[1120px] w-full bg-white"
+                          />
                         </div>
 
-                        <div className="rounded-[24px] bg-[radial-gradient(circle_at_center,#e5e0d7_0%,#e5e0d7_44%,#f3efe8_45%,#f3efe8_100%)] p-4">
-                          <div className="flex h-full min-h-[260px] items-center justify-center">
-                            <div className="relative flex h-44 w-44 items-center justify-center rounded-full border border-[#313238]/10 bg-[#313238] text-[#f4f1eb] shadow-[0_18px_34px_rgba(49,50,56,0.18)]">
-                              <div className="text-center">
-                                <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/16">
-                                  <Dna size={28} />
-                                </div>
-                                <div className="mt-3 text-sm font-bold uppercase tracking-[0.16em]">
-                                  Living system
-                                </div>
-                                <div className="mt-1 text-xs text-white/78">{topicName}</div>
-                              </div>
-
-                              <div className="absolute left-[-0.75rem] top-6 h-4 w-4 rounded-full bg-[#d0c6b8]" />
-                              <div className="absolute right-[-0.5rem] top-9 h-3 w-3 rounded-full bg-[#be7d62]" />
-                              <div className="absolute bottom-5 left-1 h-3 w-3 rounded-full bg-[#ceb3a1]" />
-                              <div className="absolute bottom-7 right-2 h-4 w-4 rounded-full bg-[#e5e0d7]" />
-                            </div>
+                        <div className="mt-4 rounded-[22px] bg-[#f3efe8] px-4 py-4">
+                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                            Reading note
+                          </div>
+                          <div className="mt-2 text-sm leading-7 text-[#5f564c]">
+                            {embeddedArticle.summary}
+                          </div>
+                          <div className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#7a7063]">
+                            If the site blocks embedding, use the button above and keep reading notes here.
                           </div>
                         </div>
                       </div>
@@ -649,49 +757,36 @@ export const WorkspaceView = () => {
 
                     <div className="rounded-[24px] bg-[#313238] p-5 text-[#f4f1eb] shadow-[0_12px_24px_rgba(49,50,56,0.14)]">
                       <div className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">
-                        Interactive case
+                        Knowledge analysis
                       </div>
                       <div className="mt-3 text-xl font-semibold">
-                        Explore one organism from four angles
+                        Concepts this article may assume you already know
                       </div>
                       <div className="mt-3 text-sm leading-7 text-white/78">
-                        Start from one living thing, observe its structure, identify the process inside
-                        it, connect it to habitat, then test one variable with a simple experiment.
+                        This panel breaks down unfamiliar terms so the learner can read the article
+                        without getting blocked by medical vocabulary or research context.
                       </div>
 
                       <div className="mt-5 space-y-3">
-                        {[
-                          'Choose a plant, insect, or cell diagram.',
-                          'Tap one icon to open a focused explanation path.',
-                          'Compare what changes when the environment shifts.',
-                        ].map((item, index) => (
-                          <div key={item} className="rounded-[18px] bg-white/10 px-4 py-3">
-                            <div className="text-xs font-bold uppercase tracking-[0.16em] text-white/56">
-                              Path 0{index + 1}
+                        {articleKnowledgeGaps.map((item) => {
+                          const Icon = item.icon;
+
+                          return (
+                            <div key={item.title} className="rounded-[18px] bg-white/10 px-4 py-4">
+                              <div className="flex items-center gap-3">
+                                <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/12">
+                                  <Icon size={18} />
+                                </div>
+                                <div className="text-sm font-semibold text-white">{item.title}</div>
+                              </div>
+                              <div className="mt-3 text-sm leading-6 text-white/78">{item.body}</div>
                             </div>
-                            <div className="mt-1 text-sm leading-6 text-white/84">{item}</div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 grid gap-3 md:grid-cols-3">
-                    {activePage.keyPoints.map((point, index) => (
-                      <div
-                        key={point}
-                        className={clsx(
-                          'rounded-[20px] p-4 shadow-[0_10px_22px_rgba(18,38,34,0.04)]',
-                          index === 0 && 'bg-[#be7d62] text-[#f4f1eb]',
-                          index === 1 && 'bg-[#e5e0d7] text-[#313238]',
-                          index === 2 && 'bg-[#d0c6b8] text-[#f4f1eb]'
-                        )}
-                      >
-                        <div className="text-base font-semibold">Key point 0{index + 1}</div>
-                        <div className={clsx('mt-2 text-sm leading-6', index === 1 ? 'text-[#313238]' : 'text-[#f4f1eb]')}>{point}</div>
-                      </div>
-                    ))}
-                  </div>
                 </>
               )}
 
@@ -711,14 +806,38 @@ export const WorkspaceView = () => {
                       'Read the prompt carefully',
                       'Predict the answer before checking',
                       'Compare your reasoning with the solution',
-                    ].map((step, index) => (
-                      <div key={step} className="rounded-[20px] bg-[#f3efe8] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
-                        <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#7a7063]">
-                          Step 0{index + 1}
+                    ].map((step, index) => {
+                      const icons = [Microscope, Dna, FlaskConical];
+                      const Icon = icons[index];
+
+                      return (
+                        <div key={step} className="rounded-[20px] bg-[#f3efe8] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
+                          <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e8e2da] text-[#455763]">
+                            <Icon size={18} />
+                          </div>
+                          <div className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                            Step 0{index + 1}
+                          </div>
+                          <div className="mt-2 text-sm font-semibold leading-6 text-[#313238]">{step}</div>
                         </div>
-                        <div className="mt-2 text-sm font-semibold leading-6 text-[#313238]">{step}</div>
-                      </div>
-                    ))}
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-4 grid gap-3 lg:grid-cols-3">
+                    {examplePanels.map((item) => {
+                      const Icon = item.icon;
+
+                      return (
+                        <div key={item.title} className="rounded-[22px] bg-white/70 p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
+                          <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#d8d2ee] text-[#455763]">
+                            <Icon size={19} />
+                          </div>
+                          <div className="mt-4 text-lg font-semibold text-[#313238]">{item.title}</div>
+                          <div className="mt-2 text-sm leading-6 text-[#7a7063]">{item.text}</div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               )}

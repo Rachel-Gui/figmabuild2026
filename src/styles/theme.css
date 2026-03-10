@@ -10,9 +10,9 @@
   --popover-foreground: #313238;
   --primary: #313238;
   --primary-foreground: #f4f1eb;
-  --secondary: #e5e0d7;
+  --secondary: #e8e2da;
   --secondary-foreground: #313238;
-  --muted: #d4caba;
+  --muted: #d6c9b4;
   --muted-foreground: #7a7063;
   --accent: #be7d62;
   --accent-foreground: #f8f4ef;
@@ -25,11 +25,11 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: rgba(49, 50, 56, 0.2);
-  --chart-1: #be7d62;
-  --chart-2: #d0c6b8;
-  --chart-3: #313238;
-  --chart-4: #ceb3a1;
-  --chart-5: #e5e0d7;
+  --chart-1: #455763;
+  --chart-2: #d3dadc;
+  --chart-3: #d6c9b4;
+  --chart-4: #be7d62;
+  --chart-5: #e8e2da;
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -127,7 +127,7 @@
   body {
     @apply bg-background text-foreground;
     background:
-      linear-gradient(180deg, #efedeb 0%, #e8e3dd 100%);
+      linear-gradient(180deg, #dfe5e5 0%, #ece8e2 34%, #e8e2da 100%);
     font-family: 'Manrope', sans-serif;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -197,25 +197,25 @@
   }
 
   ::selection {
-    background: rgba(190, 125, 98, 0.2);
+    background: rgba(69, 87, 99, 0.18);
     color: #313238;
   }
 }
 
 @layer utilities {
   .app-surface {
-    background: rgba(243, 239, 232, 0.9);
+    background: rgba(245, 242, 236, 0.9);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(49, 50, 56, 0.08);
+    border: 1px solid rgba(69, 87, 99, 0.08);
     box-shadow:
-      0 18px 40px rgba(49, 50, 56, 0.08),
+      0 18px 40px rgba(49, 50, 56, 0.07),
       inset 0 1px 0 rgba(255, 255, 255, 0.65);
   }
 
   .app-panel {
-    background: rgba(229, 224, 215, 0.72);
-    border: 1px solid rgba(49, 50, 56, 0.08);
+    background: rgba(232, 226, 218, 0.78);
+    border: 1px solid rgba(69, 87, 99, 0.08);
     box-shadow:
       0 14px 32px rgba(49, 50, 56, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.55);

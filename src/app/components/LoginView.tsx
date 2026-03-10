@@ -42,53 +42,53 @@ export const LoginView = () => {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="app-surface relative w-full max-w-4xl rounded-[40px] p-4 sm:p-6 lg:p-7"
+          className="relative w-full max-w-6xl rounded-[44px] p-4 sm:p-5 lg:p-6"
         >
-          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
-          <div className="pointer-events-none absolute inset-x-8 top-0 h-20 rounded-b-[30px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
-          <div className="rounded-[34px] border border-[#313238]/10 bg-[#f3efe8] px-5 py-8 shadow-[0_18px_32px_rgba(49,50,56,0.05)] sm:px-8 sm:py-10">
-            <div className="mb-6 flex justify-center">
-              <div className="rounded-full bg-white/65 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#7a7063]">
+          <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-10 sm:py-10">
+            <div className="mb-8 flex justify-center">
+              <div className="rounded-full bg-white/88 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-[#8b857f] shadow-[0_8px_18px_rgba(49,50,56,0.04)]">
                 Quick learning brief
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4 text-center text-[1.85rem] font-medium leading-[1.4] text-[#5a4638] sm:text-[2.55rem]">
-              <span>Hi Cogi, I want to learn</span>
-              <InlineField
-                value={topic}
-                onChange={setTopic}
-                placeholder="Topic"
-                widthClass="w-[220px] sm:w-[260px]"
-              />
-              <span>.</span>
+            <div className="mx-auto max-w-5xl text-center text-[1.6rem] font-medium leading-[1.4] tracking-[-0.035em] text-[#5a4638] sm:text-[2.15rem]">
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
+                <span>Hi Cogi, I want to learn</span>
+                <InlineField
+                  value={topic}
+                  onChange={setTopic}
+                  placeholder="Topic"
+                  widthClass="w-[210px] sm:w-[250px]"
+                />
+                <span>.</span>
+              </div>
+
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
+                <span>My goal is to</span>
+                <InlineField
+                  value={goal}
+                  onChange={setGoal}
+                  placeholder="Learning Goal"
+                  widthClass="w-[240px] sm:w-[300px]"
+                />
+                <span>, and I plan to study for</span>
+                <InlineField
+                  value={time}
+                  onChange={setTime}
+                  placeholder="Time"
+                  widthClass="w-[170px] sm:w-[210px]"
+                />
+                <span>.</span>
+              </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-4 text-center text-[1.85rem] font-medium leading-[1.4] text-[#5a4638] sm:text-[2.55rem]">
-              <span>My goal is to</span>
-              <InlineField
-                value={goal}
-                onChange={setGoal}
-                placeholder="Learning Goal"
-                widthClass="w-[260px] sm:w-[320px]"
-              />
-              <span>, and I plan to study for</span>
-              <InlineField
-                value={time}
-                onChange={setTime}
-                placeholder="Time"
-                widthClass="w-[180px] sm:w-[220px]"
-              />
-              <span>.</span>
-            </div>
-
-            <div className="mt-8 flex flex-col gap-4 border-t border-[#313238]/8 pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-center text-sm leading-6 text-[#7a7063] sm:text-left">
+            <div className="mt-10 flex flex-col gap-4 border-t border-[#313238]/8 pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-sm leading-6 text-[#8b857f]">
                 Fill in one sentence to open your workspace.
               </div>
               <button
                 onClick={handleNext}
-                className="inline-flex items-center justify-center gap-2 self-center rounded-full bg-[#313238] px-6 py-3 text-sm font-bold text-[#f4f1eb] shadow-[0_14px_24px_rgba(49,50,56,0.14)] transition hover:bg-[#7a7063] sm:self-auto"
+                className="inline-flex items-center justify-center gap-2 self-end rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white shadow-[0_18px_28px_rgba(49,50,56,0.16)] transition hover:bg-[#313238] sm:self-auto"
               >
                 Continue
                 <ArrowRight size={18} />
@@ -112,13 +112,15 @@ const InlineField = ({
   placeholder: string;
   widthClass: string;
 }) => (
-  <label className={`inline-flex min-h-[58px] items-center rounded-full border border-[#313238]/6 bg-[#d9d7d5] px-5 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_8px_18px_rgba(49,50,56,0.04)] ${widthClass}`}>
+  <label
+    className={`inline-flex min-h-[60px] items-center rounded-full bg-[#e3dfda] px-5 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_8px_18px_rgba(49,50,56,0.04)] ${widthClass}`}
+  >
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-transparent text-center text-base font-semibold text-[#313238] outline-none placeholder:text-[#a9a6a3] sm:text-[1.05rem]"
+      className="w-full bg-transparent text-center text-[0.95rem] font-semibold text-[#313238] outline-none placeholder:text-[#a8a39d] sm:text-[1.05rem]"
     />
   </label>
 );

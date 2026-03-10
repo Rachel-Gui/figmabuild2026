@@ -71,13 +71,13 @@ export const MainLayout = () => {
 
         <aside
           className={clsx(
-            'app-surface fixed inset-y-4 left-4 z-40 flex flex-col overflow-hidden rounded-[30px] p-4 transition-all duration-300 lg:static lg:m-4 lg:translate-x-0',
+            'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-[30px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100vh-2rem)] lg:self-start lg:translate-x-0',
             isSidebarCollapsed ? 'w-[92px]' : 'w-[290px]',
             isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
           )}
         >
           <div className="pointer-events-none absolute inset-x-4 top-0 h-24 rounded-b-[30px] bg-[linear-gradient(180deg,rgba(208,198,184,0.22)_0%,rgba(208,198,184,0)_100%)]" />
-          <div className={clsx('mb-8 flex px-2 pt-2', isSidebarCollapsed ? 'justify-center' : 'items-start justify-between')}>
+          <div className={clsx('mb-8 flex shrink-0 px-2 pt-2', isSidebarCollapsed ? 'justify-center' : 'items-start justify-between')}>
             <div className={clsx(isSidebarCollapsed && 'hidden lg:block')}>
               <NavLink
                 to="/"
@@ -114,7 +114,8 @@ export const MainLayout = () => {
             </div>
           </div>
 
-          <nav className="flex flex-1 flex-col gap-2">
+          <nav className="min-h-0 flex-1 overflow-y-auto pr-1">
+            <div className="flex flex-col gap-2">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -156,13 +157,14 @@ export const MainLayout = () => {
                         </div>
                       )}
                     </div>
-                  );
-                }}
-              </NavLink>
+                );
+              }}
+            </NavLink>
             ))}
+            </div>
           </nav>
 
-          <div className="mt-3 border-t border-[#313238]/8 pt-3">
+          <div className="mt-3 shrink-0 border-t border-[#313238]/8 pt-3">
             <NavLink
               to={profileNavItem.to}
               onClick={() => setIsSidebarOpen(false)}
@@ -210,7 +212,7 @@ export const MainLayout = () => {
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col p-4 pt-20 lg:p-4 lg:pl-0 lg:pt-4">
-          <main className="min-h-0 flex-1 rounded-[34px]">
+          <main className="min-h-0 flex-1 overflow-hidden rounded-[34px]">
             <Outlet />
           </main>
         </div>
