@@ -32,15 +32,16 @@ export const LoginView = () => {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-4 py-5 text-[#17332d] sm:px-6 lg:px-8">
+    <div className="relative min-h-screen overflow-hidden px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0">
         <img
           src={doodle}
           alt=""
           className="absolute right-[-2rem] top-8 w-[18rem] rotate-[8deg] opacity-[0.08] blur-[1px] sm:w-[26rem]"
         />
-        <div className="absolute bottom-[-6rem] left-[-4rem] h-72 w-72 rounded-full bg-[#d77642]/18 blur-3xl" />
-        <div className="absolute right-[-5rem] top-1/4 h-80 w-80 rounded-full bg-[#5f8f82]/18 blur-3xl" />
+        <div className="absolute bottom-[-6rem] left-[-4rem] h-72 w-72 rounded-full bg-[#e5e0d7]/24 blur-3xl" />
+        <div className="absolute right-[-5rem] top-1/4 h-80 w-80 rounded-full bg-[#ceb3a1]/18 blur-3xl" />
+        <div className="absolute left-[28%] top-[14%] h-64 w-64 rounded-full bg-[#d0c6b8]/10 blur-3xl" />
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
@@ -52,16 +53,15 @@ export const LoginView = () => {
           className="app-surface flex flex-col justify-between rounded-[34px] px-6 py-8 sm:px-8 sm:py-10 lg:px-10"
         >
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#17332d] px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-[#fffaf4]">
-              <Sparkles size={14} />
+            <div className="inline-flex items-center rounded-full bg-[#313238] px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-[#f4f1eb] shadow-[0_12px_22px_rgba(49,50,56,0.14)]">
               CogniSense
             </div>
 
-            <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-tight text-[#17332d] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-tight text-[#313238] sm:text-5xl lg:text-6xl">
               A study interface that feels calm, clear, and actually usable.
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-7 text-[#60716b] sm:text-lg">
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#7a7063] sm:text-lg">
               Tell the system what you want to learn and it will shape the workspace around your goal,
               time, and pace instead of dumping everything on one screen.
             </p>
@@ -87,7 +87,7 @@ export const LoginView = () => {
 
           <div className="mt-10 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="app-panel rounded-[28px] p-5 sm:p-6">
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#60716b]">
+              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#7a7063]">
                 Prompt examples
               </div>
               <div className="mt-4 flex flex-wrap gap-3">
@@ -98,7 +98,7 @@ export const LoginView = () => {
                       setIsFreeMode(true);
                       setFreeText(prompt);
                     }}
-                    className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#17332d] transition hover:bg-[#17332d] hover:text-[#fffaf4]"
+                    className="rounded-full bg-[#f3efe8] px-4 py-2 text-sm font-semibold text-[#313238] transition hover:bg-[#313238] hover:text-[#f4f1eb]"
                   >
                     {prompt}
                   </button>
@@ -107,13 +107,13 @@ export const LoginView = () => {
             </div>
 
             <div className="app-panel rounded-[28px] p-5 sm:p-6">
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#60716b]">
+              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#7a7063]">
                 Current design goal
               </div>
-              <p className="mt-3 text-lg font-bold text-[#17332d]">
+              <p className="mt-3 text-lg font-bold text-[#313238]">
                 Replace clutter with a single, readable learning flow.
               </p>
-              <p className="mt-3 text-sm leading-6 text-[#60716b]">
+              <p className="mt-3 text-sm leading-6 text-[#7a7063]">
                 This version prioritizes spacing, contrast, and visual rhythm over decorative outlines.
               </p>
             </div>
@@ -127,21 +127,22 @@ export const LoginView = () => {
           className="app-surface relative rounded-[34px] p-5 sm:p-6 lg:p-8"
         >
           <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+          <div className="pointer-events-none absolute inset-x-6 top-0 h-24 rounded-b-[28px] bg-[linear-gradient(180deg,rgba(208,198,184,0.18)_0%,rgba(208,198,184,0)_100%)]" />
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#60716b]">
+              <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#7a7063]">
                 Start session
               </div>
-              <h2 className="mt-2 text-2xl font-semibold text-[#17332d] sm:text-3xl">
+              <h2 className="mt-2 text-2xl font-semibold text-[#313238] sm:text-3xl">
                 Shape your learning brief
               </h2>
             </div>
 
-            <div className="rounded-full bg-[#f1ebdf] p-1">
+            <div className="rounded-full bg-[#e5e0d7] p-1">
               <button
                 onClick={() => setIsFreeMode(false)}
                 className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                  isFreeMode ? 'text-[#60716b]' : 'bg-[#17332d] text-[#fffaf4]'
+                  isFreeMode ? 'text-[#7a7063]' : 'bg-[#313238] text-[#f4f1eb]'
                 }`}
               >
                 Guided
@@ -149,7 +150,7 @@ export const LoginView = () => {
               <button
                 onClick={() => setIsFreeMode(true)}
                 className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                  isFreeMode ? 'bg-[#17332d] text-[#fffaf4]' : 'text-[#60716b]'
+                  isFreeMode ? 'bg-[#313238] text-[#f4f1eb]' : 'text-[#7a7063]'
                 }`}
               >
                 Free ask
@@ -160,14 +161,14 @@ export const LoginView = () => {
           <div className="mt-6 app-panel rounded-[30px] p-5 sm:p-6">
             {isFreeMode ? (
               <div>
-                <label className="text-sm font-bold uppercase tracking-[0.2em] text-[#60716b]">
+                <label className="text-sm font-bold uppercase tracking-[0.2em] text-[#7a7063]">
                   What do you want to learn?
                 </label>
                 <textarea
                   placeholder="Describe the topic, your situation, and what kind of help you want."
                   value={freeText}
                   onChange={(e) => setFreeText(e.target.value)}
-                  className="mt-4 min-h-[280px] w-full rounded-[28px] border border-[#17332d]/10 bg-white/80 px-5 py-5 text-lg leading-8 text-[#17332d] outline-none transition placeholder:text-[#7b8a84] focus:border-[#17332d]/20 focus:bg-white"
+                  className="mt-4 min-h-[280px] w-full rounded-[28px] border border-[#313238]/10 bg-[#f3efe8] px-5 py-5 text-lg leading-8 text-[#313238] outline-none transition placeholder:text-[#8f857a] focus:border-[#313238]/20 focus:bg-white"
                 />
               </div>
             ) : (
@@ -192,7 +193,7 @@ export const LoginView = () => {
                     placeholder="Examples: 20 min/day, 3 weeks, weekends only"
                   />
                 </div>
-                <div className="rounded-[24px] bg-[#17332d] px-5 py-4 text-sm leading-6 text-[#fffaf4]/86">
+                <div className="rounded-[24px] bg-[#313238] px-5 py-4 text-sm leading-6 text-[#f4f1eb]/90 shadow-[0_16px_26px_rgba(49,50,56,0.14)]">
                   The workspace will use this brief to generate a cleaner plan, suggested questions, and
                   a more relevant chat context.
                 </div>
@@ -201,14 +202,14 @@ export const LoginView = () => {
           </div>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-md text-sm leading-6 text-[#60716b]">
+            <p className="max-w-md text-sm leading-6 text-[#7a7063]">
               Start with a rough prompt if needed. The next screen is designed to refine it rather than
               punish incomplete input.
             </p>
 
             <button
               onClick={handleNext}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#d77642] px-6 py-3 text-sm font-bold text-[#fffaf4] transition hover:bg-[#c96a38]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#313238] px-6 py-3 text-sm font-bold text-[#f4f1eb] shadow-[0_14px_24px_rgba(49,50,56,0.14)] transition hover:bg-[#7a7063]"
             >
               Continue to workspace
               <ArrowRight size={18} />
@@ -230,11 +231,11 @@ const FeatureCard = ({
   description: string;
 }) => (
   <div className="app-panel rounded-[28px] p-5">
-    <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#17332d] text-[#fffaf4]">
+    <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#313238] text-[#f4f1eb]">
       <Icon size={18} />
     </div>
-    <h3 className="mt-4 text-lg font-semibold text-[#17332d]">{title}</h3>
-    <p className="mt-2 text-sm leading-6 text-[#60716b]">{description}</p>
+    <h3 className="mt-4 text-lg font-semibold text-[#313238]">{title}</h3>
+    <p className="mt-2 text-sm leading-6 text-[#7a7063]">{description}</p>
   </div>
 );
 
@@ -250,13 +251,13 @@ const Field = ({
   placeholder: string;
 }) => (
   <label className="app-panel block rounded-[26px] p-5">
-    <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#60716b]">{label}</span>
+    <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#7a7063]">{label}</span>
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="mt-3 w-full rounded-[18px] border border-[#17332d]/10 bg-white/82 px-4 py-4 text-base text-[#17332d] outline-none transition placeholder:text-[#7b8a84] focus:border-[#17332d]/20 focus:bg-white"
+      className="mt-3 w-full rounded-[18px] border border-[#313238]/10 bg-[#f3efe8] px-4 py-4 text-base text-[#313238] outline-none transition placeholder:text-[#8f857a] focus:border-[#313238]/20 focus:bg-white"
     />
   </label>
 );
