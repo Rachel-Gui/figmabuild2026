@@ -7,7 +7,7 @@ import doodle from '@/assets/c66905e9277bdd045c5911a8ef1f9bc6131f4a00.png';
 
 export const LoginView = () => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<'guided' | 'self'>('self');
+  const [mode, setMode] = useState<'guided' | 'self'>('guided');
   const [prompt, setPrompt] = useState('');
   const [topic, setTopic] = useState('');
   const [goal, setGoal] = useState('');
@@ -39,15 +39,15 @@ export const LoginView = () => {
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
-      <div className="app-page-frame relative mx-auto flex min-h-[calc(100dvh-2.5rem)] max-w-[min(96vw,84rem)] items-center justify-center">
+      <div className="relative mx-auto flex min-h-[calc(100dvh-2.5rem)] max-w-[min(96vw,84rem)] items-center justify-center">
         <motion.section
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="relative w-full max-w-[min(92vw,74rem)] rounded-[44px] p-3 sm:p-4 lg:p-5"
+          className="relative w-full max-w-[min(92vw,78rem)] rounded-[44px] p-3 sm:p-5 lg:p-6"
         >
-          <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-8 sm:py-8 lg:px-9 lg:py-9">
-            <div className="mb-7 flex flex-col items-center gap-4">
+          <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-9 sm:py-9 lg:px-10 lg:py-10">
+            <div className="mb-8 flex flex-col items-center gap-4">
               <div className="inline-flex rounded-full bg-[#ebe7e1] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
                 {[
                   ['guided', 'Guided'],
@@ -79,11 +79,11 @@ export const LoginView = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe what you want to learn, your goal, what feels difficult, and how you want to study."
-                  className="min-h-[220px] w-full resize-none rounded-[30px] bg-[#ece7e1] px-6 py-6 text-[1.15rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#938b82] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.35rem]"
+                  className="min-h-[220px] w-full resize-none rounded-[30px] bg-[#ece7e1] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#938b82] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
                 />
               </div>
             ) : (
-              <div className="mx-auto max-w-[min(100%,62rem)] text-center text-[clamp(1.25rem,1.05rem+0.8vw,1.9rem)] font-medium leading-[1.38] tracking-[-0.03em] text-[#5a4638]">
+              <div className="mx-auto max-w-[min(100%,66rem)] text-center text-[clamp(1.22rem,1rem+0.95vw,1.95rem)] font-medium leading-[1.38] tracking-[-0.03em] text-[#5a4638]">
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
                   <span>Hi Cogi, I want to learn</span>
                   <InlineField
@@ -115,7 +115,7 @@ export const LoginView = () => {
               </div>
             )}
 
-            <div className="mt-7 flex justify-end border-t border-[#313238]/8 pt-5 sm:mt-8">
+            <div className="mt-8 flex justify-end border-t border-[#313238]/8 pt-5 sm:mt-10">
               <button
                 onClick={handleNext}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white shadow-[0_18px_28px_rgba(49,50,56,0.16)] transition hover:bg-[#313238]"
@@ -150,7 +150,7 @@ const InlineField = ({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-transparent text-center text-[0.95rem] font-semibold text-[#313238] outline-none placeholder:text-[#a8a39d] sm:text-[1.05rem]"
+      className="w-full bg-transparent text-center text-[0.9rem] font-semibold text-[#313238] outline-none placeholder:text-[#a8a39d] sm:text-[0.98rem]"
     />
   </label>
 );

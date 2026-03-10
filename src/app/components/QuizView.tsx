@@ -139,8 +139,8 @@ export const QuizView = () => {
       animate={{ opacity: 1, y: 0 }}
       className="grid gap-5"
     >
-      <section className="app-surface overflow-hidden rounded-[32px] p-4 sm:p-5">
-        <div className="grid gap-4 xl:grid-cols-[68px_minmax(0,1.1fr)_300px]">
+      <section className="app-surface overflow-hidden rounded-[36px] p-4 sm:p-5">
+        <div className="grid gap-4 xl:grid-cols-[72px_minmax(0,1.1fr)_320px]">
           <aside className="hidden rounded-[28px] bg-[#f7f4ef] p-3 xl:flex xl:flex-col xl:items-center xl:justify-between">
             <div className="space-y-3">
               {dashboardTabs.map((item) => {
@@ -173,7 +173,7 @@ export const QuizView = () => {
           <div className="grid gap-4">
             <div className="flex flex-col gap-3 rounded-[30px] bg-[#f7f4ef] px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <div className="text-[clamp(1.65rem,1.45rem+0.6vw,2rem)] font-semibold tracking-[-0.04em] text-[#313238]">Hi, Rachel.</div>
+                <div className="text-[1.75rem] font-semibold tracking-[-0.04em] text-[#313238]">Hi, Rachel.</div>
                 <div className="mt-1 text-sm leading-6 text-[#7a7063]">
                   Here is today&apos;s learning state, with attention, emotion, and anxiety signals in one place.
                 </div>
@@ -206,7 +206,7 @@ export const QuizView = () => {
             )}
 
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
-              <section className="relative overflow-hidden rounded-[24px] bg-[#d9d0c3] p-3">
+              <section className="relative overflow-hidden rounded-[26px] bg-[#d9d0c3] p-3">
                 <div className="max-w-[190px]">
                   <div className="text-[12px] font-semibold text-[#313238]">Today&apos;s learning condition</div>
                   <div className="mt-1 text-[12px] leading-4.5 text-[#5f564c]">
@@ -239,7 +239,7 @@ export const QuizView = () => {
                       type="button"
                       onClick={() => setActiveMetric(metric.label)}
                       className={clsx(
-                        'flex min-h-[124px] flex-col rounded-[16px] bg-white/58 px-3 py-3 text-left backdrop-blur-xl transition',
+                        'flex min-h-[118px] flex-col rounded-[16px] bg-white/58 px-3 py-3 text-left backdrop-blur-xl transition',
                         activeMetric === metric.label
                           ? 'ring-2 ring-[#455763]/30'
                           : 'hover:bg-white/70'
@@ -248,7 +248,7 @@ export const QuizView = () => {
                       <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#7a7063]">
                         {metric.label}
                       </div>
-                      <div className="mt-1.5 text-[1.05rem] font-semibold leading-none text-[#313238]">{metric.value}</div>
+                      <div className="mt-1.5 text-[1rem] font-semibold leading-none text-[#313238]">{metric.value}</div>
                       <div className="mt-2 min-h-[2.5rem] text-[12px] leading-4.5 text-[#7a7063]">{metric.note}</div>
                       <div className="mt-auto pt-2">
                         <div className="h-1.5 rounded-full bg-white/60">
