@@ -16,19 +16,16 @@ const navItems = [
   {
     to: '/app/workspace',
     label: 'Workspace',
-    description: 'Daily plan and learning flow',
     icon: BookOpenCheck,
   },
   {
     to: '/app/chat',
     label: 'Folder',
-    description: 'Past study records and saved boards',
     icon: FolderOpen,
   },
   {
     to: '/app/quiz',
     label: 'Dashboard',
-    description: 'Visual analytics and milestones',
     icon: ChartNoAxesColumn,
   },
 ];
@@ -36,7 +33,6 @@ const navItems = [
 const profileNavItem = {
   to: '/app/profile',
   label: 'Profile',
-  description: 'Streaks, badges, and goals',
   icon: UserRound,
 };
 
@@ -58,7 +54,7 @@ export const MainLayout = () => {
         {showSidebar && (
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="app-frost fixed left-4 top-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-[#313238] lg:hidden"
+            className="app-frost fixed left-4 top-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-xl text-[#313238] lg:hidden"
             aria-label="Open navigation"
           >
             <Menu size={22} />
@@ -75,12 +71,12 @@ export const MainLayout = () => {
         {showSidebar && (
           <aside
             className={clsx(
-              'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[30px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
-              isSidebarCollapsed ? 'w-[92px]' : 'w-[290px]',
+              'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[24px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
+              isSidebarCollapsed ? 'w-[92px]' : 'w-[260px]',
               isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
             )}
           >
-            <div className="pointer-events-none absolute inset-x-4 top-0 h-24 rounded-b-[30px] bg-[linear-gradient(180deg,rgba(208,198,184,0.22)_0%,rgba(208,198,184,0)_100%)]" />
+            <div className="pointer-events-none absolute inset-x-4 top-0 h-24 rounded-b-[24px] bg-[linear-gradient(180deg,rgba(208,198,184,0.22)_0%,rgba(208,198,184,0)_100%)]" />
             <div
               className={clsx(
                 'mb-8 shrink-0 px-2 pt-2',
@@ -97,24 +93,21 @@ export const MainLayout = () => {
                     <span>CogniSense</span>
                   </NavLink>
 
-                  <h2 className="text-[1.58rem] font-semibold leading-tight text-[#313238]">Adaptive Learning Studio</h2>
-                  <p className="mt-2 max-w-[18rem] text-sm leading-6 text-[#5f564c]">
-                    A cleaner control center for planning lessons, chatting with AI, and tracking progress.
-                  </p>
+                  <h2 className="text-[1.58rem] font-semibold leading-tight text-[#313238]">Learning Studio</h2>
                 </div>
               )}
 
               <div className={clsx('flex gap-2', isSidebarCollapsed ? 'items-center justify-center' : 'shrink-0')}>
                 <button
                   onClick={() => setIsSidebarCollapsed((prev) => !prev)}
-                  className="hidden lg:inline-flex h-10 w-10 items-center justify-center rounded-2xl text-[#5f564c] transition hover:bg-[#e5e0d7]/28 hover:text-[#313238]"
+                  className="hidden lg:inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#e5e0d7]/28 hover:text-[#313238]"
                   aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
                 >
                   {isSidebarCollapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}
                 </button>
                 <button
                   onClick={() => setIsSidebarOpen(false)}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl text-[#5f564c] transition hover:bg-[#e5e0d7]/28 hover:text-[#313238] lg:hidden"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#e5e0d7]/28 hover:text-[#313238] lg:hidden"
                   aria-label="Close navigation"
                 >
                   <X size={20} />
@@ -131,7 +124,7 @@ export const MainLayout = () => {
                     onClick={() => setIsSidebarOpen(false)}
                     className={({ isActive }) =>
                       clsx(
-                        'group rounded-[24px] transition-all duration-200',
+                        'group rounded-[18px] transition-all duration-200',
                         isSidebarCollapsed ? 'flex justify-center px-0 py-3' : 'px-4 py-4',
                         isActive
                           ? 'bg-[#7a7063] text-[#f4f1eb] shadow-[0_20px_40px_rgba(49,50,56,0.16)]'
@@ -146,7 +139,7 @@ export const MainLayout = () => {
                         <div className={clsx('flex gap-3', isSidebarCollapsed ? 'justify-center' : 'items-start')}>
                           <div
                             className={clsx(
-                              'inline-flex h-11 w-11 items-center justify-center rounded-2xl transition',
+                              'inline-flex h-11 w-11 items-center justify-center rounded-xl transition',
                               !isSidebarCollapsed && 'mt-0.5',
                               isActive ? 'bg-white/18' : 'bg-[#e5e0d7]/32 text-[#313238]'
                             )}
@@ -156,14 +149,6 @@ export const MainLayout = () => {
                           {!isSidebarCollapsed && (
                             <div>
                               <div className="text-base font-bold">{item.label}</div>
-                              <div
-                                className={clsx(
-                                  'mt-1 text-sm leading-5',
-                                  isActive ? 'text-[#f4f1eb]/88' : 'text-[#5f564c]'
-                                )}
-                              >
-                                {item.description}
-                              </div>
                             </div>
                           )}
                         </div>
@@ -180,7 +165,7 @@ export const MainLayout = () => {
                 onClick={() => setIsSidebarOpen(false)}
                 className={({ isActive }) =>
                   clsx(
-                    'group block rounded-[24px] transition-all duration-200',
+                    'group block rounded-[18px] transition-all duration-200',
                     isSidebarCollapsed ? 'flex justify-center px-0 py-3' : 'px-4 py-4',
                     isActive
                       ? 'bg-[#7a7063] text-[#f4f1eb] shadow-[0_20px_40px_rgba(49,50,56,0.16)]'
@@ -195,7 +180,7 @@ export const MainLayout = () => {
                     <div className={clsx('flex gap-3', isSidebarCollapsed ? 'justify-center' : 'items-start')}>
                       <div
                         className={clsx(
-                          'inline-flex h-11 w-11 items-center justify-center rounded-2xl transition',
+                          'inline-flex h-11 w-11 items-center justify-center rounded-xl transition',
                           !isSidebarCollapsed && 'mt-0.5',
                           isActive ? 'bg-white/18' : 'bg-[#e5e0d7]/32 text-[#313238]'
                         )}
@@ -205,14 +190,6 @@ export const MainLayout = () => {
                       {!isSidebarCollapsed && (
                         <div>
                           <div className="text-base font-bold">{profileNavItem.label}</div>
-                          <div
-                            className={clsx(
-                              'mt-1 text-sm leading-5',
-                              isActive ? 'text-[#f4f1eb]/88' : 'text-[#5f564c]'
-                            )}
-                          >
-                            {profileNavItem.description}
-                          </div>
                         </div>
                       )}
                     </div>
@@ -229,7 +206,7 @@ export const MainLayout = () => {
             showSidebar ? 'pt-20 lg:pl-0 lg:pt-4' : 'pt-4'
           )}
         >
-          <main className="h-full min-h-0 flex-1 overflow-hidden rounded-[34px]">
+          <main className="h-full min-h-0 flex-1 overflow-hidden rounded-[28px]">
             <Outlet />
           </main>
         </div>

@@ -44,9 +44,9 @@ export const LoginView = () => {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="relative w-full max-w-[min(92vw,78rem)] rounded-[44px] p-3 sm:p-5 lg:p-6"
+          className="relative w-full max-w-[min(92vw,78rem)] rounded-[36px] p-3 sm:p-5 lg:p-6"
         >
-          <div className="rounded-[40px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-9 sm:py-9 lg:px-10 lg:py-10">
+          <div className="rounded-[32px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-9 sm:py-9 lg:px-10 lg:py-10">
             <div className="mb-8 flex flex-col items-center gap-4">
               <div className="inline-flex rounded-full bg-[#ebe7e1] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
                 {[
@@ -79,7 +79,7 @@ export const LoginView = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe what you want to learn, your goal, what feels difficult, and how you want to study."
-                  className="min-h-[220px] w-full resize-none rounded-[30px] bg-[#ece7e1] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#7f766d] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
+                  className="min-h-[220px] w-full resize-none rounded-[24px] bg-[#ece7e1] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#7f766d] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
                 />
               </div>
             ) : (

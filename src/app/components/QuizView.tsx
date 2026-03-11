@@ -195,10 +195,10 @@ export const QuizView = () => {
       animate={{ opacity: 1, y: 0 }}
       className="grid h-full min-h-0 gap-5 overflow-hidden"
     >
-      <section className="app-surface flex min-h-0 flex-col overflow-hidden rounded-[36px] p-4 sm:p-5">
+      <section className="app-surface flex min-h-0 flex-col overflow-hidden rounded-[30px] p-4 sm:p-5">
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
           <div className="grid gap-4">
-            <div className="flex flex-col gap-3 rounded-[30px] bg-[#f7f4ef] px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 rounded-[24px] bg-[#f7f4ef] px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="text-[1.75rem] font-semibold tracking-[-0.04em] text-[#313238]">Hi, Rachel.</div>
                 <div className="mt-1 text-sm leading-6 text-[#5f564c]">
@@ -216,13 +216,13 @@ export const QuizView = () => {
             </div>
 
             {isPlanOpen && (
-              <div className="rounded-[24px] bg-[#f7f4ef] px-5 py-4 text-sm leading-6 text-[#5f564c] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+              <div className="rounded-[18px] bg-[#f7f4ef] px-5 py-4 text-sm leading-6 text-[#5f564c] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
                 The current plan prioritizes one guided example, one low-pressure recall task, and one short reflection to keep anxiety contained while retention improves.
               </div>
             )}
 
             <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
-              <section className="relative h-full overflow-hidden rounded-[26px] bg-[#d9d0c3] p-3">
+              <section className="relative h-full overflow-hidden rounded-[20px] bg-[#d9d0c3] p-3">
                 <div className="max-w-[190px]">
                   <div className="text-[12px] font-semibold text-[#313238]">Today&apos;s learning condition</div>
                   <div className="mt-1 text-[12px] leading-4.5 text-[#5f564c]">
@@ -307,7 +307,7 @@ export const QuizView = () => {
               </section>
 
               <section className="grid h-full gap-4">
-                <div className="flex h-full flex-col rounded-[32px] bg-[#1f2229] p-5 text-white">
+                <div className="flex h-full flex-col rounded-[26px] bg-[#1f2229] p-5 text-white">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold">Mental state summary</div>
@@ -320,17 +320,17 @@ export const QuizView = () => {
                     </div>
                   </div>
 
-                  <div className="mt-5 flex-1 space-y-3">
+                  <div className="mt-5 grid min-h-0 flex-1 grid-rows-3 gap-3">
                     {stateSummaryCards.map((item) => {
                       const Icon = item.icon;
 
                       return (
                         <div
                           key={item.label}
-                          className={`rounded-[20px] p-4 text-[#313238] ${item.tone}`}
+                          className={`flex h-full rounded-[16px] p-4 text-[#313238] ${item.tone}`}
                         >
                           <div className="flex items-start gap-3">
-                            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/70">
+                            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/70">
                               <Icon size={18} />
                             </div>
                             <div>
@@ -352,7 +352,7 @@ export const QuizView = () => {
 
             <div className="grid gap-4 lg:grid-cols-[260px_minmax(0,1fr)]">
               <div className="grid gap-4">
-                <section className="rounded-[28px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                <section className="rounded-[22px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold text-[#313238]">Emotional readiness</div>
@@ -458,7 +458,7 @@ export const QuizView = () => {
                   </div>
                 </section>
 
-                <section className="rounded-[28px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                <section className="rounded-[22px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold text-[#313238]">Anxiety watch</div>
@@ -484,7 +484,7 @@ export const QuizView = () => {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-[20px] bg-[#ece7ff] px-4 py-4">
+                  <div className="mt-5 rounded-[16px] bg-[#ece7ff] px-4 py-4">
                     <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a60d6]">
                       Anxiety trend
                     </div>
@@ -495,7 +495,7 @@ export const QuizView = () => {
                 </section>
               </div>
 
-              <section className="rounded-[28px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+              <section className="rounded-[22px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="text-sm font-semibold text-[#313238]">Learning signals</div>
@@ -515,9 +515,9 @@ export const QuizView = () => {
                     return (
                       <div
                         key={item.label}
-                        className="flex w-full items-center gap-4 rounded-[22px] bg-white px-4 py-4 text-left shadow-[0_8px_18px_rgba(49,50,56,0.04)]"
+                        className="flex w-full items-center gap-4 rounded-[16px] bg-white px-4 py-4 text-left shadow-[0_8px_18px_rgba(49,50,56,0.04)]"
                       >
-                        <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${item.tint} text-[#313238]`}>
+                        <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${item.tint} text-[#313238]`}>
                           <Icon size={20} />
                         </div>
 
@@ -552,7 +552,7 @@ export const QuizView = () => {
                   })}
                 </div>
 
-                <div className="mt-5 rounded-[24px] bg-[#faf8f4] p-5">
+                <div className="mt-5 rounded-[18px] bg-[#faf8f4] p-5">
                   <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
                     Recommended intervention
                   </div>

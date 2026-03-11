@@ -10,9 +10,9 @@ const achievements = [
 export const ProfileView = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="grid h-full min-h-0 gap-4 overflow-hidden lg:grid-cols-[360px_minmax(0,1fr)]">
-      <section className="app-surface relative min-h-0 overflow-y-auto rounded-[32px] p-6">
-        <div className="pointer-events-none absolute inset-x-6 top-0 h-24 rounded-b-[30px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
-        <div className="inline-flex h-16 w-16 items-center justify-center rounded-[24px] bg-[#313238] text-2xl font-bold text-[#f4f1eb]">
+      <section className="app-surface relative min-h-0 overflow-y-auto rounded-[26px] p-6">
+        <div className="pointer-events-none absolute inset-x-6 top-0 h-24 rounded-b-[24px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
+        <div className="inline-flex h-16 w-16 items-center justify-center rounded-[18px] bg-[#313238] text-2xl font-bold text-[#f4f1eb]">
           RG
         </div>
         <h2 className="mt-5 text-2xl font-semibold text-[#313238]">Rachel</h2>
@@ -28,9 +28,9 @@ export const ProfileView = () => {
       </section>
 
       <div className="grid min-h-0 content-start gap-4 overflow-y-auto pr-1">
-        <section className="app-surface shrink-0 rounded-[32px] p-6 sm:p-8">
+        <section className="app-surface shrink-0 rounded-[26px] p-6 sm:p-8">
           <div className="flex items-center gap-3">
-            <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#be7d62] text-[#f4f1eb]">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#be7d62] text-[#f4f1eb]">
               <Award size={20} />
             </div>
             <div>
@@ -45,11 +45,11 @@ export const ProfileView = () => {
           </div>
         </section>
 
-        <section className="app-surface shrink-0 rounded-[32px] p-6 sm:p-8">
+        <section className="app-surface shrink-0 rounded-[26px] p-6 sm:p-8">
           <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#5f564c]">Recent highlights</div>
           <div className="mt-4 space-y-3">
             {achievements.map((item) => (
-              <div key={item} className="app-panel rounded-[24px] px-4 py-4 text-sm font-semibold leading-6 text-[#313238]">
+              <div key={item} className="app-panel rounded-[18px] px-4 py-4 text-sm font-semibold leading-6 text-[#313238]">
                 {item}
               </div>
             ))}
@@ -69,9 +69,9 @@ const ProfileMetric = ({
   label: string;
   value: string;
 }) => (
-  <div className="app-panel rounded-[24px] p-4">
+  <div className="app-panel rounded-[18px] p-4">
     <div className="flex items-start gap-3">
-      <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e5e0d7] text-[#313238]">
+      <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#e5e0d7] text-[#313238]">
         <Icon size={18} />
       </div>
       <div>
@@ -83,7 +83,7 @@ const ProfileMetric = ({
 );
 
 const StatCard = ({ label, value, detail }: { label: string; value: string; detail: string }) => (
-  <div className="app-panel rounded-[26px] p-5">
+  <div className="app-panel rounded-[20px] p-5">
     <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#5f564c]">{label}</div>
     <div className="mt-3 text-3xl font-semibold text-[#313238]">{value}</div>
     <div className="mt-2 text-sm leading-6 text-[#5f564c]">{detail}</div>

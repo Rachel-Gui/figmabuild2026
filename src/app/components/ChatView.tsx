@@ -100,13 +100,13 @@ export const ChatView = () => {
       animate={{ opacity: 1, y: 0 }}
       className="grid h-full min-h-0 gap-4 overflow-hidden lg:grid-cols-[minmax(0,1.2fr)_360px]"
     >
-      <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[32px] p-6 sm:p-8">
+      <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[26px] p-6 sm:p-8">
         <img
           src={doodle}
           alt=""
           className="pointer-events-none absolute right-[-3rem] top-[-2rem] w-64 rotate-[14deg] opacity-[0.06]"
         />
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-24 rounded-b-[32px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-24 rounded-b-[26px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
 
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
           <div className="max-w-3xl">
@@ -123,8 +123,8 @@ export const ChatView = () => {
             </p>
           </div>
 
-          <div className="mt-8 rounded-[28px] bg-[#e5e0d7] p-3">
-            <div className="flex items-center gap-3 rounded-[22px] bg-[#f3efe8] px-4 py-4 text-sm text-[#5f564c]">
+          <div className="mt-8 rounded-[22px] bg-[#e5e0d7] p-3">
+            <div className="flex items-center gap-3 rounded-[16px] bg-[#f3efe8] px-4 py-4 text-sm text-[#5f564c]">
               <Search size={18} className="text-[#313238]" />
               Search previous topics, notes, or saved boards
             </div>
@@ -132,7 +132,7 @@ export const ChatView = () => {
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             {archiveStats.map((item) => (
-              <div key={item.label} className="app-frost rounded-[22px] px-4 py-4">
+              <div key={item.label} className="app-frost rounded-[16px] px-4 py-4">
                 <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                   {item.label}
                 </div>
@@ -143,9 +143,9 @@ export const ChatView = () => {
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {folders.map((folder) => (
-              <div key={folder.title} className={`rounded-[28px] p-5 shadow-[0_14px_32px_rgba(49,50,56,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(49,50,56,0.08)] ${folder.tone}`}>
+              <div key={folder.title} className={`rounded-[22px] p-5 shadow-[0_14px_32px_rgba(49,50,56,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(49,50,56,0.08)] ${folder.tone}`}>
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#313238] text-[#f4f1eb] shadow-[0_12px_20px_rgba(49,50,56,0.14)]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#313238] text-[#f4f1eb] shadow-[0_12px_20px_rgba(49,50,56,0.14)]">
                     <FolderGit2 size={18} />
                   </div>
                   <div className="rounded-full bg-white/65 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#5f564c]">
@@ -159,9 +159,9 @@ export const ChatView = () => {
             ))}
           </div>
 
-          <div className="mt-8 rounded-[30px] bg-[#f3efe8] p-5 shadow-[0_14px_30px_rgba(49,50,56,0.05)]">
+          <div className="mt-8 rounded-[24px] bg-[#f3efe8] p-5 shadow-[0_14px_30px_rgba(49,50,56,0.05)]">
             <div className="flex items-center gap-3">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#be7d62] text-[#f4f1eb]">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#be7d62] text-[#f4f1eb]">
                 <History size={18} />
               </div>
               <div>
@@ -174,7 +174,7 @@ export const ChatView = () => {
 
             <div className="mt-5 space-y-3">
               {historyRecords.map((record) => (
-                <div key={record.title} className="app-panel rounded-[24px] p-4">
+                <div key={record.title} className="app-panel rounded-[18px] p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-base font-semibold text-[#313238]">{record.title}</div>
@@ -194,22 +194,22 @@ export const ChatView = () => {
       </section>
 
       <aside className="grid min-h-0 content-start gap-4 overflow-y-auto pr-1">
-        <section className="app-surface shrink-0 rounded-[30px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#e5e0d7] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
+        <section className="app-surface shrink-0 rounded-[24px] p-5">
+          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e5e0d7] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
             <BookmarkCheck size={18} />
           </div>
           <h3 className="mt-4 text-xl font-semibold text-[#313238]">Pinned notes</h3>
           <div className="mt-4 space-y-3">
             {pinnedItems.map((item) => (
-              <div key={item} className="app-panel rounded-[24px] p-4 text-sm leading-6 text-[#313238]">
+              <div key={item} className="app-panel rounded-[18px] p-4 text-sm leading-6 text-[#313238]">
                 {item}
               </div>
             ))}
           </div>
         </section>
 
-        <section className="app-surface shrink-0 rounded-[30px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#d0c6b8] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
+        <section className="app-surface shrink-0 rounded-[24px] p-5">
+          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#d0c6b8] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
             <FileClock size={18} />
           </div>
           <h3 className="mt-4 text-xl font-semibold text-[#313238]">Archive logic</h3>
@@ -219,14 +219,14 @@ export const ChatView = () => {
           </p>
         </section>
 
-        <section className="app-surface shrink-0 rounded-[30px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#ceb3a1] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
+        <section className="app-surface shrink-0 rounded-[24px] p-5">
+          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#ceb3a1] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
             <Target size={18} />
           </div>
           <h3 className="mt-4 text-xl font-semibold text-[#313238]">Future learning goals</h3>
           <div className="mt-4 space-y-3">
             {futureGoals.map((goal) => (
-              <div key={goal.title} className="app-panel rounded-[24px] p-4">
+              <div key={goal.title} className="app-panel rounded-[18px] p-4">
                 <div className="text-sm font-semibold leading-6 text-[#313238]">{goal.title}</div>
                 <p className="mt-2 text-sm leading-6 text-[#5f564c]">{goal.note}</p>
               </div>
