@@ -26,7 +26,7 @@ export const LoginView = () => {
   };
 
   return (
-    <div className="relative min-h-[100dvh] overflow-hidden px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
+    <div className="relative h-[100dvh] overflow-y-auto px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0">
         <img
           src={doodle}
@@ -39,7 +39,7 @@ export const LoginView = () => {
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[calc(100dvh-2.5rem)] max-w-[min(96vw,84rem)] items-center justify-center">
+      <div className="relative mx-auto flex min-h-full max-w-[min(96vw,84rem)] items-center justify-center">
         <motion.section
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export const LoginView = () => {
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       mode === value
                         ? 'bg-[#202127] text-white shadow-[0_10px_18px_rgba(49,50,56,0.14)]'
-                        : 'text-[#7a7063] hover:text-[#313238]'
+                        : 'text-[#5f564c] hover:text-[#313238]'
                     }`}
                   >
                     {label}
@@ -68,7 +68,7 @@ export const LoginView = () => {
                 ))}
               </div>
 
-              <div className="rounded-full bg-white/88 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-[#8b857f] shadow-[0_8px_18px_rgba(49,50,56,0.04)]">
+              <div className="rounded-full bg-white/88 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-[#6d645a] shadow-[0_8px_18px_rgba(49,50,56,0.04)]">
                 {mode === 'self' ? 'Self-directed learning mode' : 'Quick learning brief'}
               </div>
             </div>
@@ -79,7 +79,7 @@ export const LoginView = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe what you want to learn, your goal, what feels difficult, and how you want to study."
-                  className="min-h-[220px] w-full resize-none rounded-[30px] bg-[#ece7e1] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#938b82] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
+                  className="min-h-[220px] w-full resize-none rounded-[30px] bg-[#ece7e1] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#7f766d] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
                 />
               </div>
             ) : (
@@ -150,7 +150,7 @@ const InlineField = ({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-transparent text-center text-[0.9rem] font-semibold text-[#313238] outline-none placeholder:text-[#a8a39d] sm:text-[0.98rem]"
+      className="w-full bg-transparent text-center text-[0.9rem] font-semibold text-[#313238] outline-none placeholder:text-[#837a72] sm:text-[0.98rem]"
     />
   </label>
 );

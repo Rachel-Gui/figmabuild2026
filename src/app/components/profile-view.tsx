@@ -15,36 +15,36 @@ interface Achievement {
 const allAchievements: Achievement[] = [
   {
     id: 'first-chat',
-    title: '初次对话',
-    description: '与AI助手开始第一次对话',
+    title: 'First Conversation',
+    description: 'Started the first conversation with the AI assistant',
     icon: Star,
     color: 'from-blue-400 to-cyan-400'
   },
   {
     id: 'explored-1',
-    title: '宇宙探索者',
-    description: '探索了宇宙话题',
+    title: 'Space Explorer',
+    description: 'Explored a space-related topic',
     icon: Trophy,
     color: 'from-purple-400 to-pink-400'
   },
   {
     id: 'explored-2',
-    title: 'AI 学习者',
-    description: '探索了人工智能话题',
+    title: 'AI Learner',
+    description: 'Explored an artificial intelligence topic',
     icon: Zap,
     color: 'from-blue-400 to-indigo-400'
   },
   {
     id: 'streak-3',
-    title: '连胜高手',
-    description: '答题连对3题',
+    title: 'Hot Streak',
+    description: 'Answered 3 questions correctly in a row',
     icon: Target,
     color: 'from-yellow-400 to-orange-400'
   },
   {
     id: 'quiz-master',
-    title: '知识达人',
-    description: '挑战中答对80%以上',
+    title: 'Quiz Master',
+    description: 'Scored above 80% in the challenge',
     icon: Award,
     color: 'from-green-400 to-emerald-400'
   }
@@ -80,13 +80,13 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
               🎓
             </div>
             <div className="flex-1">
-              <h2 className="text-3xl mb-2">学习者</h2>
+              <h2 className="text-3xl mb-2">Learner</h2>
               <div className="flex items-center gap-3 mb-3">
                 <Badge className="bg-white/20 text-white border-white/30">
-                  等级 {level}
+                  Level {level}
                 </Badge>
                 <span className="text-purple-100 text-sm">
-                  还需 {pointsToNextLevel} 积分升级
+                  {pointsToNextLevel} points to the next level
                 </span>
               </div>
               <Progress value={levelProgress} className="h-2 bg-white/20" />
@@ -107,7 +107,7 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
               <Trophy className="w-6 h-6 text-white" />
             </div>
             <div className="text-2xl mb-1">{points}</div>
-            <div className="text-sm text-gray-600">总积分</div>
+            <div className="text-sm text-gray-600">Total Points</div>
           </Card>
         </motion.div>
 
@@ -121,7 +121,7 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
               <Star className="w-6 h-6 text-white" />
             </div>
             <div className="text-2xl mb-1">{level}</div>
-            <div className="text-sm text-gray-600">当前等级</div>
+            <div className="text-sm text-gray-600">Current Level</div>
           </Card>
         </motion.div>
 
@@ -135,7 +135,7 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
               <Award className="w-6 h-6 text-white" />
             </div>
             <div className="text-2xl mb-1">{earnedAchievements.length}</div>
-            <div className="text-sm text-gray-600">成就</div>
+            <div className="text-sm text-gray-600">Achievements</div>
           </Card>
         </motion.div>
 
@@ -149,14 +149,14 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
               <TrendingUp className="w-6 h-6 text-white" />
             </div>
             <div className="text-2xl mb-1">{Math.floor(points / 10)}</div>
-            <div className="text-sm text-gray-600">学习次数</div>
+            <div className="text-sm text-gray-600">Study Sessions</div>
           </Card>
         </motion.div>
       </div>
 
       {/* Achievements */}
       <div className="mb-6">
-        <h3 className="text-xl mb-4">🏆 已获得成就</h3>
+        <h3 className="text-xl mb-4">🏆 Earned Achievements</h3>
         {earnedAchievements.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {earnedAchievements.map((achievement, index) => {
@@ -187,7 +187,7 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
         ) : (
           <Card className="p-8 text-center text-gray-500">
             <Trophy className="w-12 h-12 mx-auto mb-3 opacity-30" />
-            <p>还没有获得成就，继续探索吧！</p>
+            <p>No achievements yet. Keep exploring.</p>
           </Card>
         )}
       </div>
@@ -195,7 +195,7 @@ export function ProfileView({ points, achievements }: ProfileViewProps) {
       {/* Locked Achievements */}
       {lockedAchievements.length > 0 && (
         <div>
-          <h3 className="text-xl mb-4">🔒 待解锁成就</h3>
+          <h3 className="text-xl mb-4">🔒 Locked Achievements</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {lockedAchievements.map((achievement, index) => {
               const Icon = achievement.icon;

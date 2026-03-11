@@ -13,12 +13,11 @@ import {
   Lightbulb,
   Microscope,
   Orbit,
-  Paperclip,
   Send,
   User,
   X,
 } from 'lucide-react';
-import { type ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { clsx } from 'clsx';
 import doodle from '@/assets/c66905e9277bdd045c5911a8ef1f9bc6131f4a00.png';
 
@@ -250,11 +249,9 @@ export const WorkspaceView = () => {
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
-  const [selectedFileName, setSelectedFileName] = useState('');
   const [knowledgePages, setKnowledgePages] = useState<KnowledgePage[]>(initialPages);
   const [activePageId, setActivePageId] = useState<string>(initialPages[0].id);
   const [activeBoardSection, setActiveBoardSection] = useState<BoardSection>('definition');
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (messages.length > 0) return;
@@ -332,11 +329,6 @@ export const WorkspaceView = () => {
 
   const activePage = knowledgePages.find((page) => page.id === activePageId) ?? knowledgePages[0];
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setSelectedFileName(file?.name ?? '');
-  };
-
   const recordItems = [
     { label: 'Topic', value: topicName, completed: true },
     { label: 'Goal', value: goalText, completed: true },
@@ -407,18 +399,18 @@ export const WorkspaceView = () => {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid h-full min-h-0 items-start gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)]"
+      className="grid h-full min-h-0 gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)] xl:grid-rows-[minmax(0,1fr)]"
     >
-      <div className="flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col gap-2.5 overflow-hidden">
+      <div className="flex min-h-0 flex-col gap-2.5 overflow-hidden">
         <section className="app-surface relative shrink-0 overflow-hidden rounded-[32px] p-3">
           <div className="pointer-events-none absolute right-[-1.5rem] top-[-1.5rem] h-20 w-20 rounded-full bg-white/20 blur-2xl" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(190,125,98,0.18)_0%,rgba(208,198,184,0.08)_100%)]" />
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#7a7063]">Auto record</div>
+              <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#5f564c]">Auto record</div>
               <h3 className="mt-1 text-[1rem] font-semibold text-[#313238]">Learning progress</h3>
             </div>
-            <div className="app-frost rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+            <div className="app-frost rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
               To do list
             </div>
           </div>
@@ -426,7 +418,7 @@ export const WorkspaceView = () => {
           <div className="app-frost mt-2.5 rounded-[20px] p-2">
             <div className="grid gap-2 sm:grid-cols-2">
               <div className="rounded-[16px] bg-white/38 px-3 py-2 backdrop-blur-xl">
-                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                   Current progress
                 </div>
                 <div className="mt-1 text-[1.25rem] font-semibold leading-none text-[#313238]">
@@ -434,7 +426,7 @@ export const WorkspaceView = () => {
                 </div>
               </div>
               <div className="rounded-[16px] bg-white/38 px-3 py-2 backdrop-blur-xl sm:text-right">
-                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                   Estimated time
                 </div>
                 <div className="mt-1 text-[0.98rem] font-semibold leading-none text-[#313238]">
@@ -470,16 +462,6 @@ export const WorkspaceView = () => {
             className="pointer-events-none absolute right-[-2rem] top-[-3rem] w-64 rotate-[10deg] opacity-[0.05]"
           />
 
-          <div className="border-b border-[#313238]/8 bg-[linear-gradient(180deg,rgba(208,198,184,0.12)_0%,rgba(208,198,184,0)_100%)] px-5 py-4">
-            <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#7a7063]">
-              Live conversation
-            </div>
-            <h2 className="mt-2 text-[1.72rem] font-semibold text-[#313238]">Learning workspace</h2>
-            <p className="mt-2 text-sm leading-6 text-[#7a7063]">
-              This area is only for questions, follow-ups, and clarification.
-            </p>
-          </div>
-
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-4 py-4">
             <div className="min-h-0 flex-1 overflow-y-auto pr-1">
               <div className="mb-4 flex flex-wrap gap-2">
@@ -497,7 +479,7 @@ export const WorkspaceView = () => {
               <div className="mb-4 rounded-[26px] bg-[linear-gradient(180deg,rgba(243,239,232,0.96)_0%,rgba(232,226,218,0.92)_100%)] p-4 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#7a7063]">
+                    <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#5f564c]">
                       Recommended resources
                     </div>
                     <div className="mt-1 text-lg font-semibold text-[#313238]">
@@ -522,20 +504,17 @@ export const WorkspaceView = () => {
                           <Icon size={22} />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                             {card.source}
                           </div>
                           <div className="mt-1 text-base font-semibold text-[#313238]">{card.title}</div>
-                          <div className="mt-1 text-sm leading-6 text-[#7a7063]">{card.summary}</div>
+                          <div className="mt-1 text-sm leading-6 text-[#5f564c]">{card.summary}</div>
                         </div>
                       </div>
                     );
                   })}
                 </div>
 
-                <button className="mt-4 inline-flex w-full items-center justify-center rounded-[18px] bg-[#d8d2ee] px-4 py-3 text-sm font-semibold text-[#455763] transition hover:bg-[#cbc4ea]">
-                  Open all resources
-                </button>
               </div>
 
               <div className="space-y-4">
@@ -574,20 +553,7 @@ export const WorkspaceView = () => {
             </div>
 
             <div className="app-frost sticky bottom-0 z-10 mt-4 rounded-[28px] p-2">
-              <input
-                ref={fileInputRef}
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-              />
               <div className="flex items-end gap-2">
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-[22px] bg-white/42 text-[#313238] transition hover:bg-white/58"
-                  aria-label="Upload file"
-                >
-                  <Paperclip size={18} />
-                </button>
                 <textarea
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
@@ -599,7 +565,7 @@ export const WorkspaceView = () => {
                   }}
                   rows={1}
                   placeholder="Ask a follow-up..."
-                  className="max-h-36 min-h-[120px] flex-1 resize-none rounded-[22px] bg-white/42 px-4 py-4 text-base text-[#313238] outline-none placeholder:text-[#8f857a] backdrop-blur-xl"
+                  className="min-h-[70px] max-h-32 flex-1 resize-none rounded-[22px] bg-white/42 px-4 py-3 text-base text-[#313238] outline-none placeholder:text-[#8f857a] backdrop-blur-xl"
                 />
                 <button
                   onClick={handleSend}
@@ -609,17 +575,12 @@ export const WorkspaceView = () => {
                   <Send size={18} />
                 </button>
               </div>
-              {selectedFileName && (
-                <div className="app-frost mt-3 rounded-[18px] px-4 py-3 text-sm font-semibold text-[#7a7063]">
-                  Attached: {selectedFileName}
-                </div>
-              )}
             </div>
           </div>
         </section>
       </div>
 
-      <section className="app-surface relative flex h-[calc(100dvh-6.5rem)] min-h-0 self-start flex-col overflow-hidden rounded-[32px]">
+      <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[32px]">
         <img
           src={doodle}
           alt=""
@@ -636,7 +597,7 @@ export const WorkspaceView = () => {
                     'flex max-w-[260px] items-center gap-2 rounded-t-[18px] px-3 py-2 text-left text-sm font-semibold whitespace-nowrap transition',
                     activePageId === page.id
                       ? 'bg-[#f3efe8] text-[#313238] shadow-[0_-1px_0_rgba(255,255,255,0.7),0_8px_20px_rgba(49,50,56,0.08)]'
-                      : 'bg-[#d4caba] text-[#7a7063] hover:bg-[#e5e0d7]'
+                      : 'bg-[#d4caba] text-[#5f564c] hover:bg-[#e5e0d7]'
                   )}
                 >
                   <button
@@ -656,7 +617,7 @@ export const WorkspaceView = () => {
                       knowledgePages.length <= 1
                         ? 'cursor-not-allowed text-[#aaa5bf]'
                         : activePageId === page.id
-                          ? 'text-[#7a7063] hover:bg-[#e5e0d7]'
+                          ? 'text-[#5f564c] hover:bg-[#e5e0d7]'
                           : 'text-[#8f857a] hover:bg-[#ddd8ee] hover:text-[#313238]'
                     )}
                     aria-label={`Delete ${page.title}`}
@@ -667,7 +628,7 @@ export const WorkspaceView = () => {
               ))}
               <button
                 onClick={handleAddPage}
-                className="ml-1 rounded-t-[18px] bg-[#f3efe8] px-4 py-3 text-sm font-bold text-[#7a7063] transition hover:bg-white"
+                className="ml-1 rounded-t-[18px] bg-[#f3efe8] px-4 py-3 text-sm font-bold text-[#5f564c] transition hover:bg-white"
                 aria-label="Create new page"
               >
                 +
@@ -683,7 +644,7 @@ export const WorkspaceView = () => {
                     'rounded-full px-4 py-2 text-sm font-semibold transition',
                     activeBoardSection === section.id
                       ? 'bg-[#313238] text-[#f4f1eb]'
-                      : 'bg-[#f3efe8] text-[#7a7063] hover:bg-white'
+                      : 'bg-[#f3efe8] text-[#5f564c] hover:bg-white'
                   )}
                 >
                   {section.label}
@@ -694,12 +655,22 @@ export const WorkspaceView = () => {
         </div>
 
         <div className="min-h-0 flex-1 overflow-hidden bg-[linear-gradient(180deg,rgba(242,239,232,0.84)_0%,rgba(255,250,240,0.76)_100%)] p-4">
-          <div className="h-full overflow-y-auto rounded-[28px] bg-[#f3efe8] p-5 shadow-[0_18px_34px_rgba(49,50,56,0.06)]">
-            <div className="rounded-[24px] bg-[linear-gradient(180deg,#e5e0d7_0%,#f3efe8_100%)] p-5">
+          <div
+            className={clsx(
+              'h-full rounded-[28px] bg-[#f3efe8] p-5 shadow-[0_18px_34px_rgba(49,50,56,0.06)]',
+              activeBoardSection === 'definition' ? 'flex min-h-0 flex-col overflow-hidden' : 'overflow-y-auto'
+            )}
+          >
+            <div
+              className={clsx(
+                'rounded-[24px] bg-[linear-gradient(180deg,#e5e0d7_0%,#f3efe8_100%)] p-5',
+                activeBoardSection === 'definition' && 'flex min-h-0 flex-1 flex-col'
+              )}
+            >
               {activeBoardSection === 'definition' && (
                 <>
-                  <div className="grid gap-4 xl:grid-cols-[minmax(0,1.45fr)_320px]">
-                    <div className="overflow-hidden rounded-[24px] bg-[#f6f4f1] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                  <div className="grid min-h-0 flex-1 items-stretch gap-4 overflow-hidden xl:grid-cols-[minmax(0,1.45fr)_320px]">
+                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[24px] bg-[#f6f4f1] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
                       <div className="border-b border-[#313238]/8 bg-[#f3efe8] px-4 py-3">
                         <div className="flex items-center justify-between gap-4">
                           <div className="flex items-center gap-3">
@@ -707,7 +678,7 @@ export const WorkspaceView = () => {
                               <Globe size={18} />
                             </div>
                             <div>
-                              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                                 Learning browser
                               </div>
                               <div className="text-sm font-semibold text-[#313238]">
@@ -727,36 +698,36 @@ export const WorkspaceView = () => {
                           </a>
                         </div>
 
-                        <div className="mt-3 rounded-full bg-white px-4 py-3 text-sm text-[#7a7063] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+                        <div className="mt-3 rounded-full bg-white px-4 py-3 text-sm text-[#5f564c] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
                           {embeddedArticle.url}
                         </div>
                       </div>
 
-                      <div className="p-4">
-                        <div className="overflow-hidden rounded-[22px] border border-[#313238]/8 bg-white">
+                      <div className="flex min-h-0 flex-1 flex-col p-4">
+                        <div className="min-h-0 flex-1 overflow-hidden rounded-[22px] border border-[#313238]/8 bg-white">
                           <iframe
                             src={embeddedArticle.url}
                             title={embeddedArticle.title}
-                            className="h-[1120px] w-full bg-white"
+                            className="h-full w-full bg-white"
                           />
                         </div>
 
-                        <div className="mt-4 rounded-[22px] bg-[#f3efe8] px-4 py-4">
-                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                        <div className="mt-4 shrink-0 rounded-[22px] bg-[#f3efe8] px-4 py-4">
+                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                             Reading note
                           </div>
                           <div className="mt-2 text-sm leading-7 text-[#5f564c]">
                             {embeddedArticle.summary}
                           </div>
-                          <div className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#7a7063]">
+                          <div className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#5f564c]">
                             If the site blocks embedding, use the button above and keep reading notes here.
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="rounded-[24px] bg-[#313238] p-5 text-[#f4f1eb] shadow-[0_12px_24px_rgba(49,50,56,0.14)]">
-                      <div className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">
+                    <div className="flex min-h-0 h-full flex-col rounded-[24px] bg-[#313238] p-5 text-[#f4f1eb] shadow-[0_12px_24px_rgba(49,50,56,0.14)]">
+                      <div className="text-xs font-bold uppercase tracking-[0.18em] text-white/82">
                         Knowledge analysis
                       </div>
                       <div className="mt-3 text-xl font-semibold">
@@ -767,7 +738,7 @@ export const WorkspaceView = () => {
                         without getting blocked by medical vocabulary or research context.
                       </div>
 
-                      <div className="mt-5 space-y-3">
+                      <div className="mt-5 min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
                         {articleKnowledgeGaps.map((item) => {
                           const Icon = item.icon;
 
@@ -792,13 +763,13 @@ export const WorkspaceView = () => {
 
               {activeBoardSection === 'examples' && (
                 <>
-                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                     <BookOpenCheck size={16} />
                     Worked examples
                   </div>
                   <div className="mt-4 rounded-[20px] bg-[#f3efe8] p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
                     <div className="text-lg font-semibold text-[#313238]">{activePage.exampleTitle}</div>
-                    <div className="mt-2 text-sm leading-7 text-[#7a7063]">{activePage.exampleBody}</div>
+                    <div className="mt-2 text-sm leading-7 text-[#5f564c]">{activePage.exampleBody}</div>
                   </div>
 
                   <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -815,7 +786,7 @@ export const WorkspaceView = () => {
                           <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#e8e2da] text-[#455763]">
                             <Icon size={18} />
                           </div>
-                          <div className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                          <div className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                             Step 0{index + 1}
                           </div>
                           <div className="mt-2 text-sm font-semibold leading-6 text-[#313238]">{step}</div>
@@ -834,7 +805,7 @@ export const WorkspaceView = () => {
                             <Icon size={19} />
                           </div>
                           <div className="mt-4 text-lg font-semibold text-[#313238]">{item.title}</div>
-                          <div className="mt-2 text-sm leading-6 text-[#7a7063]">{item.text}</div>
+                          <div className="mt-2 text-sm leading-6 text-[#5f564c]">{item.text}</div>
                         </div>
                       );
                     })}
@@ -844,26 +815,26 @@ export const WorkspaceView = () => {
 
               {activeBoardSection === 'mistakes' && (
                 <>
-                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#7a7063]">
+                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                     <AlertCircle size={16} />
                     Common mistakes
                   </div>
                   <div className="mt-4 rounded-[20px] bg-[#f3efe8] p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
                     <div className="text-lg font-semibold text-[#313238]">What often goes wrong</div>
-                    <div className="mt-2 text-sm leading-7 text-[#7a7063]">{activePage.mistake}</div>
+                    <div className="mt-2 text-sm leading-7 text-[#5f564c]">{activePage.mistake}</div>
                   </div>
 
                   <div className="mt-4 grid gap-3 md:grid-cols-2">
                     <div className="rounded-[20px] bg-[#e5e0d7] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
                       <div className="text-sm font-semibold text-[#313238]">Correction strategy</div>
-                      <div className="mt-2 text-sm leading-6 text-[#7a7063]">
+                      <div className="mt-2 text-sm leading-6 text-[#5f564c]">
                         Slow down, restate the concept once, and ask one specific question instead of
                         switching immediately into more practice.
                       </div>
                     </div>
                     <div className="rounded-[20px] bg-[#ceb3a1] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
                       <div className="text-sm font-semibold text-[#313238]">Self-check</div>
-                      <div className="mt-2 text-sm leading-6 text-[#7a7063]">
+                      <div className="mt-2 text-sm leading-6 text-[#5f564c]">
                         Can you explain the concept without notes and identify where the common mistake
                         begins?
                       </div>
@@ -902,7 +873,7 @@ const RecordRow = ({
         <Check size={12} strokeWidth={3} />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7a7063]">{label}</div>
+        <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">{label}</div>
         <div className="mt-1.5 text-sm leading-5 text-[#313238]">{value}</div>
       </div>
     </div>

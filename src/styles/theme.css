@@ -2,29 +2,29 @@
 
 :root {
   --font-size: 14px;
-  --background: #ece9e4;
-  --foreground: #313238;
-  --card: rgba(243, 239, 232, 0.92);
-  --card-foreground: #313238;
+  --background: #f0ece6;
+  --foreground: #2b2d33;
+  --card: rgba(247, 243, 237, 0.96);
+  --card-foreground: #2b2d33;
   --popover: oklch(1 0 0);
-  --popover-foreground: #313238;
-  --primary: #313238;
+  --popover-foreground: #2b2d33;
+  --primary: #2b2d33;
   --primary-foreground: #f4f1eb;
-  --secondary: #e8e2da;
-  --secondary-foreground: #313238;
-  --muted: #d6c9b4;
-  --muted-foreground: #7a7063;
+  --secondary: #e6dfd6;
+  --secondary-foreground: #2b2d33;
+  --muted: #d7cbbb;
+  --muted-foreground: #5f564c;
   --accent: #be7d62;
   --accent-foreground: #f8f4ef;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(49, 50, 56, 0.12);
+  --border: rgba(43, 45, 51, 0.16);
   --input: transparent;
-  --input-background: rgba(243, 239, 232, 0.9);
+  --input-background: rgba(247, 243, 237, 0.94);
   --switch-background: #c7bcaf;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: rgba(49, 50, 56, 0.2);
+  --ring: rgba(43, 45, 51, 0.28);
   --chart-1: #455763;
   --chart-2: #d3dadc;
   --chart-3: #d6c9b4;
@@ -127,7 +127,7 @@
   body {
     @apply bg-background text-foreground;
     background:
-      linear-gradient(180deg, #dfe5e5 0%, #ece8e2 34%, #e8e2da 100%);
+      linear-gradient(180deg, #e5ebeb 0%, #efebe5 34%, #e7dfd5 100%);
     font-family:
       'Manrope',
       'Avenir Next',
@@ -231,20 +231,20 @@
 
 @layer utilities {
   .app-surface {
-    background: rgba(245, 242, 236, 0.9);
+    background: rgba(248, 245, 240, 0.94);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(69, 87, 99, 0.08);
+    border: 1px solid rgba(43, 45, 51, 0.11);
     box-shadow:
-      0 18px 40px rgba(49, 50, 56, 0.07),
+      0 18px 40px rgba(49, 50, 56, 0.09),
       inset 0 1px 0 rgba(255, 255, 255, 0.65);
   }
 
   .app-panel {
-    background: rgba(232, 226, 218, 0.78);
-    border: 1px solid rgba(69, 87, 99, 0.08);
+    background: rgba(244, 239, 232, 0.9);
+    border: 1px solid rgba(43, 45, 51, 0.1);
     box-shadow:
-      0 14px 32px rgba(49, 50, 56, 0.05),
+      0 14px 32px rgba(49, 50, 56, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.55);
   }
 
@@ -257,12 +257,12 @@
   }
 
   .app-frost {
-    background: rgba(255, 255, 255, 0.46);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.62);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow:
-      0 14px 32px rgba(49, 50, 56, 0.06),
+      0 14px 32px rgba(49, 50, 56, 0.07),
       inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 }

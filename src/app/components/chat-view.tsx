@@ -17,15 +17,22 @@ interface ChatViewProps {
   onAddAchievement: (achievement: string) => void;
 }
 
-// AI 回复模板
+// Simple AI response templates for common topics.
 const aiResponses: Record<string, string> = {
-  '宇宙': '🚀 太空真的很神奇！宇宙中有数以亿计的星系，我们的银河系只是其中之一。你知道吗？光从太阳到达地球需要约8分钟。你对宇宙的哪个方面最感兴趣呢？',
-  '黑洞': '⚫ 黑洞是宇宙中最神秘的天体之一！它们的引力如此之强，连光都无法逃脱。黑洞形成于大质量恒星的死亡。有趣的是，靠近黑洞时间会变慢哦！',
-  '人工智能': '🤖 人工智能正在改变我们的世界！从你使用的语音助手到自动驾驶汽车，AI无处不在。机器学习让计算机能够从数据中学习，而不需要明确编程每一个步骤。',
-  '量子': '⚛️ 量子世界充满了不可思议的现象！量子纠缠让两个粒子无论距离多远都能瞬间互相影响。薛定谔的猫展示了量子叠加态的概念，一个粒子可以同时处于多个状态。',
-  '地球': '🌍 地球是我们的家园！它有着复杂的生态系统，从海洋深处到高山之巅。地球的大气层保护我们免受太空辐射，而磁场则保护我们免受太阳风的侵袭。',
-  '历史': '📜 历史帮助我们了解过去，指引未来！从古代文明的兴衰到现代科技的发展，每个时代都有其独特的故事。学习历史让我们更好地理解当今世界。',
-  default: '💡 这是一个很好的问题！让我们一起探索这个话题。学习的关键是保持好奇心和提出问题。你想深入了解哪个方面呢？我可以为你提供更多信息！'
+  space:
+    '🚀 Space is full of astonishing scale. There are billions of galaxies, and our Milky Way is only one of them. Sunlight reaches Earth in about 8 minutes. Which part of space would you like to explore next?',
+  'black hole':
+    '⚫ Black holes are among the most extreme objects in the universe. Their gravity is so strong that even light cannot escape once it crosses the event horizon. They often form after massive stars collapse.',
+  ai:
+    '🤖 AI is already woven into daily life, from voice assistants to recommendation systems. Machine learning lets computers learn patterns from data instead of relying on every rule being written by hand.',
+  quantum:
+    '⚛️ Quantum physics describes a world that behaves very differently from everyday experience. Ideas like superposition and entanglement show how particles can behave in ways that feel counterintuitive at first.',
+  earth:
+    '🌍 Earth is a complex system of oceans, atmosphere, land, and life. Its magnetic field and atmosphere help protect living systems from solar radiation and extreme conditions in space.',
+  history:
+    '📜 History helps us understand how the present was shaped. Studying past civilizations, inventions, and turning points gives us better context for the world we live in today.',
+  default:
+    '💡 That is a strong question. Let’s break it down clearly and explore one step at a time. If you want, I can explain the concept, give an example, or compare related ideas.'
 };
 
 function getAIResponse(userMessage: string): string {
@@ -44,7 +51,8 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: '你好！我是你的 AI 学习助手 ✨ 我可以帮助你探索任何你感兴趣的知识。试着问我关于宇宙、科学、历史或任何你好奇的事情吧！',
+      content:
+        "Hello. I'm your AI learning assistant ✨ I can help you explore any topic you're curious about. Ask me about space, science, history, or anything else you want to understand better.",
       sender: 'ai',
       timestamp: new Date()
     }
@@ -76,7 +84,7 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
     setIsTyping(true);
     onAddPoints(5);
 
-    // 模拟 AI 思考延迟
+    // Simulate a short AI response delay.
     setTimeout(() => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -88,7 +96,7 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
       setIsTyping(false);
       onAddPoints(10);
       
-      // 第一次对话成就
+      // Award the first chat achievement on the first exchange.
       if (messages.length === 1) {
         onAddAchievement('first-chat');
       }
@@ -105,10 +113,10 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
   };
 
   const suggestedQuestions = [
-    '黑洞是什么？',
-    '人工智能如何工作？',
-    '宇宙有多大？',
-    '量子计算是什么？'
+    'What is a black hole?',
+    'How does AI work?',
+    'How big is the universe?',
+    'What is quantum computing?'
   ];
 
   return (
@@ -120,8 +128,8 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
             <Sparkles className="w-7 h-7" />
           </div>
           <div>
-            <h2 className="text-2xl">AI 学习助手</h2>
-            <p className="text-purple-100 text-sm">随时为你解答疑问</p>
+            <h2 className="text-2xl">AI Learning Assistant</h2>
+            <p className="text-purple-100 text-sm">Ready to answer questions anytime</p>
           </div>
         </div>
       </div>
@@ -186,7 +194,7 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
             >
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-4 flex items-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin text-purple-600" />
-                <span className="text-gray-600">AI 正在思考...</span>
+                <span className="text-gray-600">AI is thinking...</span>
               </div>
             </motion.div>
           )}
@@ -198,7 +206,7 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
       {/* Suggested Questions */}
       {messages.length === 1 && (
         <div className="mb-4">
-          <p className="text-sm text-gray-600 mb-2">💡 试试这些问题：</p>
+          <p className="text-sm text-gray-600 mb-2">💡 Try these prompts:</p>
           <div className="flex flex-wrap gap-2">
             {suggestedQuestions.map((question) => (
               <Badge
@@ -221,7 +229,7 @@ export function ChatView({ onAddPoints, onAddAchievement }: ChatViewProps) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-          placeholder="输入你的问题..."
+          placeholder="Type your question..."
           className="flex-1 px-6 py-4 rounded-full border-2 border-purple-200 focus:border-purple-500 focus:outline-none bg-white"
         />
         <button

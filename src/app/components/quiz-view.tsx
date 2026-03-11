@@ -18,47 +18,52 @@ interface Question {
 const quizQuestions: Question[] = [
   {
     id: '1',
-    question: '光从太阳到达地球需要多长时间？',
-    options: ['1分钟', '8分钟', '1小时', '1天'],
+    question: 'How long does sunlight take to reach Earth?',
+    options: ['1 minute', '8 minutes', '1 hour', '1 day'],
     correctAnswer: 1,
-    explanation: '光速约为每秒30万公里，太阳距离地球约1.5亿公里，光需要大约8分钟才能到达地球。',
-    category: '天文学',
+    explanation:
+      'Light travels at about 300,000 kilometers per second, and the Sun is roughly 150 million kilometers from Earth, so sunlight takes about 8 minutes to arrive.',
+    category: 'Astronomy',
     points: 20
   },
   {
     id: '2',
-    question: '以下哪个不是机器学习的类型？',
-    options: ['监督学习', '无监督学习', '强化学习', '量子学习'],
+    question: 'Which of the following is not a standard type of machine learning?',
+    options: ['Supervised learning', 'Unsupervised learning', 'Reinforcement learning', 'Quantum learning'],
     correctAnswer: 3,
-    explanation: '机器学习主要分为监督学习、无监督学习和强化学习三大类。量子学习不是标准的机器学习分类。',
-    category: '人工智能',
+    explanation:
+      'Machine learning is commonly grouped into supervised, unsupervised, and reinforcement learning. "Quantum learning" is not a standard core category.',
+    category: 'Artificial Intelligence',
     points: 25
   },
   {
     id: '3',
-    question: '地球上最深的海沟是？',
-    options: ['马里亚纳海沟', '大西洋海沟', '太平洋海沟', '北冰洋海沟'],
+    question: 'What is the deepest ocean trench on Earth?',
+    options: ['Mariana Trench', 'Atlantic Trench', 'Pacific Trench', 'Arctic Trench'],
     correctAnswer: 0,
-    explanation: '马里亚纳海沟是地球上最深的海沟，最深处约11,000米，位于西太平洋。',
-    category: '地理',
+    explanation:
+      'The Mariana Trench is the deepest known ocean trench on Earth, reaching roughly 11,000 meters in the western Pacific Ocean.',
+    category: 'Geography',
     points: 15
   },
   {
     id: '4',
-    question: '量子纠缠现象是谁首先提出的？',
-    options: ['牛顿', '爱因斯坦', '霍金', '费曼'],
+    question: 'Who first introduced the idea of quantum entanglement?',
+    options: ['Newton', 'Einstein', 'Hawking', 'Feynman'],
     correctAnswer: 1,
-    explanation: '爱因斯坦在1935年与其他科学家一起提出了量子纠缠的概念，他称之为"鬼魅般的超距作用"。',
-    category: '物理',
+    explanation:
+      'Einstein discussed the idea in 1935 with other physicists and famously described it as "spooky action at a distance."',
+    category: 'Physics',
     points: 30
   },
   {
     id: '5',
-    question: '世界上第一台计算机叫什么名字？',
+    question: 'What was the name of the world’s first general-purpose electronic computer?',
     options: ['ENIAC', 'IBM', 'Apple I', 'Colossus'],
     correctAnswer: 0,
-    explanation: 'ENIAC（电子数字积分计算机）于1946年问世，被认为是世界上第一台通用电子计算机。',
-    category: '科技史',
+    explanation:
+      'ENIAC, introduced in 1946, is widely recognized as the first general-purpose electronic computer.',
+    category: 'History of Technology',
     points: 20
   }
 ];
@@ -141,8 +146,8 @@ export function QuizView({ onAddPoints, onAddAchievement }: QuizViewProps) {
               <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trophy className="w-14 h-14 text-white" />
               </div>
-              <h2 className="text-3xl mb-2">挑战完成！</h2>
-              <p className="text-gray-600">太棒了！你完成了所有问题</p>
+              <h2 className="text-3xl mb-2">Challenge Complete!</h2>
+              <p className="text-gray-600">Great work. You finished every question.</p>
             </div>
 
             <div className="mb-8">
@@ -150,7 +155,7 @@ export function QuizView({ onAddPoints, onAddAchievement }: QuizViewProps) {
                 {score.toFixed(0)}%
               </div>
               <p className="text-gray-600">
-                答对 {correctCount} / {quizQuestions.length} 题
+                Correct: {correctCount} / {quizQuestions.length}
               </p>
             </div>
 
@@ -158,17 +163,17 @@ export function QuizView({ onAddPoints, onAddAchievement }: QuizViewProps) {
               <div className="bg-white rounded-xl p-4">
                 <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
                 <div className="text-2xl mb-1">{correctCount}</div>
-                <div className="text-sm text-gray-600">正确</div>
+                <div className="text-sm text-gray-600">Correct</div>
               </div>
               <div className="bg-white rounded-xl p-4">
                 <XCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
                 <div className="text-2xl mb-1">{quizQuestions.length - correctCount}</div>
-                <div className="text-sm text-gray-600">错误</div>
+                <div className="text-sm text-gray-600">Incorrect</div>
               </div>
               <div className="bg-white rounded-xl p-4">
                 <Star className="w-8 h-8 text-yellow-500 mx-auto mb-2" />
                 <div className="text-2xl mb-1">{correctCount * 20}</div>
-                <div className="text-sm text-gray-600">积分</div>
+                <div className="text-sm text-gray-600">Points</div>
               </div>
             </div>
 
@@ -177,7 +182,7 @@ export function QuizView({ onAddPoints, onAddAchievement }: QuizViewProps) {
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
               <RefreshCw className="w-5 h-5" />
-              再来一次
+              Try Again
             </button>
           </Card>
         </motion.div>
@@ -191,15 +196,15 @@ export function QuizView({ onAddPoints, onAddAchievement }: QuizViewProps) {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-2xl">知识挑战</h2>
+            <h2 className="text-2xl">Knowledge Challenge</h2>
             <p className="text-gray-600 text-sm">
-              题目 {currentQuestionIndex + 1} / {quizQuestions.length}
+              Question {currentQuestionIndex + 1} / {quizQuestions.length}
             </p>
           </div>
           {streak > 0 && (
             <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white border-0">
               <Zap className="w-4 h-4 mr-1" />
-              {streak} 连胜
+              {streak} streak
             </Badge>
           )}
         </div>
@@ -279,14 +284,14 @@ export function QuizView({ onAddPoints, onAddAchievement }: QuizViewProps) {
                 disabled={selectedAnswer === null}
                 className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                提交答案
+                Submit Answer
               </button>
             ) : (
               <button
                 onClick={handleNext}
                 className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all"
               >
-                {currentQuestionIndex < quizQuestions.length - 1 ? '下一题' : '查看结果'}
+                {currentQuestionIndex < quizQuestions.length - 1 ? 'Next Question' : 'See Results'}
               </button>
             )}
           </div>

@@ -19,68 +19,68 @@ interface Topic {
 const topics: Topic[] = [
   {
     id: '1',
-    title: '宇宙探索',
+    title: 'Space Exploration',
     icon: Rocket,
     color: 'text-purple-600',
     gradient: 'from-purple-500 to-pink-500',
-    description: '探索浩瀚宇宙的奥秘',
-    subtopics: ['太阳系', '黑洞', '星系', '宇宙起源'],
-    difficulty: '中级',
+    description: 'Explore the mysteries of the universe.',
+    subtopics: ['Solar System', 'Black Holes', 'Galaxies', 'Origins of the Universe'],
+    difficulty: 'Intermediate',
     points: 50
   },
   {
     id: '2',
-    title: '人工智能',
+    title: 'Artificial Intelligence',
     icon: Brain,
     color: 'text-blue-600',
     gradient: 'from-blue-500 to-cyan-500',
-    description: '了解AI如何改变世界',
-    subtopics: ['机器学习', '神经网络', '自然语言处理', '计算机视觉'],
-    difficulty: '高级',
+    description: 'See how AI is reshaping the world.',
+    subtopics: ['Machine Learning', 'Neural Networks', 'Natural Language Processing', 'Computer Vision'],
+    difficulty: 'Advanced',
     points: 75
   },
   {
     id: '3',
-    title: '地球科学',
+    title: 'Earth Science',
     icon: Globe,
     color: 'text-green-600',
     gradient: 'from-green-500 to-emerald-500',
-    description: '认识我们生活的星球',
-    subtopics: ['地质', '气候', '海洋', '生态系统'],
-    difficulty: '初级',
+    description: 'Learn more about the planet we live on.',
+    subtopics: ['Geology', 'Climate', 'Oceans', 'Ecosystems'],
+    difficulty: 'Beginner',
     points: 30
   },
   {
     id: '4',
-    title: '量子物理',
+    title: 'Quantum Physics',
     icon: Atom,
     color: 'text-indigo-600',
     gradient: 'from-indigo-500 to-purple-500',
-    description: '探索微观世界的规律',
-    subtopics: ['量子力学', '粒子物理', '波粒二象性', '量子纠缠'],
-    difficulty: '高级',
+    description: 'Discover the rules of the microscopic world.',
+    subtopics: ['Quantum Mechanics', 'Particle Physics', 'Wave-Particle Duality', 'Quantum Entanglement'],
+    difficulty: 'Advanced',
     points: 100
   },
   {
     id: '5',
-    title: '历史文化',
+    title: 'History and Culture',
     icon: BookOpen,
     color: 'text-orange-600',
     gradient: 'from-orange-500 to-red-500',
-    description: '穿越时空了解人类文明',
-    subtopics: ['古代文明', '文艺复兴', '工业革命', '现代史'],
-    difficulty: '中级',
+    description: 'Travel across time to understand human civilization.',
+    subtopics: ['Ancient Civilizations', 'The Renaissance', 'The Industrial Revolution', 'Modern History'],
+    difficulty: 'Intermediate',
     points: 40
   },
   {
     id: '6',
-    title: '创新思维',
+    title: 'Creative Thinking',
     icon: Lightbulb,
     color: 'text-yellow-600',
     gradient: 'from-yellow-500 to-orange-500',
-    description: '培养创造力和问题解决能力',
-    subtopics: ['设计思维', '批判性思考', '创意方法', '头脑风暴'],
-    difficulty: '中级',
+    description: 'Build creativity and problem-solving ability.',
+    subtopics: ['Design Thinking', 'Critical Thinking', 'Idea Methods', 'Brainstorming'],
+    difficulty: 'Intermediate',
     points: 60
   }
 ];
@@ -118,9 +118,9 @@ export function ExploreView({ onSwitchToChat, onAddPoints, onAddAchievement }: E
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent"
         >
-          开启你的知识之旅
+          Start Your Learning Journey
         </motion.h2>
-        <p className="text-gray-600">点击任何话题，开始探索吧！</p>
+        <p className="text-gray-600">Click any topic to start exploring.</p>
       </div>
 
       {/* Topics Grid */}
@@ -151,9 +151,9 @@ export function ExploreView({ onSwitchToChat, onAddPoints, onAddAchievement }: E
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   {isExplored && (
-                    <Badge className="bg-green-100 text-green-700 border-green-200">
-                      <Star className="w-3 h-3 mr-1" />
-                      已探索
+                      <Badge className="bg-green-100 text-green-700 border-green-200">
+                        <Star className="w-3 h-3 mr-1" />
+                      Explored
                     </Badge>
                   )}
                 </div>
@@ -168,7 +168,7 @@ export function ExploreView({ onSwitchToChat, onAddPoints, onAddAchievement }: E
                     {topic.difficulty}
                   </Badge>
                   <span className="text-sm font-medium text-purple-600">
-                    +{topic.points} 积分
+                    +{topic.points} points
                   </span>
                 </div>
               </Card>
@@ -194,7 +194,7 @@ export function ExploreView({ onSwitchToChat, onAddPoints, onAddAchievement }: E
             </div>
           </div>
 
-          <h4 className="text-lg mb-4 text-gray-700">探索子话题：</h4>
+          <h4 className="text-lg mb-4 text-gray-700">Explore Subtopics:</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
             {selectedTopic.subtopics.map((subtopic, index) => (
               <motion.button
@@ -215,7 +215,7 @@ export function ExploreView({ onSwitchToChat, onAddPoints, onAddAchievement }: E
             onClick={onSwitchToChat}
             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all"
           >
-            向 AI 助手提问
+            Ask the AI Assistant
           </button>
         </motion.div>
       )}
