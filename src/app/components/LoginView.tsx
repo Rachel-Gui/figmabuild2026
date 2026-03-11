@@ -68,9 +68,6 @@ export const LoginView = () => {
                 ))}
               </div>
 
-              <div className="rounded-full bg-[#f4f6f8] px-5 py-2 text-[12px] font-bold uppercase tracking-[0.28em] text-[#6d645a]">
-                {mode === 'self' ? 'Self-directed learning mode' : 'Quick learning brief'}
-              </div>
             </div>
 
             {mode === 'self' ? (
@@ -90,7 +87,7 @@ export const LoginView = () => {
                     value={topic}
                     onChange={setTopic}
                     placeholder="Topic"
-                    widthClass="w-[210px] sm:w-[250px]"
+                    widthClass="w-[180px] sm:w-[220px]"
                   />
                   <span>.</span>
                 </div>
@@ -101,14 +98,14 @@ export const LoginView = () => {
                     value={goal}
                     onChange={setGoal}
                     placeholder="Learning Goal"
-                    widthClass="w-[210px] sm:w-[260px]"
+                    widthClass="w-[190px] sm:w-[230px]"
                   />
                   <span>, and I plan to study for</span>
                   <InlineField
                     value={time}
                     onChange={setTime}
                     placeholder="Time"
-                    widthClass="w-[150px] sm:w-[180px]"
+                    widthClass="w-[128px] sm:w-[156px]"
                   />
                   <span>.</span>
                 </div>
@@ -143,7 +140,7 @@ const InlineField = ({
   widthClass: string;
 }) => (
   <label
-    className={`inline-flex min-h-[58px] items-center rounded-full bg-[#f1f3f6] px-5 py-2 ${widthClass}`}
+    className={`inline-flex min-h-[52px] items-center rounded-full bg-[#f1f3f6] px-4 py-1.5 ${widthClass}`}
   >
     <input
       type="text"
