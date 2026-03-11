@@ -83,7 +83,7 @@ export const LoginView = () => {
                 />
               </div>
             ) : (
-              <div className="mx-auto max-w-[min(100%,66rem)] text-center text-[clamp(1.22rem,1rem+0.95vw,1.95rem)] font-medium leading-[1.38] tracking-[-0.03em] text-[#5a4638]">
+              <div className="mx-auto max-w-[min(100%,66rem)] text-center text-[clamp(1rem,0.92rem+0.55vw,1.32rem)] font-medium leading-[1.45] tracking-[-0.02em] text-[#5f564c]">
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
                   <span>Hi Cogi, I want to learn</span>
                   <InlineField
@@ -143,14 +143,14 @@ const InlineField = ({
   widthClass: string;
 }) => (
   <label
-    className={`inline-flex min-h-[60px] items-center rounded-full bg-[#f1f3f6] px-5 py-2 ${widthClass}`}
+    className={`inline-flex min-h-[58px] items-center rounded-full bg-[#f1f3f6] px-5 py-2 ${widthClass}`}
   >
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-transparent text-center text-[0.9rem] font-semibold text-[#313238] outline-none placeholder:text-[#837a72] sm:text-[0.98rem]"
+      className="w-full bg-transparent text-center text-[clamp(1rem,0.92rem+0.55vw,1.32rem)] font-medium tracking-[-0.02em] text-[#5f564c] outline-none placeholder:text-[#8a837d]"
     />
   </label>
 );
