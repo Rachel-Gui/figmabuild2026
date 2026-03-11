@@ -3,16 +3,12 @@ import { useLocation } from 'react-router';
 import {
   AlertCircle,
   Bot,
-  BookOpenCheck,
-  Dna,
-  ExternalLink,
-  FlaskConical,
-  Globe,
   Check,
+  Dna,
+  FlaskConical,
   Leaf,
   Lightbulb,
   Microscope,
-  Orbit,
   Send,
   User,
   X,
@@ -35,7 +31,10 @@ interface Message {
   text: string;
 }
 
-type BoardSection = 'definition' | 'examples' | 'mistakes';
+type BoardSection = 'definition' | 'summary' | 'examples';
+
+const todoProgressRingRadius = 28;
+const todoProgressRingCircumference = 2 * Math.PI * todoProgressRingRadius;
 
 interface KnowledgePage {
   id: string;
@@ -234,14 +233,18 @@ const normalizeTopicName = (value?: string) => {
   return `${shortClause.slice(0, 39).trim()}...`;
 };
 
+const resolveBoardSection = (pageId: string): BoardSection => {
+  if (pageId === 'overview') return 'definition';
+  if (pageId === 'examples') return 'examples';
+  return 'summary';
+};
+
 export const WorkspaceView = () => {
   const location = useLocation();
   const state = location.state as LocationState | null;
   const estimatedTime = state?.time || '15-20 minutes';
   const topicName = normalizeTopicName(state?.topic || state?.freeText);
   const goalText = state?.goal || 'Build understanding step by step';
-  const progressValue = state?.isFreeMode ? 32 : state?.topic || state?.goal || state?.time ? 46 : 24;
-  const completedSteps = state?.isFreeMode ? 1 : 2;
 
   const initialPages = buildKnowledgePages(topicName, goalText, estimatedTime);
 
@@ -249,7 +252,6 @@ export const WorkspaceView = () => {
   const [inputText, setInputText] = useState('');
   const [knowledgePages, setKnowledgePages] = useState<KnowledgePage[]>(initialPages);
   const [activePageId, setActivePageId] = useState<string>(initialPages[0].id);
-  const [activeBoardSection, setActiveBoardSection] = useState<BoardSection>('definition');
 
   useEffect(() => {
     if (messages.length > 0) return;
@@ -306,7 +308,6 @@ export const WorkspaceView = () => {
     );
     setKnowledgePages((prev) => [...prev, newPage]);
     setActivePageId(newPage.id);
-    setActiveBoardSection('definition');
   };
 
   const handleRemovePage = (pageId: string) => {
@@ -321,53 +322,20 @@ export const WorkspaceView = () => {
     if (activePageId === pageId) {
       const fallbackPage = nextPages[Math.max(0, pageIndex - 1)] ?? nextPages[0];
       setActivePageId(fallbackPage.id);
-      setActiveBoardSection('definition');
     }
   };
 
   const activePage = knowledgePages.find((page) => page.id === activePageId) ?? knowledgePages[0];
-
-  const recordItems = [
+  const activeBoardSection = resolveBoardSection(activePage.id);
+  const todoItems = [
     { label: 'Topic', value: topicName, completed: true },
     { label: 'Goal', value: goalText, completed: true },
-    { label: 'Completed', value: `${completedSteps}/4 milestones`, completed: completedSteps >= 2 },
     { label: 'Active page', value: activePage.title, completed: activePageId !== initialPages[0].id },
-    {
-      label: 'Suggested pace',
-      value: `${estimatedTime} + one short reflection`,
-      completed: progressValue >= 40,
-    },
+    { label: 'Suggested pace', value: `${estimatedTime} + reflection`, completed: true },
   ];
-
-  const quickPrompts = [
-    'Explain the core concept in simple terms',
-    'Give me a 20-minute study plan',
-    'Quiz me on the most important ideas',
-  ];
-
-  const resourceCards = [
-    {
-      title: `Starter guide to ${topicName}`,
-      source: 'Learning brief',
-      summary: 'A short overview that frames the topic, the key language, and what to look for first.',
-      icon: BookOpenCheck,
-      tone: 'bg-[#f3efe8]',
-    },
-    {
-      title: 'Visual breakdown',
-      source: 'Concept map',
-      summary: 'A diagram-first explanation that turns the lesson into nodes, steps, and relationships.',
-      icon: Orbit,
-      tone: 'bg-[#e8e2da]',
-    },
-    {
-      title: 'Practice checkpoint',
-      source: 'Self-check',
-      summary: 'Three small prompts to confirm understanding before moving into deeper practice.',
-      icon: FlaskConical,
-      tone: 'bg-[#d6c9b4]',
-    },
-  ];
+  const completedTodoCount = todoItems.filter((item) => item.completed).length;
+  const todoProgress = Math.round((completedTodoCount / todoItems.length) * 100);
+  const todoRingOffset = todoProgressRingCircumference * (1 - todoProgress / 100);
 
   const examplePanels = [
     {
@@ -394,56 +362,64 @@ export const WorkspaceView = () => {
       className="grid h-full min-h-0 gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)] xl:grid-rows-[minmax(0,1fr)]"
     >
       <div className="flex min-h-0 flex-col gap-2 overflow-hidden">
-        <section className="app-surface relative shrink-0 overflow-hidden rounded-[26px] p-2.5">
-          <div className="pointer-events-none absolute right-[-1.5rem] top-[-1.5rem] h-20 w-20 rounded-full bg-white/20 blur-2xl" />
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(190,125,98,0.18)_0%,rgba(208,198,184,0.08)_100%)]" />
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#5f564c]">Auto record</div>
-              <h3 className="mt-0.5 text-[0.95rem] font-semibold text-[#313238]">Learning progress</h3>
-            </div>
-            <div className="app-frost rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
-              To do list
-            </div>
-          </div>
+        <section className="app-surface shrink-0 rounded-[26px] p-3">
+          <div className="grid gap-3 sm:grid-cols-[112px_minmax(0,1fr)]">
+            <div className="app-frost flex min-h-[132px] flex-col items-center justify-center rounded-[18px] px-3 py-3">
+              <div className="relative h-22 w-22">
+                <svg viewBox="0 0 80 80" className="h-full w-full -rotate-90">
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r={todoProgressRingRadius}
+                    fill="none"
+                    stroke="rgba(49,50,56,0.08)"
+                    strokeWidth="8"
+                  />
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r={todoProgressRingRadius}
+                    fill="none"
+                    stroke="#313238"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeDasharray={todoProgressRingCircumference}
+                    strokeDashoffset={todoRingOffset}
+                  />
+                </svg>
 
-          <div className="app-frost mt-2 rounded-[18px] p-1.5">
-            <div className="grid gap-2 sm:grid-cols-2">
-              <div className="rounded-[14px] bg-white/38 px-3 py-1.5 backdrop-blur-xl">
-                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
-                  Current progress
-                </div>
-                <div className="mt-0.5 text-[1.1rem] font-semibold leading-none text-[#313238]">
-                  {progressValue}%
+                <div className="absolute inset-[0.9rem] flex items-center justify-center rounded-full bg-white">
+                  <div className="text-center">
+                    <div className="text-lg font-semibold leading-none text-[#313238]">{todoProgress}%</div>
+                    <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#5f564c]">
+                      done
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="rounded-[14px] bg-white/38 px-3 py-1.5 backdrop-blur-xl sm:text-right">
-                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
-                  Estimated time
-                </div>
-                <div className="mt-0.5 text-[0.92rem] font-semibold leading-none text-[#313238]">
-                  {estimatedTime}
-                </div>
+
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#5f564c]">
+                {completedTodoCount}/{todoItems.length} complete
               </div>
             </div>
 
-            <div className="mt-1.5 h-1.25 rounded-full bg-[#e5e0d7]">
-              <div
-                className="h-1.25 rounded-full bg-gradient-to-r from-[#313238] via-[#d0c6b8] to-[#be7d62]"
-                style={{ width: `${progressValue}%` }}
-              />
-            </div>
-          </div>
+            <div className="min-w-0">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-sm font-semibold text-[#313238]">To do list</div>
+                <div className="text-[12px] font-semibold text-[#5f564c]">{todoItems.length} items</div>
+              </div>
 
-          <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
-            {recordItems.map((item) => (
-              <RecordRow
-                key={item.label}
-                label={item.label}
-                value={item.value}
-                completed={item.completed}
-              />
-            ))}
+              <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+                {todoItems.map((item) => (
+                  <TodoRow
+                    key={item.label}
+                    label={item.label}
+                    value={item.value}
+                    completed={item.completed}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -456,59 +432,6 @@ export const WorkspaceView = () => {
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-4 py-4">
             <div className="min-h-0 flex-1 overflow-y-auto pr-1">
-              <div className="mb-4 flex flex-wrap gap-2">
-                {quickPrompts.map((prompt) => (
-                  <button
-                    key={prompt}
-                    onClick={() => setInputText(prompt)}
-                    className="rounded-full bg-[#e5e0d7] px-4 py-2 text-sm font-semibold text-[#313238] shadow-[0_8px_16px_rgba(49,50,56,0.05)] transition hover:bg-[#313238] hover:text-[#f4f1eb]"
-                  >
-                    {prompt}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mb-4 rounded-[20px] bg-[linear-gradient(180deg,rgba(243,239,232,0.96)_0%,rgba(232,226,218,0.92)_100%)] p-4 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#5f564c]">
-                      Recommended resources
-                    </div>
-                    <div className="mt-1 text-lg font-semibold text-[#313238]">
-                      Start with one clear explanation, then compare examples
-                    </div>
-                  </div>
-                  <div className="rounded-full bg-[#455763] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#f4f1eb]">
-                    Ready to open
-                  </div>
-                </div>
-
-                <div className="mt-4 space-y-3">
-                  {resourceCards.map((card) => {
-                    const Icon = card.icon;
-
-                    return (
-                      <div
-                        key={card.title}
-                        className={`flex items-center gap-4 rounded-[16px] p-4 shadow-[0_10px_18px_rgba(49,50,56,0.04)] ${card.tone}`}
-                      >
-                        <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-white/70 text-[#313238]">
-                          <Icon size={22} />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
-                            {card.source}
-                          </div>
-                          <div className="mt-1 text-base font-semibold text-[#313238]">{card.title}</div>
-                          <div className="mt-1 text-sm leading-6 text-[#5f564c]">{card.summary}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-              </div>
-
               <div className="space-y-4">
                 {messages.map((msg) => (
                   <motion.div
@@ -525,10 +448,10 @@ export const WorkspaceView = () => {
 
                     <div
                       className={clsx(
-                        'max-w-[85%] rounded-[18px] px-5 py-4 text-[15px] leading-7 shadow-[0_16px_34px_rgba(18,38,34,0.06)] sm:text-base',
+                        'max-w-[85%] rounded-[18px] px-5 py-4 text-[15px] leading-7 sm:text-base',
                         msg.role === 'user'
                           ? 'rounded-br-[10px] bg-[#313238] text-[#f4f1eb]'
-                          : 'rounded-bl-[10px] bg-[#f3efe8] text-[#313238]'
+                          : 'rounded-bl-[10px] bg-white text-[#313238]'
                       )}
                     >
                       {msg.text}
@@ -573,17 +496,29 @@ export const WorkspaceView = () => {
       </div>
 
       <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[26px]">
-        <div className="border-b border-[#313238]/8 bg-[linear-gradient(180deg,rgba(212,202,186,0.92)_0%,rgba(212,202,186,0.72)_100%)] px-5 py-4">
+        <div
+          className={clsx(
+            'border-b border-[#313238]/8 px-5',
+            activeBoardSection === 'definition'
+              ? 'bg-[#eef1f4] pt-4 pb-0'
+              : 'bg-[#eef1f4] py-4'
+          )}
+        >
           <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-end gap-1 overflow-x-auto pb-1">
+            <div
+              className={clsx(
+                'flex flex-wrap items-end gap-1 overflow-x-auto',
+                activeBoardSection === 'definition' ? 'pb-0' : 'pb-1'
+              )}
+            >
               {knowledgePages.map((page) => (
                 <div
                   key={page.id}
                   className={clsx(
-                    'flex max-w-[260px] items-center gap-2 rounded-t-[14px] px-3 py-2 text-left text-sm font-semibold whitespace-nowrap transition',
+                    'relative -mb-px flex max-w-[260px] items-center gap-2 rounded-t-[14px] border border-transparent border-b-0 px-3 py-2 text-left text-sm font-semibold whitespace-nowrap transition',
                     activePageId === page.id
-                      ? 'bg-[#f3efe8] text-[#313238] shadow-[0_-1px_0_rgba(255,255,255,0.7),0_8px_20px_rgba(49,50,56,0.08)]'
-                      : 'bg-[#d4caba] text-[#5f564c] hover:bg-[#e5e0d7]'
+                      ? 'border-[#313238]/8 bg-white text-[#313238]'
+                      : 'bg-[#eef1f4] text-[#5f564c] hover:bg-[#e6eaee]'
                   )}
                 >
                   <button
@@ -603,7 +538,7 @@ export const WorkspaceView = () => {
                       knowledgePages.length <= 1
                         ? 'cursor-not-allowed text-[#aaa5bf]'
                         : activePageId === page.id
-                          ? 'text-[#5f564c] hover:bg-[#e5e0d7]'
+                          ? 'text-[#5f564c] hover:bg-[#edf0f3]'
                           : 'text-[#8f857a] hover:bg-[#ddd8ee] hover:text-[#313238]'
                     )}
                     aria-label={`Delete ${page.title}`}
@@ -614,7 +549,7 @@ export const WorkspaceView = () => {
               ))}
               <button
                 onClick={handleAddPage}
-                className="ml-1 rounded-t-[14px] bg-[#f3efe8] px-4 py-3 text-sm font-bold text-[#5f564c] transition hover:bg-white"
+                className="ml-1 -mb-px rounded-t-[14px] border border-transparent border-b-0 bg-[#eef1f4] px-4 py-3 text-sm font-bold text-[#5f564c] transition hover:bg-[#e6eaee]"
                 aria-label="Create new page"
               >
                 +
@@ -626,58 +561,41 @@ export const WorkspaceView = () => {
 
         <div
           className={clsx(
-            'min-h-0 flex-1 overflow-hidden bg-[linear-gradient(180deg,rgba(242,239,232,0.84)_0%,rgba(255,250,240,0.76)_100%)]',
+            'min-h-0 flex-1 overflow-hidden',
+            activeBoardSection === 'definition'
+              ? 'bg-white'
+              : 'bg-[#eef1f4]',
             activeBoardSection === 'definition' ? 'p-0' : 'p-4'
           )}
         >
           <div
             className={clsx(
-              'h-full rounded-[22px] bg-[#f3efe8] shadow-[0_18px_34px_rgba(49,50,56,0.06)]',
+              'h-full bg-white',
               activeBoardSection === 'definition'
-                ? 'flex min-h-0 flex-col overflow-hidden p-0'
-                : 'overflow-y-auto p-5'
+                ? 'flex min-h-0 flex-col overflow-hidden rounded-none p-0'
+                : 'overflow-y-auto rounded-[22px] p-5'
             )}
           >
             <div
               className={clsx(
-                'rounded-[18px] bg-[linear-gradient(180deg,#e5e0d7_0%,#f3efe8_100%)]',
-                activeBoardSection === 'definition' ? 'flex min-h-0 flex-1 flex-col p-0' : 'p-5'
+                activeBoardSection === 'definition'
+                  ? 'flex min-h-0 flex-1 flex-col bg-white p-0'
+                  : 'rounded-[18px] bg-white p-5'
               )}
             >
               {activeBoardSection === 'definition' && (
                 <>
-                  <div className="grid min-h-0 flex-1 items-stretch gap-4 overflow-hidden xl:grid-cols-[minmax(0,1.45fr)_320px]">
-                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-[#f6f4f1] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
-                      <div className="border-b border-[#313238]/8 bg-[#f3efe8] px-5 py-4">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8e2da] text-[#455763]">
-                              <Globe size={18} />
-                            </div>
-                            <div>
-                              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
-                                Learning browser
-                              </div>
-                              <div className="text-sm font-semibold text-[#313238]">
-                                {embeddedArticle.title}
-                              </div>
-                            </div>
-                          </div>
-
-                          <a
-                            href={embeddedArticle.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-[#455763] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[#f4f1eb]"
-                          >
-                            Open source
-                            <ExternalLink size={14} />
-                          </a>
-                        </div>
-
-                        <div className="mt-3 border border-[#313238]/8 bg-white px-5 py-3 text-sm text-[#5f564c]">
+                  <div className="grid min-h-0 flex-1 items-stretch gap-4 overflow-hidden xl:gap-0 xl:grid-cols-[minmax(0,1.45fr)_320px]">
+                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-white xl:rounded-r-none">
+                      <div className="border-b border-[#313238]/8 bg-[#f5f7fa] px-5 py-3">
+                        <a
+                          href={embeddedArticle.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-sm text-[#5f564c] underline-offset-4 transition hover:text-[#313238] hover:underline"
+                        >
                           {embeddedArticle.url}
-                        </div>
+                        </a>
                       </div>
 
                       <div className="min-h-0 flex-1 overflow-hidden bg-white">
@@ -689,7 +607,7 @@ export const WorkspaceView = () => {
                       </div>
                     </div>
 
-                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-[#313238] text-[#f4f1eb] shadow-[0_12px_24px_rgba(49,50,56,0.14)]">
+                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-[#313238] text-[#f4f1eb] xl:rounded-l-none">
                       <div className="border-b border-white/10 px-5 py-5">
                         <div className="text-xs font-bold uppercase tracking-[0.18em] text-white/82">
                           Learning recap
@@ -725,13 +643,63 @@ export const WorkspaceView = () => {
                 </>
               )}
 
+              {activeBoardSection === 'summary' && (
+                <>
+                  <div className="rounded-[20px] bg-white p-5">
+                    <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                      {activePage.title}
+                    </div>
+                    <div className="mt-3 text-2xl font-semibold text-[#313238]">{activePage.subtitle}</div>
+                    <div className="mt-3 max-w-3xl text-sm leading-7 text-[#5f564c]">
+                      {activePage.definition}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_320px]">
+                    <div className="rounded-[20px] bg-white p-5">
+                      <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                        Key points
+                      </div>
+                      <div className="mt-4 space-y-3">
+                        {activePage.keyPoints.map((point, index) => (
+                          <div key={point} className="app-panel rounded-[16px] px-4 py-4">
+                            <div className="flex items-start gap-3">
+                              <div className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#313238] text-[12px] font-bold text-white">
+                                {index + 1}
+                              </div>
+                              <div className="text-sm leading-6 text-[#313238]">{point}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid gap-4">
+                      <div className="rounded-[20px] bg-white p-5">
+                        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                          Study focus
+                        </div>
+                        <div className="mt-3 text-sm leading-7 text-[#313238]">{activePage.focus}</div>
+                      </div>
+
+                      <div className="rounded-[20px] bg-white p-5">
+                        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                          Watch out
+                        </div>
+                        <div className="mt-3 text-sm leading-7 text-[#313238]">{activePage.mistake}</div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
               {activeBoardSection === 'examples' && (
                 <>
                   <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                     <BookOpenCheck size={16} />
                     Worked examples
                   </div>
-                  <div className="mt-4 rounded-[16px] bg-[#f3efe8] p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
+                  <div className="mt-4 rounded-[16px] bg-white p-5">
                     <div className="text-lg font-semibold text-[#313238]">{activePage.exampleTitle}</div>
                     <div className="mt-2 text-sm leading-7 text-[#5f564c]">{activePage.exampleBody}</div>
                   </div>
@@ -746,7 +714,7 @@ export const WorkspaceView = () => {
                       const Icon = icons[index];
 
                       return (
-                        <div key={step} className="rounded-[16px] bg-[#f3efe8] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
+                        <div key={step} className="rounded-[16px] bg-white p-4">
                           <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8e2da] text-[#455763]">
                             <Icon size={18} />
                           </div>
@@ -764,7 +732,7 @@ export const WorkspaceView = () => {
                       const Icon = item.icon;
 
                       return (
-                        <div key={item.title} className="rounded-[16px] bg-white/70 p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
+                        <div key={item.title} className="rounded-[16px] bg-white/70 p-5">
                           <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#d8d2ee] text-[#455763]">
                             <Icon size={19} />
                           </div>
@@ -777,35 +745,6 @@ export const WorkspaceView = () => {
                 </>
               )}
 
-              {activeBoardSection === 'mistakes' && (
-                <>
-                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#5f564c]">
-                    <AlertCircle size={16} />
-                    Common mistakes
-                  </div>
-                  <div className="mt-4 rounded-[16px] bg-[#f3efe8] p-5 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
-                    <div className="text-lg font-semibold text-[#313238]">What often goes wrong</div>
-                    <div className="mt-2 text-sm leading-7 text-[#5f564c]">{activePage.mistake}</div>
-                  </div>
-
-                  <div className="mt-4 grid gap-3 md:grid-cols-2">
-                    <div className="rounded-[16px] bg-[#e5e0d7] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
-                      <div className="text-sm font-semibold text-[#313238]">Correction strategy</div>
-                      <div className="mt-2 text-sm leading-6 text-[#5f564c]">
-                        Slow down, restate the concept once, and ask one specific question instead of
-                        switching immediately into more practice.
-                      </div>
-                    </div>
-                    <div className="rounded-[16px] bg-[#ceb3a1] p-4 shadow-[0_10px_22px_rgba(49,50,56,0.04)]">
-                      <div className="text-sm font-semibold text-[#313238]">Self-check</div>
-                      <div className="mt-2 text-sm leading-6 text-[#5f564c]">
-                        Can you explain the concept without notes and identify where the common mistake
-                        begins?
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
             </div>
           </div>
         </div>
@@ -815,7 +754,7 @@ export const WorkspaceView = () => {
   );
 };
 
-const RecordRow = ({
+const TodoRow = ({
   label,
   value,
   completed,
@@ -837,7 +776,7 @@ const RecordRow = ({
         <Check size={11} strokeWidth={3} />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">{label}</div>
+        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">{label}</div>
         <div className="mt-1 text-[13px] leading-4.5 text-[#313238]">{value}</div>
       </div>
     </div>

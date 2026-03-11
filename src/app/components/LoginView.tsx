@@ -33,9 +33,9 @@ export const LoginView = () => {
           alt=""
           className="absolute right-[-2rem] top-8 w-[18rem] rotate-[8deg] opacity-[0.08] blur-[1px] sm:w-[26rem]"
         />
-        <div className="absolute bottom-[-6rem] left-[-4rem] h-72 w-72 rounded-full bg-[#e5e0d7]/24 blur-3xl" />
-        <div className="absolute right-[-5rem] top-1/4 h-80 w-80 rounded-full bg-[#ceb3a1]/18 blur-3xl" />
-        <div className="absolute left-[28%] top-[14%] h-64 w-64 rounded-full bg-[#d0c6b8]/10 blur-3xl" />
+        <div className="absolute bottom-[-6rem] left-[-4rem] h-72 w-72 rounded-full bg-white/34 blur-3xl" />
+        <div className="absolute right-[-5rem] top-1/4 h-80 w-80 rounded-full bg-[#dfe4eb]/36 blur-3xl" />
+        <div className="absolute left-[28%] top-[14%] h-64 w-64 rounded-full bg-[#d7dde5]/22 blur-3xl" />
         <div className="app-grid absolute inset-0 opacity-30" />
       </div>
 
@@ -46,9 +46,9 @@ export const LoginView = () => {
           transition={{ duration: 0.55, delay: 0.08 }}
           className="relative w-full max-w-[min(92vw,78rem)] rounded-[36px] p-3 sm:p-5 lg:p-6"
         >
-          <div className="rounded-[32px] border border-[#ebe7e1] bg-[#f6f4f1] px-6 py-7 shadow-[0_22px_42px_rgba(49,50,56,0.05),inset_0_1px_0_rgba(255,255,255,0.82)] sm:px-9 sm:py-9 lg:px-10 lg:py-10">
+          <div className="rounded-[32px] border border-[#dde2e8] bg-white px-6 py-7 sm:px-9 sm:py-9 lg:px-10 lg:py-10">
             <div className="mb-8 flex flex-col items-center gap-4">
-              <div className="inline-flex rounded-full bg-[#ebe7e1] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+              <div className="inline-flex rounded-full bg-[#eef1f4] p-1">
                 {[
                   ['guided', 'Guided'],
                   ['self', 'Self-directed'],
@@ -59,7 +59,7 @@ export const LoginView = () => {
                     onClick={() => setMode(value as 'guided' | 'self')}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       mode === value
-                        ? 'bg-[#202127] text-white shadow-[0_10px_18px_rgba(49,50,56,0.14)]'
+                        ? 'bg-[#202127] text-white'
                         : 'text-[#5f564c] hover:text-[#313238]'
                     }`}
                   >
@@ -68,7 +68,7 @@ export const LoginView = () => {
                 ))}
               </div>
 
-              <div className="rounded-full bg-white/88 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-[#6d645a] shadow-[0_8px_18px_rgba(49,50,56,0.04)]">
+              <div className="rounded-full bg-[#f4f6f8] px-5 py-2 text-[12px] font-bold uppercase tracking-[0.28em] text-[#6d645a]">
                 {mode === 'self' ? 'Self-directed learning mode' : 'Quick learning brief'}
               </div>
             </div>
@@ -79,7 +79,7 @@ export const LoginView = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe what you want to learn, your goal, what feels difficult, and how you want to study."
-                  className="min-h-[220px] w-full resize-none rounded-[24px] bg-[#ece7e1] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#7f766d] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
+                  className="min-h-[220px] w-full resize-none rounded-[24px] bg-[#f4f6f8] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#7f766d] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
                 />
               </div>
             ) : (
@@ -118,7 +118,7 @@ export const LoginView = () => {
             <div className="mt-8 flex justify-end border-t border-[#313238]/8 pt-5 sm:mt-10">
               <button
                 onClick={handleNext}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white shadow-[0_18px_28px_rgba(49,50,56,0.16)] transition hover:bg-[#313238]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white transition hover:bg-[#313238]"
               >
                 Continue
                 <ArrowRight size={18} />
@@ -143,7 +143,7 @@ const InlineField = ({
   widthClass: string;
 }) => (
   <label
-    className={`inline-flex min-h-[60px] items-center rounded-full bg-[#e3dfda] px-5 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_8px_18px_rgba(49,50,56,0.04)] ${widthClass}`}
+    className={`inline-flex min-h-[60px] items-center rounded-full bg-[#f1f3f6] px-5 py-2 ${widthClass}`}
   >
     <input
       type="text"

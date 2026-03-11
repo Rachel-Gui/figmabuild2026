@@ -11,7 +11,6 @@ export const ProfileView = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="grid h-full min-h-0 gap-4 overflow-hidden lg:grid-cols-[360px_minmax(0,1fr)]">
       <section className="app-surface relative min-h-0 overflow-y-auto rounded-[26px] p-6">
-        <div className="pointer-events-none absolute inset-x-6 top-0 h-24 rounded-b-[24px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
         <div className="inline-flex h-16 w-16 items-center justify-center rounded-[18px] bg-[#313238] text-2xl font-bold text-[#f4f1eb]">
           RG
         </div>

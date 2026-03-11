@@ -4,7 +4,6 @@ import {
   Clock3,
   FileClock,
   FolderGit2,
-  FolderOpen,
   History,
   Search,
   Target,
@@ -17,25 +16,25 @@ const folders = [
     title: 'Biology review',
     count: '12 records',
     updated: 'Updated 2 hours ago',
-    tone: 'bg-[#e5e0d7]',
+    tone: 'bg-white',
   },
   {
     title: 'Math practice',
     count: '9 records',
     updated: 'Updated yesterday',
-    tone: 'bg-[#f3efe8]',
+    tone: 'bg-white',
   },
   {
     title: 'Writing feedback',
     count: '7 records',
     updated: 'Updated 3 days ago',
-    tone: 'bg-[#d0c6b8]',
+    tone: 'bg-[#f7f8fa]',
   },
   {
     title: 'Physics concepts',
     count: '15 records',
     updated: 'Updated this week',
-    tone: 'bg-[#ceb3a1]',
+    tone: 'bg-[#f7f8fa]',
   },
 ];
 
@@ -87,10 +86,6 @@ const futureGoals = [
     title: 'Connect short sessions into one track',
     note: 'Keep notes, examples, and corrections tied to the same long-term subject.',
   },
-  {
-    title: 'Spot progress earlier',
-    note: 'Use past boards to notice stronger recall, cleaner reasoning, and fewer repeated mistakes.',
-  },
 ];
 
 export const ChatView = () => {
@@ -106,25 +101,9 @@ export const ChatView = () => {
           alt=""
           className="pointer-events-none absolute right-[-3rem] top-[-2rem] w-64 rotate-[14deg] opacity-[0.06]"
         />
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-24 rounded-b-[26px] bg-[linear-gradient(180deg,rgba(208,198,184,0.16)_0%,rgba(208,198,184,0)_100%)]" />
-
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#313238] px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-[#f4f1eb]">
-              <FolderOpen size={14} />
-              Folder
-            </div>
-            <h2 className="mt-5 text-3xl font-semibold text-[#313238] sm:text-4xl">
-              Previous learning records, saved in one place.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[#5f564c]">
-              This page works like a study archive. Each folder keeps past explanations, saved notes,
-              worked examples, and review history from earlier sessions.
-            </p>
-          </div>
-
-          <div className="mt-8 rounded-[22px] bg-[#e5e0d7] p-3">
-            <div className="flex items-center gap-3 rounded-[16px] bg-[#f3efe8] px-4 py-4 text-sm text-[#5f564c]">
+          <div className="rounded-[22px] bg-[#eef1f4] p-3">
+            <div className="flex items-center gap-3 rounded-[16px] bg-white px-4 py-4 text-sm text-[#5f564c]">
               <Search size={18} className="text-[#313238]" />
               Search previous topics, notes, or saved boards
             </div>
@@ -133,7 +112,7 @@ export const ChatView = () => {
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             {archiveStats.map((item) => (
               <div key={item.label} className="app-frost rounded-[16px] px-4 py-4">
-                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                   {item.label}
                 </div>
                 <div className="mt-2 text-2xl font-semibold text-[#313238]">{item.value}</div>
@@ -143,9 +122,12 @@ export const ChatView = () => {
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {folders.map((folder) => (
-              <div key={folder.title} className={`rounded-[22px] p-5 shadow-[0_14px_32px_rgba(49,50,56,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(49,50,56,0.08)] ${folder.tone}`}>
+              <div
+                key={folder.title}
+                className={`rounded-[22px] border border-[#d5dbe2] p-5 transition hover:-translate-y-0.5 ${folder.tone}`}
+              >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#313238] text-[#f4f1eb] shadow-[0_12px_20px_rgba(49,50,56,0.14)]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#313238] text-[#f4f1eb]">
                     <FolderGit2 size={18} />
                   </div>
                   <div className="rounded-full bg-white/65 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#5f564c]">
@@ -159,7 +141,7 @@ export const ChatView = () => {
             ))}
           </div>
 
-          <div className="mt-8 rounded-[24px] bg-[#f3efe8] p-5 shadow-[0_14px_30px_rgba(49,50,56,0.05)]">
+          <div className="mt-8 rounded-[24px] bg-white p-5">
             <div className="flex items-center gap-3">
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#be7d62] text-[#f4f1eb]">
                 <History size={18} />
@@ -180,7 +162,7 @@ export const ChatView = () => {
                       <div className="text-base font-semibold text-[#313238]">{record.title}</div>
                       <div className="mt-1 text-sm font-semibold text-[#5f564c]">{record.folder}</div>
                     </div>
-                    <div className="inline-flex items-center gap-2 rounded-full bg-[#f3efe8] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[#f4f6f8] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#5f564c]">
                       <Clock3 size={12} />
                       {record.time}
                     </div>
@@ -195,7 +177,7 @@ export const ChatView = () => {
 
       <aside className="grid min-h-0 content-start gap-4 overflow-y-auto pr-1">
         <section className="app-surface shrink-0 rounded-[24px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e5e0d7] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
+          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#e5e0d7] text-[#313238]">
             <BookmarkCheck size={18} />
           </div>
           <h3 className="mt-4 text-xl font-semibold text-[#313238]">Pinned notes</h3>
@@ -209,7 +191,7 @@ export const ChatView = () => {
         </section>
 
         <section className="app-surface shrink-0 rounded-[24px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#d0c6b8] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
+          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#d0c6b8] text-[#313238]">
             <FileClock size={18} />
           </div>
           <h3 className="mt-4 text-xl font-semibold text-[#313238]">Archive logic</h3>
@@ -220,7 +202,7 @@ export const ChatView = () => {
         </section>
 
         <section className="app-surface shrink-0 rounded-[24px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#ceb3a1] text-[#313238] shadow-[0_10px_18px_rgba(49,50,56,0.08)]">
+          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#ceb3a1] text-[#313238]">
             <Target size={18} />
           </div>
           <h3 className="mt-4 text-xl font-semibold text-[#313238]">Future learning goals</h3>

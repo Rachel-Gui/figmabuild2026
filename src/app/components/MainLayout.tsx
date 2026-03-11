@@ -43,13 +43,6 @@ export const MainLayout = () => {
 
   return (
     <div className="relative h-[100dvh] overflow-hidden text-[#313238]">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8rem] top-[-6rem] h-72 w-72 rounded-full bg-[#e5e0d7]/30 blur-3xl" />
-        <div className="absolute right-[-4rem] top-20 h-80 w-80 rounded-full bg-[#ceb3a1]/24 blur-3xl" />
-        <div className="absolute bottom-[-5rem] right-[18%] h-72 w-72 rounded-full bg-[#d0c6b8]/16 blur-3xl" />
-        <div className="app-grid absolute inset-0 opacity-35" />
-      </div>
-
       <div className="relative flex h-full min-h-0">
         {showSidebar && (
           <button
@@ -72,47 +65,54 @@ export const MainLayout = () => {
           <aside
             className={clsx(
               'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[24px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
-              isSidebarCollapsed ? 'w-[92px]' : 'w-[260px]',
+              isSidebarCollapsed ? 'w-[92px]' : 'w-[180px]',
               isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
             )}
           >
-            <div className="pointer-events-none absolute inset-x-4 top-0 h-24 rounded-b-[24px] bg-[linear-gradient(180deg,rgba(208,198,184,0.22)_0%,rgba(208,198,184,0)_100%)]" />
             <div
               className={clsx(
                 'mb-8 shrink-0 px-2 pt-2',
-                isSidebarCollapsed ? 'flex justify-center' : 'flex items-start justify-between gap-3'
+                isSidebarCollapsed ? 'flex justify-center' : 'relative'
               )}
             >
-              {!isSidebarCollapsed && (
-                <div className="min-w-0">
-                  <NavLink
-                    to="/"
-                    onClick={() => setIsSidebarOpen(false)}
-                    className="mb-3 inline-flex items-center rounded-full bg-[#313238] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-[#f4f1eb] shadow-[0_10px_18px_rgba(49,50,56,0.16)] transition hover:bg-[#7a7063]"
-                  >
-                    <span>CogniSense</span>
-                  </NavLink>
-
-                  <h2 className="text-[1.58rem] font-semibold leading-tight text-[#313238]">Learning Studio</h2>
-                </div>
-              )}
-
-              <div className={clsx('flex gap-2', isSidebarCollapsed ? 'items-center justify-center' : 'shrink-0')}>
+              {isSidebarCollapsed ? (
                 <button
                   onClick={() => setIsSidebarCollapsed((prev) => !prev)}
-                  className="hidden lg:inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#e5e0d7]/28 hover:text-[#313238]"
+                  className="hidden lg:inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#edf0f3] hover:text-[#313238]"
                   aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
                 >
                   {isSidebarCollapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}
                 </button>
-                <button
-                  onClick={() => setIsSidebarOpen(false)}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#e5e0d7]/28 hover:text-[#313238] lg:hidden"
-                  aria-label="Close navigation"
-                >
-                  <X size={20} />
-                </button>
-              </div>
+              ) : (
+                <div className="min-w-0">
+                  <button
+                    onClick={() => setIsSidebarCollapsed((prev) => !prev)}
+                    className="mb-3 hidden h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#edf0f3] hover:text-[#313238] lg:inline-flex"
+                    aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                  >
+                    {isSidebarCollapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}
+                  </button>
+
+                  <NavLink
+                    to="/"
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="inline-flex items-center rounded-full bg-[#313238] px-4 py-1 text-[12px] font-bold uppercase tracking-[0.24em] text-[#f4f1eb] transition hover:bg-[#7a7063]"
+                  >
+                    <span>CogniSense</span>
+                  </NavLink>
+                </div>
+              )}
+
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className={clsx(
+                  'inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5f564c] transition hover:bg-[#edf0f3] hover:text-[#313238] lg:hidden',
+                  isSidebarCollapsed ? '' : 'absolute right-2 top-2'
+                )}
+                aria-label="Close navigation"
+              >
+                <X size={20} />
+              </button>
             </div>
 
             <nav className={clsx('min-h-0 flex-1 overflow-y-auto', isSidebarCollapsed ? 'pr-0' : 'pr-1')}>
@@ -124,11 +124,11 @@ export const MainLayout = () => {
                     onClick={() => setIsSidebarOpen(false)}
                     className={({ isActive }) =>
                       clsx(
-                        'group rounded-[18px] transition-all duration-200',
+                        'group block w-full rounded-[18px] transition-all duration-200',
                         isSidebarCollapsed ? 'flex justify-center px-0 py-3' : 'px-4 py-4',
                         isActive
-                          ? 'bg-[#7a7063] text-[#f4f1eb] shadow-[0_20px_40px_rgba(49,50,56,0.16)]'
-                          : 'hover:bg-[#e5e0d7]/26 hover:shadow-[0_12px_22px_rgba(49,50,56,0.05)]'
+                          ? 'bg-[#edf0f3] text-[#313238]'
+                          : 'hover:bg-[#f2f4f7]'
                       )
                     }
                   >
@@ -136,12 +136,17 @@ export const MainLayout = () => {
                       const Icon = item.icon;
 
                       return (
-                        <div className={clsx('flex gap-3', isSidebarCollapsed ? 'justify-center' : 'items-start')}>
+                        <div
+                          className={clsx(
+                            'flex w-full gap-3',
+                            isSidebarCollapsed ? 'justify-center' : 'items-start'
+                          )}
+                        >
                           <div
                             className={clsx(
                               'inline-flex h-11 w-11 items-center justify-center rounded-xl transition',
                               !isSidebarCollapsed && 'mt-0.5',
-                              isActive ? 'bg-white/18' : 'bg-[#e5e0d7]/32 text-[#313238]'
+                              'bg-transparent text-[#313238]'
                             )}
                           >
                             <Icon size={20} />
@@ -168,8 +173,8 @@ export const MainLayout = () => {
                     'group block rounded-[18px] transition-all duration-200',
                     isSidebarCollapsed ? 'flex justify-center px-0 py-3' : 'px-4 py-4',
                     isActive
-                      ? 'bg-[#7a7063] text-[#f4f1eb] shadow-[0_20px_40px_rgba(49,50,56,0.16)]'
-                      : 'hover:bg-[#e5e0d7]/26 hover:shadow-[0_12px_22px_rgba(49,50,56,0.05)]'
+                      ? 'bg-[#edf0f3] text-[#313238]'
+                      : 'hover:bg-[#f2f4f7]'
                   )
                 }
               >
@@ -182,7 +187,7 @@ export const MainLayout = () => {
                         className={clsx(
                           'inline-flex h-11 w-11 items-center justify-center rounded-xl transition',
                           !isSidebarCollapsed && 'mt-0.5',
-                          isActive ? 'bg-white/18' : 'bg-[#e5e0d7]/32 text-[#313238]'
+                          'bg-transparent text-[#313238]'
                         )}
                       >
                         <Icon size={20} />

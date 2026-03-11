@@ -9,30 +9,6 @@ import {
 } from 'lucide-react';
 import { clsx } from 'clsx';
 
-const overviewMetrics = [
-  {
-    label: 'Attention stability',
-    value: '82',
-    note: 'Steady through explanation blocks',
-    accent: 'bg-[#455763]',
-    progress: 82,
-  },
-  {
-    label: 'Emotional readiness',
-    value: '74%',
-    note: 'Open to learning, low resistance',
-    accent: 'bg-[#be7d62]',
-    progress: 74,
-  },
-  {
-    label: 'Anxiety signal',
-    value: '31%',
-    note: 'Elevates before timed tasks',
-    accent: 'bg-[#d6c9b4]',
-    progress: 31,
-  },
-];
-
 const signalRows = [
   {
     label: 'Cognitive friction',
@@ -122,43 +98,233 @@ const stateSummaryCards = [
 
 const learningConditionOrbs = [
   {
-    className: 'left-[16%] top-[33%] h-[4.25rem] w-[4.25rem] bg-[#455763]',
-    opacity: 0.9,
-    blur: 'blur-[2px]',
-    x: [0, 10, -6, 0],
-    y: [0, -8, 6, 0],
-    scale: [1, 1.06, 0.98, 1],
-    duration: 13,
+    className: 'left-[12%] top-[31%] h-[4.5rem] w-[4.5rem] bg-[#455763]',
+    opacity: 0.88,
+    blur: 'blur-[3px]',
+    x: [0, 18, -12, 8, 0],
+    y: [0, -16, 10, -6, 0],
+    scale: [1, 1.1, 0.94, 1.04, 1],
+    duration: 15,
   },
   {
-    className: 'left-[30%] top-[42%] h-[5.25rem] w-[5.25rem] bg-[#ef8870]',
-    opacity: 0.72,
-    blur: 'blur-[8px]',
-    x: [0, -12, 8, 0],
-    y: [0, 10, -6, 0],
-    scale: [1, 1.08, 0.96, 1],
-    duration: 16,
-  },
-  {
-    className: 'left-[48%] top-[20%] h-[6.1rem] w-[6.1rem] bg-[#f4d870]',
-    opacity: 0.92,
+    className: 'left-[27%] top-[44%] h-[5.6rem] w-[5.6rem] bg-[#ef8870]',
+    opacity: 0.74,
     blur: 'blur-[10px]',
-    x: [0, 12, -10, 0],
-    y: [0, -12, 8, 0],
-    scale: [1, 1.04, 0.97, 1],
+    x: [0, -18, 14, -6, 0],
+    y: [0, 14, -9, 5, 0],
+    scale: [1, 1.12, 0.95, 1.03, 1],
     duration: 18,
+  },
+  {
+    className: 'left-[46%] top-[18%] h-[6.2rem] w-[6.2rem] bg-[#f4d870]',
+    opacity: 0.92,
+    blur: 'blur-[12px]',
+    x: [0, 20, -16, 10, 0],
+    y: [0, -18, 12, -8, 0],
+    scale: [1, 1.08, 0.95, 1.02, 1],
+    duration: 20,
+  },
+  {
+    className: 'left-[58%] top-[36%] h-[4.2rem] w-[4.2rem] bg-[#d8eef4]',
+    opacity: 0.58,
+    blur: 'blur-[8px]',
+    x: [0, 14, -10, 6, 0],
+    y: [0, 12, -14, 4, 0],
+    scale: [1, 1.07, 0.92, 1.04, 1],
+    duration: 17,
+  },
+  {
+    className: 'left-[66%] top-[24%] h-[3.4rem] w-[3.4rem] bg-[#f7e8ad]',
+    opacity: 0.72,
+    blur: 'blur-[7px]',
+    x: [0, -12, 16, -4, 0],
+    y: [0, -10, 12, -6, 0],
+    scale: [1, 1.11, 0.93, 1.05, 1],
+    duration: 14,
   },
 ];
 
 const learningConditionParticles = [
-  { left: '18%', top: '24%', size: '0.45rem', color: 'bg-white/65', delay: 0, duration: 7.5 },
-  { left: '24%', top: '52%', size: '0.55rem', color: 'bg-[#d8eef4]/70', delay: 0.8, duration: 8.5 },
-  { left: '33%', top: '28%', size: '0.5rem', color: 'bg-[#f4d870]/75', delay: 1.6, duration: 9.5 },
-  { left: '39%', top: '50%', size: '0.7rem', color: 'bg-[#ef8870]/58', delay: 0.4, duration: 10.5 },
-  { left: '49%', top: '34%', size: '0.52rem', color: 'bg-white/55', delay: 1.2, duration: 8.2 },
-  { left: '56%', top: '61%', size: '0.42rem', color: 'bg-[#455763]/45', delay: 2.1, duration: 11 },
-  { left: '61%', top: '30%', size: '0.6rem', color: 'bg-[#f4d870]/58', delay: 0.7, duration: 9.8 },
-  { left: '67%', top: '49%', size: '0.48rem', color: 'bg-white/60', delay: 1.8, duration: 8.8 },
+  {
+    left: '14%',
+    top: '22%',
+    size: '0.36rem',
+    color: 'bg-white/65',
+    delay: 0,
+    duration: 8.4,
+    x: [0, 15, -8, 5, 0],
+    y: [0, -18, 10, -6, 0],
+    opacity: [0.18, 0.82, 0.28, 0.56, 0.18],
+    scale: [0.62, 1.22, 0.82, 1.04, 0.62],
+  },
+  {
+    left: '18%',
+    top: '39%',
+    size: '0.48rem',
+    color: 'bg-[#d8eef4]/75',
+    delay: 1.1,
+    duration: 9.2,
+    x: [0, -12, 16, -4, 0],
+    y: [0, 14, -10, 6, 0],
+    opacity: [0.22, 0.7, 0.36, 0.62, 0.22],
+    scale: [0.68, 1.18, 0.88, 1.08, 0.68],
+  },
+  {
+    left: '22%',
+    top: '55%',
+    size: '0.42rem',
+    color: 'bg-white/55',
+    delay: 0.4,
+    duration: 10.6,
+    x: [0, 10, -14, 7, 0],
+    y: [0, -12, 14, -5, 0],
+    opacity: [0.16, 0.76, 0.24, 0.54, 0.16],
+    scale: [0.58, 1.16, 0.86, 1.02, 0.58],
+  },
+  {
+    left: '27%',
+    top: '26%',
+    size: '0.56rem',
+    color: 'bg-[#f4d870]/78',
+    delay: 1.8,
+    duration: 8.8,
+    x: [0, -16, 12, -3, 0],
+    y: [0, -20, 8, 4, 0],
+    opacity: [0.2, 0.84, 0.34, 0.6, 0.2],
+    scale: [0.7, 1.26, 0.9, 1.08, 0.7],
+  },
+  {
+    left: '32%',
+    top: '47%',
+    size: '0.7rem',
+    color: 'bg-[#ef8870]/58',
+    delay: 0.9,
+    duration: 11.4,
+    x: [0, 18, -10, 6, 0],
+    y: [0, 12, -16, 8, 0],
+    opacity: [0.18, 0.64, 0.28, 0.46, 0.18],
+    scale: [0.76, 1.18, 0.92, 1.04, 0.76],
+  },
+  {
+    left: '38%',
+    top: '20%',
+    size: '0.38rem',
+    color: 'bg-white/60',
+    delay: 2.2,
+    duration: 9.8,
+    x: [0, 13, -11, 4, 0],
+    y: [0, -15, 12, -7, 0],
+    opacity: [0.14, 0.74, 0.26, 0.58, 0.14],
+    scale: [0.54, 1.2, 0.8, 1.06, 0.54],
+  },
+  {
+    left: '43%',
+    top: '57%',
+    size: '0.44rem',
+    color: 'bg-[#455763]/46',
+    delay: 1.3,
+    duration: 12.1,
+    x: [0, -14, 18, -5, 0],
+    y: [0, 16, -12, 5, 0],
+    opacity: [0.12, 0.52, 0.24, 0.4, 0.12],
+    scale: [0.6, 1.14, 0.82, 0.98, 0.6],
+  },
+  {
+    left: '48%',
+    top: '31%',
+    size: '0.5rem',
+    color: 'bg-[#f4d870]/65',
+    delay: 0.6,
+    duration: 10.1,
+    x: [0, 17, -9, 6, 0],
+    y: [0, -19, 11, -4, 0],
+    opacity: [0.18, 0.78, 0.3, 0.58, 0.18],
+    scale: [0.64, 1.22, 0.88, 1.02, 0.64],
+  },
+  {
+    left: '54%',
+    top: '44%',
+    size: '0.34rem',
+    color: 'bg-white/70',
+    delay: 2.5,
+    duration: 7.9,
+    x: [0, -11, 13, -2, 0],
+    y: [0, 10, -14, 6, 0],
+    opacity: [0.2, 0.88, 0.32, 0.66, 0.2],
+    scale: [0.52, 1.24, 0.78, 1.1, 0.52],
+  },
+  {
+    left: '58%',
+    top: '62%',
+    size: '0.4rem',
+    color: 'bg-[#d8eef4]/60',
+    delay: 1.7,
+    duration: 11.8,
+    x: [0, 12, -16, 5, 0],
+    y: [0, -16, 14, -6, 0],
+    opacity: [0.12, 0.6, 0.24, 0.44, 0.12],
+    scale: [0.58, 1.12, 0.82, 1, 0.58],
+  },
+  {
+    left: '61%',
+    top: '27%',
+    size: '0.62rem',
+    color: 'bg-[#f4d870]/60',
+    delay: 0.2,
+    duration: 9.5,
+    x: [0, -18, 10, -4, 0],
+    y: [0, -13, 15, -7, 0],
+    opacity: [0.16, 0.72, 0.28, 0.5, 0.16],
+    scale: [0.72, 1.28, 0.9, 1.06, 0.72],
+  },
+  {
+    left: '64%',
+    top: '51%',
+    size: '0.46rem',
+    color: 'bg-white/58',
+    delay: 2.1,
+    duration: 8.7,
+    x: [0, 14, -12, 3, 0],
+    y: [0, 18, -8, 5, 0],
+    opacity: [0.18, 0.82, 0.34, 0.62, 0.18],
+    scale: [0.62, 1.18, 0.84, 1.04, 0.62],
+  },
+  {
+    left: '69%',
+    top: '36%',
+    size: '0.52rem',
+    color: 'bg-[#ef8870]/52',
+    delay: 0.7,
+    duration: 10.9,
+    x: [0, -15, 17, -6, 0],
+    y: [0, -17, 12, -4, 0],
+    opacity: [0.14, 0.58, 0.22, 0.42, 0.14],
+    scale: [0.66, 1.16, 0.86, 1.02, 0.66],
+  },
+  {
+    left: '72%',
+    top: '57%',
+    size: '0.36rem',
+    color: 'bg-[#455763]/42',
+    delay: 1.5,
+    duration: 12.4,
+    x: [0, 11, -13, 4, 0],
+    y: [0, 15, -12, 6, 0],
+    opacity: [0.1, 0.46, 0.18, 0.34, 0.1],
+    scale: [0.5, 1.08, 0.74, 0.96, 0.5],
+  },
+  {
+    left: '76%',
+    top: '24%',
+    size: '0.48rem',
+    color: 'bg-white/62',
+    delay: 2.8,
+    duration: 9.1,
+    x: [0, -10, 14, -5, 0],
+    y: [0, -14, 10, -3, 0],
+    opacity: [0.16, 0.78, 0.26, 0.56, 0.16],
+    scale: [0.6, 1.22, 0.82, 1.04, 0.6],
+  },
 ];
 
 export const QuizView = () => {
@@ -198,7 +364,7 @@ export const QuizView = () => {
       <section className="app-surface flex min-h-0 flex-col overflow-hidden rounded-[30px] p-4 sm:p-5">
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
           <div className="grid gap-4">
-            <div className="flex flex-col gap-3 rounded-[24px] bg-[#f7f4ef] px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 rounded-[24px] bg-white px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="text-[1.75rem] font-semibold tracking-[-0.04em] text-[#313238]">Hi, Rachel.</div>
                 <div className="mt-1 text-sm leading-6 text-[#5f564c]">
@@ -216,14 +382,14 @@ export const QuizView = () => {
             </div>
 
             {isPlanOpen && (
-              <div className="rounded-[18px] bg-[#f7f4ef] px-5 py-4 text-sm leading-6 text-[#5f564c] shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+              <div className="rounded-[18px] bg-white px-5 py-4 text-sm leading-6 text-[#5f564c]">
                 The current plan prioritizes one guided example, one low-pressure recall task, and one short reflection to keep anxiety contained while retention improves.
               </div>
             )}
 
             <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
-              <section className="relative h-full overflow-hidden rounded-[20px] bg-[#d9d0c3] p-3">
-                <div className="max-w-[190px]">
+              <section className="relative h-full overflow-hidden rounded-[20px] bg-[#eef1f4] p-3">
+                <div className="max-w-[30rem] pr-4">
                   <div className="text-[12px] font-semibold text-[#313238]">Today&apos;s learning condition</div>
                   <div className="mt-1 text-[12px] leading-4.5 text-[#5f564c]">
                     The learner is receptive and focused, but anxiety rises when task pressure becomes visible.
@@ -232,11 +398,6 @@ export const QuizView = () => {
 
                 <div className="relative mt-4 flex min-h-[128px] items-center justify-center">
                   <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-                    <motion.div
-                      className="absolute inset-x-[18%] top-[24%] h-24 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.34)_0%,rgba(255,255,255,0)_72%)] blur-2xl"
-                      animate={{ opacity: [0.2, 0.42, 0.24, 0.2], scale: [0.96, 1.04, 0.98, 0.96] }}
-                      transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                    />
                     {learningConditionOrbs.map((orb) => (
                       <motion.div
                         key={orb.className}
@@ -257,10 +418,10 @@ export const QuizView = () => {
                           height: particle.size,
                         }}
                         animate={{
-                          x: [0, 8, -5, 0],
-                          y: [0, -14, 6, 0],
-                          opacity: [0.22, 0.78, 0.34, 0.22],
-                          scale: [0.72, 1.18, 0.9, 0.72],
+                          x: particle.x,
+                          y: particle.y,
+                          opacity: particle.opacity,
+                          scale: particle.scale,
                         }}
                         transition={{
                           duration: particle.duration,
@@ -284,38 +445,18 @@ export const QuizView = () => {
                     <div className="mt-0.5 text-[13px] font-semibold text-[#5f564c]">69%</div>
                   </div>
                 </div>
-
-                <div className="mt-2 grid gap-2 sm:grid-cols-3">
-                  {overviewMetrics.map((metric) => (
-                    <div
-                      key={metric.label}
-                      className="flex min-h-[118px] flex-col rounded-[16px] bg-white/58 px-3 py-3 text-left backdrop-blur-xl"
-                    >
-                      <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
-                        {metric.label}
-                      </div>
-                      <div className="mt-1.5 text-[1rem] font-semibold leading-none text-[#313238]">{metric.value}</div>
-                      <div className="mt-2 min-h-[2.5rem] text-[12px] leading-4.5 text-[#5f564c]">{metric.note}</div>
-                      <div className="mt-auto pt-2">
-                        <div className="h-1.5 rounded-full bg-white/60">
-                        <div className={`h-1.5 rounded-full ${metric.accent}`} style={{ width: `${metric.progress}%` }} />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </section>
 
               <section className="grid h-full gap-4">
-                <div className="flex h-full flex-col rounded-[26px] bg-[#1f2229] p-5 text-white">
+                <div className="flex h-full flex-col rounded-[26px] bg-white p-5 text-[#313238]">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold">Mental state summary</div>
-                      <div className="mt-1 text-sm text-white/78">
+                      <div className="mt-1 text-sm text-[#5f564c]">
                         A cleaner snapshot of stress, recovery, and confidence.
                       </div>
                     </div>
-                    <div className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white/86">
+                    <div className="rounded-full bg-[#eef1f4] px-3 py-1 text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
                       Live
                     </div>
                   </div>
@@ -334,7 +475,7 @@ export const QuizView = () => {
                               <Icon size={18} />
                             </div>
                             <div>
-                              <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                              <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
                                 {item.label}
                               </div>
                               <div className="mt-1 text-lg font-semibold">{item.value}</div>
@@ -352,7 +493,7 @@ export const QuizView = () => {
 
             <div className="grid gap-4 lg:grid-cols-[260px_minmax(0,1fr)]">
               <div className="grid gap-4">
-                <section className="rounded-[22px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                <section className="rounded-[22px] bg-white p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold text-[#313238]">Emotional readiness</div>
@@ -362,8 +503,6 @@ export const QuizView = () => {
                   </div>
 
                   <div className="relative mx-auto mt-5 flex h-40 w-40 items-center justify-center">
-                    <div className="absolute inset-[1.1rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0)_72%)]" />
-
                     <svg viewBox="0 0 128 128" className="h-full w-full overflow-visible">
                       <circle
                         cx="64"
@@ -419,7 +558,7 @@ export const QuizView = () => {
                     </svg>
 
                     <div
-                      className="pointer-events-none absolute h-3 w-3 rounded-full shadow-[0_0_0_5px_rgba(255,255,255,0.3)]"
+                      className="pointer-events-none absolute h-3 w-3 rounded-full"
                       style={{
                         left: `calc(${(activeEmotionMarker.x / 128) * 100}% - 0.375rem)`,
                         top: `calc(${(activeEmotionMarker.y / 128) * 100}% - 0.375rem)`,
@@ -427,9 +566,9 @@ export const QuizView = () => {
                       }}
                     />
 
-                    <div className="absolute flex h-[5.9rem] w-[5.9rem] items-center justify-center rounded-full border border-white/80 bg-[#f7f4ef]/95 text-center shadow-[0_10px_24px_rgba(49,50,56,0.08)]">
+                    <div className="absolute flex h-[5.9rem] w-[5.9rem] items-center justify-center rounded-full border border-white/80 bg-white/95 text-center">
                       <div>
-                        <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                        <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
                           readiness
                         </div>
                         <div className="mt-1 text-2xl font-semibold text-[#313238]">74%</div>
@@ -458,7 +597,7 @@ export const QuizView = () => {
                   </div>
                 </section>
 
-                <section className="rounded-[22px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+                <section className="rounded-[22px] bg-white p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold text-[#313238]">Anxiety watch</div>
@@ -485,7 +624,7 @@ export const QuizView = () => {
                   </div>
 
                   <div className="mt-5 rounded-[16px] bg-[#ece7ff] px-4 py-4">
-                    <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5a60d6]">
+                    <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5a60d6]">
                       Anxiety trend
                     </div>
                     <div className="mt-2 text-sm leading-6 text-[#4f4b7a]">
@@ -495,7 +634,7 @@ export const QuizView = () => {
                 </section>
               </div>
 
-              <section className="rounded-[22px] bg-[#f7f4ef] p-5 shadow-[0_12px_24px_rgba(49,50,56,0.05)]">
+              <section className="rounded-[22px] bg-white p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="text-sm font-semibold text-[#313238]">Learning signals</div>
@@ -503,7 +642,7 @@ export const QuizView = () => {
                       Metrics that shape pace, confidence, and retention quality
                     </div>
                   </div>
-                  <div className="rounded-full bg-[#202127] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
+                  <div className="rounded-full bg-[#202127] px-3 py-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-white">
                     Signal model
                   </div>
                 </div>
@@ -515,7 +654,7 @@ export const QuizView = () => {
                     return (
                       <div
                         key={item.label}
-                        className="flex w-full items-center gap-4 rounded-[16px] bg-white px-4 py-4 text-left shadow-[0_8px_18px_rgba(49,50,56,0.04)]"
+                        className="flex w-full items-center gap-4 rounded-[16px] bg-white px-4 py-4 text-left"
                       >
                         <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${item.tint} text-[#313238]`}>
                           <Icon size={20} />
@@ -527,7 +666,7 @@ export const QuizView = () => {
                         </div>
 
                         <div className="w-[180px]">
-                          <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f564c]">
+                          <div className="flex items-center justify-between text-[12px] font-bold uppercase tracking-[0.14em] text-[#5f564c]">
                             <span>signal</span>
                             <span>{item.score}%</span>
                           </div>
@@ -553,13 +692,13 @@ export const QuizView = () => {
                 </div>
 
                 <div className="mt-5 rounded-[18px] bg-[#faf8f4] p-5">
-                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                  <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
                     Recommended intervention
                   </div>
                   <div className="mt-4 space-y-3">
                     {interventions.map((item, index) => (
                       <div key={item} className="flex gap-3">
-                        <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#202127] text-[11px] font-bold text-white">
+                        <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#202127] text-[12px] font-bold text-white">
                           {index + 1}
                         </div>
                         <div className="text-sm leading-6 text-[#5f564c]">{item}</div>
