@@ -26,7 +26,7 @@ export const LoginView = () => {
   };
 
   return (
-    <div className="relative h-[100dvh] overflow-y-auto px-4 py-5 text-[#313238] sm:px-6 lg:px-8">
+    <div className="relative h-[100dvh] overflow-y-auto px-4 py-5 text-[#1E1C59] sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0">
         <img
           src={doodle}
@@ -48,7 +48,7 @@ export const LoginView = () => {
         >
           <div className="rounded-[32px] border border-[#dde2e8] bg-white px-6 py-7 sm:px-9 sm:py-9 lg:px-10 lg:py-10">
             <div className="mb-8 flex flex-col items-center gap-4">
-              <div className="inline-flex rounded-full bg-[#eef1f4] p-1">
+              <div className="inline-flex rounded-full bg-[#34268C]/8 p-1">
                 {[
                   ['guided', 'Guided'],
                   ['self', 'Self-directed'],
@@ -59,8 +59,8 @@ export const LoginView = () => {
                     onClick={() => setMode(value as 'guided' | 'self')}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       mode === value
-                        ? 'bg-[#202127] text-white'
-                        : 'text-[#5f564c] hover:text-[#313238]'
+                        ? 'bg-[var(--brand-strong)] text-[var(--brand-strong-foreground)]'
+                        : 'text-[#6B6794] hover:text-[#1E1C59]'
                     }`}
                   >
                     {label}
@@ -76,11 +76,11 @@ export const LoginView = () => {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe what you want to learn, your goal, what feels difficult, and how you want to study."
-                  className="min-h-[220px] w-full resize-none rounded-[24px] bg-[#f4f6f8] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#313238] outline-none placeholder:text-[#7f766d] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
+                  className="min-h-[220px] w-full resize-none rounded-[24px] bg-[#F2F2F2] px-6 py-6 text-[1.05rem] font-medium leading-8 tracking-[-0.02em] text-[#1E1C59] outline-none placeholder:text-[#6B6794] sm:min-h-[260px] sm:px-8 sm:py-8 sm:text-[1.22rem]"
                 />
               </div>
             ) : (
-              <div className="mx-auto max-w-[min(100%,66rem)] text-center text-[clamp(1rem,0.92rem+0.55vw,1.32rem)] font-medium leading-[1.45] tracking-[-0.02em] text-[#5f564c]">
+              <div className="mx-auto max-w-[min(100%,66rem)] text-center text-[clamp(1rem,0.92rem+0.55vw,1.32rem)] font-medium leading-[1.45] tracking-[-0.02em] text-[#6B6794]">
                 <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
                   <span>Hi Cogi, I want to learn</span>
                   <InlineField
@@ -112,10 +112,10 @@ export const LoginView = () => {
               </div>
             )}
 
-            <div className="mt-8 flex justify-end border-t border-[#313238]/8 pt-5 sm:mt-10">
+            <div className="mt-8 flex justify-end border-t border-[#1E1C59]/8 pt-5 sm:mt-10">
               <button
                 onClick={handleNext}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#202127] px-7 py-4 text-base font-semibold text-white transition hover:bg-[#313238]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--brand-strong)] px-7 py-4 text-base font-semibold text-[var(--brand-strong-foreground)] transition hover:bg-[var(--brand-strong-hover)]"
               >
                 Continue
                 <ArrowRight size={18} />
@@ -140,14 +140,14 @@ const InlineField = ({
   widthClass: string;
 }) => (
   <label
-    className={`inline-flex min-h-[52px] items-center rounded-full bg-[#f1f3f6] px-4 py-1.5 ${widthClass}`}
+    className={`inline-flex min-h-[52px] items-center rounded-full bg-[#34268C]/6 px-4 py-1.5 ${widthClass}`}
   >
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-transparent text-center text-[clamp(1rem,0.92rem+0.55vw,1.32rem)] font-medium tracking-[-0.02em] text-[#5f564c] outline-none placeholder:text-[#8a837d]"
+      className="w-full bg-transparent text-center text-[clamp(1rem,0.92rem+0.55vw,1.32rem)] font-medium tracking-[-0.02em] text-[#1E1C59] outline-none placeholder:text-[#6B6794]"
     />
   </label>
 );

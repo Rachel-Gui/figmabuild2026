@@ -2,34 +2,37 @@
 
 :root {
   --font-size: 15px;
-  --background: #e7e9ed;
-  --foreground: #2b2d33;
+  --background: #f2f2f2;
+  --foreground: #1e1c59;
   --card: rgba(255, 255, 255, 0.96);
-  --card-foreground: #2b2d33;
+  --card-foreground: #1e1c59;
   --popover: oklch(1 0 0);
-  --popover-foreground: #2b2d33;
-  --primary: #2b2d33;
-  --primary-foreground: #f4f1eb;
-  --secondary: #edf0f3;
-  --secondary-foreground: #2b2d33;
-  --muted: #d8dde4;
-  --muted-foreground: #5f564c;
-  --accent: #be7d62;
-  --accent-foreground: #f8f4ef;
+  --popover-foreground: #1e1c59;
+  --primary: #34268c;
+  --primary-foreground: #f2f2f2;
+  --secondary: rgba(52, 38, 140, 0.08);
+  --secondary-foreground: #1e1c59;
+  --muted: rgba(30, 28, 89, 0.08);
+  --muted-foreground: #6b6794;
+  --accent: #e2f263;
+  --accent-foreground: #1e1c59;
+  --brand-strong: #34268c;
+  --brand-strong-hover: #1e1c59;
+  --brand-strong-foreground: #f2f2f2;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(43, 45, 51, 0.16);
+  --border: rgba(30, 28, 89, 0.12);
   --input: transparent;
-  --input-background: rgba(255, 255, 255, 0.94);
+  --input-background: rgba(255, 255, 255, 0.96);
   --switch-background: #cfd5dc;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: rgba(43, 45, 51, 0.28);
-  --chart-1: #455763;
-  --chart-2: #d3dadc;
-  --chart-3: #d6c9b4;
-  --chart-4: #be7d62;
-  --chart-5: #e8e2da;
+  --ring: rgba(52, 38, 140, 0.24);
+  --chart-1: #34268c;
+  --chart-2: #1e1c59;
+  --chart-3: #0cf25d;
+  --chart-4: #e2f263;
+  --chart-5: #f2f2f2;
   --radius: 0.5rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -223,8 +226,8 @@
   }
 
   ::selection {
-    background: rgba(69, 87, 99, 0.18);
-    color: #313238;
+    background: rgba(52, 38, 140, 0.16);
+    color: #1e1c59;
   }
 }
 
@@ -233,13 +236,13 @@
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(43, 45, 51, 0.08);
+    border: 1px solid rgba(30, 28, 89, 0.08);
     box-shadow: none;
   }
 
   .app-panel {
     background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(43, 45, 51, 0.08);
+    border: 1px solid rgba(30, 28, 89, 0.08);
     box-shadow: none;
   }
 
@@ -249,7 +252,7 @@
 
   .app-frost {
     background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(43, 45, 51, 0.06);
+    border: 1px solid rgba(30, 28, 89, 0.06);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: none;

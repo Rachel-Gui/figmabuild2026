@@ -380,7 +380,7 @@ export const WorkspaceView = () => {
                     cy="40"
                     r={todoProgressRingRadius}
                     fill="none"
-                    stroke="#313238"
+                    stroke="#34268C"
                     strokeWidth="8"
                     strokeLinecap="round"
                     strokeDasharray={todoProgressRingCircumference}
@@ -390,23 +390,23 @@ export const WorkspaceView = () => {
 
                 <div className="absolute inset-[0.9rem] flex items-center justify-center rounded-full bg-white">
                   <div className="text-center">
-                    <div className="text-lg font-semibold leading-none text-[#313238]">{todoProgress}%</div>
-                    <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#5f564c]">
+                    <div className="text-lg font-semibold leading-none text-[#1E1C59]">{todoProgress}%</div>
+                    <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#6B6794]">
                       done
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#5f564c]">
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6794]">
                 {completedTodoCount}/{todoItems.length} complete
               </div>
             </div>
 
             <div className="min-w-0">
               <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-[#313238]">To do list</div>
-                <div className="text-[12px] font-semibold text-[#5f564c]">{todoItems.length} items</div>
+                <div className="text-sm font-semibold text-[#1E1C59]">To do list</div>
+                <div className="text-[12px] font-semibold text-[#6B6794]">{todoItems.length} items</div>
               </div>
 
               <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
@@ -441,7 +441,7 @@ export const WorkspaceView = () => {
                     className={clsx('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}
                   >
                     {msg.role === 'bot' && (
-                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#313238] text-[#f4f1eb]">
+                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#34268C] text-[#F2F2F2]">
                         <Bot size={18} />
                       </div>
                     )}
@@ -450,15 +450,15 @@ export const WorkspaceView = () => {
                       className={clsx(
                         'max-w-[85%] rounded-[18px] px-5 py-4 text-[15px] leading-7 sm:text-base',
                         msg.role === 'user'
-                          ? 'rounded-br-[10px] bg-[#313238] text-[#f4f1eb]'
-                          : 'rounded-bl-[10px] bg-white text-[#313238]'
+                          ? 'rounded-br-[10px] bg-[#34268C] text-[#F2F2F2]'
+                          : 'rounded-bl-[10px] bg-white text-[#1E1C59]'
                       )}
                     >
                       {msg.text}
                     </div>
 
                     {msg.role === 'user' && (
-                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#be7d62] text-[#f4f1eb]">
+                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#0CF25D] text-[#1E1C59]">
                         <User size={18} />
                       </div>
                     )}
@@ -480,11 +480,11 @@ export const WorkspaceView = () => {
                   }}
                   rows={1}
                   placeholder="Ask a follow-up..."
-                  className="min-h-[70px] max-h-32 flex-1 resize-none rounded-[16px] bg-white/42 px-4 py-3 text-base text-[#313238] outline-none placeholder:text-[#8f857a] backdrop-blur-xl"
+                  className="min-h-[70px] max-h-32 flex-1 resize-none rounded-[16px] bg-white/42 px-4 py-3 text-base text-[#1E1C59] outline-none placeholder:text-[#6B6794] backdrop-blur-xl"
                 />
                 <button
                   onClick={handleSend}
-                  className="inline-flex h-14 w-14 items-center justify-center rounded-[16px] bg-[#313238] text-[#f4f1eb] transition hover:bg-[#7a7063]"
+                  className="inline-flex h-14 w-14 items-center justify-center rounded-[16px] bg-[var(--brand-strong)] text-[var(--brand-strong-foreground)] transition hover:bg-[var(--brand-strong-hover)]"
                   aria-label="Send message"
                 >
                   <Send size={18} />
@@ -498,10 +498,10 @@ export const WorkspaceView = () => {
       <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[26px]">
         <div
           className={clsx(
-            'border-b border-[#313238]/8 px-5',
+            'border-b border-[#1E1C59]/8 px-5',
             activeBoardSection === 'definition'
-              ? 'bg-[#eef1f4] pt-4 pb-0'
-              : 'bg-[#eef1f4] py-4'
+              ? 'bg-[#34268C]/6 pt-4 pb-0'
+              : 'bg-[#34268C]/6 py-4'
           )}
         >
           <div className="flex flex-col gap-3">
@@ -517,8 +517,8 @@ export const WorkspaceView = () => {
                   className={clsx(
                     'relative -mb-px flex max-w-[260px] items-center gap-2 rounded-t-[14px] border border-transparent border-b-0 px-3 py-2 text-left text-sm font-semibold whitespace-nowrap transition',
                     activePageId === page.id
-                      ? 'border-[#313238]/8 bg-white text-[#313238]'
-                      : 'bg-[#eef1f4] text-[#5f564c] hover:bg-[#e6eaee]'
+                      ? 'border-[#1E1C59]/8 bg-white text-[#1E1C59]'
+                      : 'bg-[#34268C]/8 text-[#6B6794] hover:bg-[#34268C]/12'
                   )}
                 >
                   <button
@@ -538,8 +538,8 @@ export const WorkspaceView = () => {
                       knowledgePages.length <= 1
                         ? 'cursor-not-allowed text-[#aaa5bf]'
                         : activePageId === page.id
-                          ? 'text-[#5f564c] hover:bg-[#edf0f3]'
-                          : 'text-[#8f857a] hover:bg-[#ddd8ee] hover:text-[#313238]'
+                          ? 'text-[#6B6794] hover:bg-[#34268C]/8'
+                          : 'text-[#8D8AB0] hover:bg-[#34268C]/12 hover:text-[#1E1C59]'
                     )}
                     aria-label={`Delete ${page.title}`}
                   >
@@ -549,7 +549,7 @@ export const WorkspaceView = () => {
               ))}
               <button
                 onClick={handleAddPage}
-                className="ml-1 -mb-px rounded-t-[14px] border border-transparent border-b-0 bg-[#eef1f4] px-4 py-3 text-sm font-bold text-[#5f564c] transition hover:bg-[#e6eaee]"
+                className="ml-1 -mb-px rounded-t-[14px] border border-transparent border-b-0 bg-[#34268C]/8 px-4 py-3 text-sm font-bold text-[#6B6794] transition hover:bg-[#34268C]/12"
                 aria-label="Create new page"
               >
                 +
@@ -564,7 +564,7 @@ export const WorkspaceView = () => {
             'min-h-0 flex-1 overflow-hidden',
             activeBoardSection === 'definition'
               ? 'bg-white'
-              : 'bg-[#eef1f4]',
+              : 'bg-[#34268C]/6',
             activeBoardSection === 'definition' ? 'p-0' : 'p-4'
           )}
         >
@@ -587,12 +587,12 @@ export const WorkspaceView = () => {
                 <>
                   <div className="grid min-h-0 flex-1 items-stretch gap-4 overflow-hidden xl:gap-0 xl:grid-cols-[minmax(0,1.45fr)_320px]">
                     <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-white xl:rounded-r-none">
-                      <div className="border-b border-[#313238]/8 bg-[#f5f7fa] px-5 py-3">
+                      <div className="border-b border-[#1E1C59]/8 bg-[#F2F2F2] px-5 py-3">
                         <a
                           href={embeddedArticle.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-sm text-[#5f564c] underline-offset-4 transition hover:text-[#313238] hover:underline"
+                          className="text-sm text-[#6B6794] underline-offset-4 transition hover:text-[#1E1C59] hover:underline"
                         >
                           {embeddedArticle.url}
                         </a>
@@ -607,7 +607,7 @@ export const WorkspaceView = () => {
                       </div>
                     </div>
 
-                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-[#313238] text-[#f4f1eb] xl:rounded-l-none">
+                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-[#1E1C59] text-[#F2F2F2] xl:rounded-l-none">
                       <div className="border-b border-white/10 px-5 py-5">
                         <div className="text-xs font-bold uppercase tracking-[0.18em] text-white/82">
                           Learning recap
@@ -646,28 +646,28 @@ export const WorkspaceView = () => {
               {activeBoardSection === 'summary' && (
                 <>
                   <div className="rounded-[20px] bg-white p-5">
-                    <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                    <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                       {activePage.title}
                     </div>
-                    <div className="mt-3 text-2xl font-semibold text-[#313238]">{activePage.subtitle}</div>
-                    <div className="mt-3 max-w-3xl text-sm leading-7 text-[#5f564c]">
+                    <div className="mt-3 text-2xl font-semibold text-[#1E1C59]">{activePage.subtitle}</div>
+                    <div className="mt-3 max-w-3xl text-sm leading-7 text-[#6B6794]">
                       {activePage.definition}
                     </div>
                   </div>
 
                   <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_320px]">
                     <div className="rounded-[20px] bg-white p-5">
-                      <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                      <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                         Key points
                       </div>
                       <div className="mt-4 space-y-3">
                         {activePage.keyPoints.map((point, index) => (
                           <div key={point} className="app-panel rounded-[16px] px-4 py-4">
                             <div className="flex items-start gap-3">
-                              <div className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#313238] text-[12px] font-bold text-white">
+                              <div className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#34268C] text-[12px] font-bold text-[#F2F2F2]">
                                 {index + 1}
                               </div>
-                              <div className="text-sm leading-6 text-[#313238]">{point}</div>
+                              <div className="text-sm leading-6 text-[#1E1C59]">{point}</div>
                             </div>
                           </div>
                         ))}
@@ -676,17 +676,17 @@ export const WorkspaceView = () => {
 
                     <div className="grid gap-4">
                       <div className="rounded-[20px] bg-white p-5">
-                        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                           Study focus
                         </div>
-                        <div className="mt-3 text-sm leading-7 text-[#313238]">{activePage.focus}</div>
+                        <div className="mt-3 text-sm leading-7 text-[#1E1C59]">{activePage.focus}</div>
                       </div>
 
                       <div className="rounded-[20px] bg-white p-5">
-                        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                           Watch out
                         </div>
-                        <div className="mt-3 text-sm leading-7 text-[#313238]">{activePage.mistake}</div>
+                        <div className="mt-3 text-sm leading-7 text-[#1E1C59]">{activePage.mistake}</div>
                       </div>
                     </div>
                   </div>
@@ -695,13 +695,13 @@ export const WorkspaceView = () => {
 
               {activeBoardSection === 'examples' && (
                 <>
-                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                     <BookOpenCheck size={16} />
                     Worked examples
                   </div>
                   <div className="mt-4 rounded-[16px] bg-white p-5">
-                    <div className="text-lg font-semibold text-[#313238]">{activePage.exampleTitle}</div>
-                    <div className="mt-2 text-sm leading-7 text-[#5f564c]">{activePage.exampleBody}</div>
+                    <div className="text-lg font-semibold text-[#1E1C59]">{activePage.exampleTitle}</div>
+                    <div className="mt-2 text-sm leading-7 text-[#6B6794]">{activePage.exampleBody}</div>
                   </div>
 
                   <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -715,13 +715,13 @@ export const WorkspaceView = () => {
 
                       return (
                         <div key={step} className="rounded-[16px] bg-white p-4">
-                          <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8e2da] text-[#455763]">
+                          <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#E2F263]/32 text-[#1E1C59]">
                             <Icon size={18} />
                           </div>
-                          <div className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#5f564c]">
+                          <div className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                             Step 0{index + 1}
                           </div>
-                          <div className="mt-2 text-sm font-semibold leading-6 text-[#313238]">{step}</div>
+                          <div className="mt-2 text-sm font-semibold leading-6 text-[#1E1C59]">{step}</div>
                         </div>
                       );
                     })}
@@ -733,11 +733,11 @@ export const WorkspaceView = () => {
 
                       return (
                         <div key={item.title} className="rounded-[16px] bg-white/70 p-5">
-                          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#d8d2ee] text-[#455763]">
+                          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0CF25D]/18 text-[#1E1C59]">
                             <Icon size={19} />
                           </div>
-                          <div className="mt-4 text-lg font-semibold text-[#313238]">{item.title}</div>
-                          <div className="mt-2 text-sm leading-6 text-[#5f564c]">{item.text}</div>
+                          <div className="mt-4 text-lg font-semibold text-[#1E1C59]">{item.title}</div>
+                          <div className="mt-2 text-sm leading-6 text-[#6B6794]">{item.text}</div>
                         </div>
                       );
                     })}
@@ -769,15 +769,15 @@ const TodoRow = ({
         className={clsx(
           'mt-0.5 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full border transition',
           completed
-            ? 'border-[#313238] bg-[#313238] text-[#f4f1eb]'
-            : 'border-[#7a7063]/45 bg-transparent text-transparent'
+            ? 'border-[#34268C] bg-[#34268C] text-[#F2F2F2]'
+            : 'border-[#1E1C59]/22 bg-transparent text-transparent'
         )}
       >
         <Check size={11} strokeWidth={3} />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#5f564c]">{label}</div>
-        <div className="mt-1 text-[13px] leading-4.5 text-[#313238]">{value}</div>
+        <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">{label}</div>
+        <div className="mt-1 text-[13px] leading-4.5 text-[#1E1C59]">{value}</div>
       </div>
     </div>
   </div>

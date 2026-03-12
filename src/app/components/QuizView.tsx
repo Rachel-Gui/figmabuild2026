@@ -15,36 +15,36 @@ const signalRows = [
     owner: 'Prompt complexity and step load',
     score: 41,
     icon: Brain,
-    tint: 'bg-[#f3efe8]',
+    tint: 'bg-[#34268C]/8',
   },
   {
     label: 'Memory imprint depth',
     owner: 'Retention after 12-hour gap',
     score: 69,
     icon: Sparkles,
-    tint: 'bg-[#e8e2da]',
+    tint: 'bg-[#E2F263]/40',
   },
   {
     label: 'Learning pace compatibility',
     owner: 'Best with short guided cycles',
     score: 78,
     icon: Clock3,
-    tint: 'bg-[#d6c9b4]',
+    tint: 'bg-[#0CF25D]/18',
   },
   {
     label: 'Mood recovery',
     owner: 'Returns to neutral after errors',
     score: 72,
     icon: HeartPulse,
-    tint: 'bg-[#f3efe8]',
+    tint: 'bg-[#34268C]/8',
   },
 ];
 
 const emotionalStates = [
-  { label: 'Calm', value: 46, color: 'bg-[#455763]', stroke: '#455763' },
-  { label: 'Curious', value: 28, color: 'bg-[#be7d62]', stroke: '#be7d62' },
-  { label: 'Frustrated', value: 14, color: 'bg-[#d6c9b4]', stroke: '#d6c9b4' },
-  { label: 'Anxious', value: 12, color: 'bg-[#d3dadc]', stroke: '#d3dadc' },
+  { label: 'Calm', value: 46, color: 'bg-[#34268C]', stroke: '#34268C' },
+  { label: 'Curious', value: 28, color: 'bg-[#0CF25D]', stroke: '#0CF25D' },
+  { label: 'Frustrated', value: 14, color: 'bg-[#E2F263]', stroke: '#E2F263' },
+  { label: 'Anxious', value: 12, color: 'bg-[#1E1C59]/14', stroke: 'rgba(30, 28, 89, 0.24)' },
 ];
 
 const readinessRingRadius = 46;
@@ -78,27 +78,27 @@ const stateSummaryCards = [
     value: 'Moderate',
     detail: 'Manageable during guided study, rises under time pressure.',
     icon: ShieldAlert,
-    tone: 'bg-[#f3efe8]',
+    tone: 'bg-[#34268C]/8',
   },
   {
     label: 'Recovery state',
     value: 'Rebuilding',
     detail: 'Focus returns well after short breaks and explanation resets.',
     icon: HeartPulse,
-    tone: 'bg-[#e8e2da]',
+    tone: 'bg-[#0CF25D]/18',
   },
   {
     label: 'Confidence pattern',
     value: 'Uneven',
     detail: 'Strong with concept review, softer during fast application tasks.',
     icon: Sparkles,
-    tone: 'bg-[#d6c9b4]',
+    tone: 'bg-[#E2F263]/32',
   },
 ];
 
 const learningConditionOrbs = [
   {
-    className: 'left-[12%] top-[31%] h-[4.5rem] w-[4.5rem] bg-[#455763]',
+    className: 'left-[12%] top-[31%] h-[4.5rem] w-[4.5rem] bg-[#34268C]',
     opacity: 0.88,
     blur: 'blur-[3px]',
     x: [0, 18, -12, 8, 0],
@@ -107,7 +107,7 @@ const learningConditionOrbs = [
     duration: 15,
   },
   {
-    className: 'left-[27%] top-[44%] h-[5.6rem] w-[5.6rem] bg-[#ef8870]',
+    className: 'left-[27%] top-[44%] h-[5.6rem] w-[5.6rem] bg-[#0CF25D]',
     opacity: 0.74,
     blur: 'blur-[10px]',
     x: [0, -18, 14, -6, 0],
@@ -116,7 +116,7 @@ const learningConditionOrbs = [
     duration: 18,
   },
   {
-    className: 'left-[46%] top-[18%] h-[6.2rem] w-[6.2rem] bg-[#f4d870]',
+    className: 'left-[46%] top-[18%] h-[6.2rem] w-[6.2rem] bg-[#E2F263]',
     opacity: 0.92,
     blur: 'blur-[12px]',
     x: [0, 20, -16, 10, 0],
@@ -125,7 +125,7 @@ const learningConditionOrbs = [
     duration: 20,
   },
   {
-    className: 'left-[58%] top-[36%] h-[4.2rem] w-[4.2rem] bg-[#d8eef4]',
+    className: 'left-[58%] top-[36%] h-[4.2rem] w-[4.2rem] bg-[#1E1C59]',
     opacity: 0.58,
     blur: 'blur-[8px]',
     x: [0, 14, -10, 6, 0],
@@ -134,7 +134,7 @@ const learningConditionOrbs = [
     duration: 17,
   },
   {
-    className: 'left-[66%] top-[24%] h-[3.4rem] w-[3.4rem] bg-[#f7e8ad]',
+    className: 'left-[66%] top-[24%] h-[3.4rem] w-[3.4rem] bg-[#E2F263]',
     opacity: 0.72,
     blur: 'blur-[7px]',
     x: [0, -12, 16, -4, 0],
@@ -161,7 +161,7 @@ const learningConditionParticles = [
     left: '18%',
     top: '39%',
     size: '0.48rem',
-    color: 'bg-[#d8eef4]/75',
+    color: 'bg-[#0CF25D]/70',
     delay: 1.1,
     duration: 9.2,
     x: [0, -12, 16, -4, 0],
@@ -185,7 +185,7 @@ const learningConditionParticles = [
     left: '27%',
     top: '26%',
     size: '0.56rem',
-    color: 'bg-[#f4d870]/78',
+    color: 'bg-[#E2F263]/78',
     delay: 1.8,
     duration: 8.8,
     x: [0, -16, 12, -3, 0],
@@ -197,7 +197,7 @@ const learningConditionParticles = [
     left: '32%',
     top: '47%',
     size: '0.7rem',
-    color: 'bg-[#ef8870]/58',
+    color: 'bg-[#34268C]/46',
     delay: 0.9,
     duration: 11.4,
     x: [0, 18, -10, 6, 0],
@@ -221,7 +221,7 @@ const learningConditionParticles = [
     left: '43%',
     top: '57%',
     size: '0.44rem',
-    color: 'bg-[#455763]/46',
+    color: 'bg-[#1E1C59]/42',
     delay: 1.3,
     duration: 12.1,
     x: [0, -14, 18, -5, 0],
@@ -233,7 +233,7 @@ const learningConditionParticles = [
     left: '48%',
     top: '31%',
     size: '0.5rem',
-    color: 'bg-[#f4d870]/65',
+    color: 'bg-[#E2F263]/65',
     delay: 0.6,
     duration: 10.1,
     x: [0, 17, -9, 6, 0],
@@ -257,7 +257,7 @@ const learningConditionParticles = [
     left: '58%',
     top: '62%',
     size: '0.4rem',
-    color: 'bg-[#d8eef4]/60',
+    color: 'bg-[#0CF25D]/58',
     delay: 1.7,
     duration: 11.8,
     x: [0, 12, -16, 5, 0],
@@ -269,7 +269,7 @@ const learningConditionParticles = [
     left: '61%',
     top: '27%',
     size: '0.62rem',
-    color: 'bg-[#f4d870]/60',
+    color: 'bg-[#E2F263]/60',
     delay: 0.2,
     duration: 9.5,
     x: [0, -18, 10, -4, 0],
@@ -293,7 +293,7 @@ const learningConditionParticles = [
     left: '69%',
     top: '36%',
     size: '0.52rem',
-    color: 'bg-[#ef8870]/52',
+    color: 'bg-[#34268C]/42',
     delay: 0.7,
     duration: 10.9,
     x: [0, -15, 17, -6, 0],
@@ -305,7 +305,7 @@ const learningConditionParticles = [
     left: '72%',
     top: '57%',
     size: '0.36rem',
-    color: 'bg-[#455763]/42',
+    color: 'bg-[#1E1C59]/36',
     delay: 1.5,
     duration: 12.4,
     x: [0, 11, -13, 4, 0],
@@ -366,8 +366,8 @@ export const QuizView = () => {
           <div className="grid gap-4">
             <div className="flex flex-col gap-3 rounded-[24px] bg-white px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <div className="text-[1.75rem] font-semibold tracking-[-0.04em] text-[#313238]">Hi, Rachel.</div>
-                <div className="mt-1 text-sm leading-6 text-[#5f564c]">
+                <div className="text-[1.75rem] font-semibold tracking-[-0.04em] text-[#1E1C59]">Hi, Rachel.</div>
+                <div className="mt-1 text-sm leading-6 text-[#6B6794]">
                   Here is today&apos;s learning state, with attention, emotion, and anxiety signals in one place.
                 </div>
               </div>
@@ -375,23 +375,23 @@ export const QuizView = () => {
               <button
                 type="button"
                 onClick={() => setIsPlanOpen((prev) => !prev)}
-                className="self-start rounded-full bg-[#202127] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#313238] sm:self-auto"
+                className="self-start rounded-full bg-[var(--brand-strong)] px-5 py-3 text-sm font-semibold text-[var(--brand-strong-foreground)] transition hover:bg-[var(--brand-strong-hover)] sm:self-auto"
               >
                 {isPlanOpen ? 'Hide plan' : 'Review plan'}
               </button>
             </div>
 
             {isPlanOpen && (
-              <div className="rounded-[18px] bg-white px-5 py-4 text-sm leading-6 text-[#5f564c]">
+              <div className="rounded-[18px] bg-white px-5 py-4 text-sm leading-6 text-[#6B6794]">
                 The current plan prioritizes one guided example, one low-pressure recall task, and one short reflection to keep anxiety contained while retention improves.
               </div>
             )}
 
             <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
-              <section className="relative h-full overflow-hidden rounded-[20px] bg-[#eef1f4] p-3">
+              <section className="relative h-full overflow-hidden rounded-[20px] bg-[#34268C]/6 p-3">
                 <div className="max-w-[30rem] pr-4">
-                  <div className="text-[12px] font-semibold text-[#313238]">Today&apos;s learning condition</div>
-                  <div className="mt-1 text-[12px] leading-4.5 text-[#5f564c]">
+                  <div className="text-[12px] font-semibold text-[#1E1C59]">Today&apos;s learning condition</div>
+                  <div className="mt-1 text-[12px] leading-4.5 text-[#6B6794]">
                     The learner is receptive and focused, but anxiety rises when task pressure becomes visible.
                   </div>
                 </div>
@@ -441,22 +441,22 @@ export const QuizView = () => {
                     <div className="mt-0.5 text-[13px] font-semibold text-[#5d443d]">31%</div>
                   </div>
                   <div className="absolute left-[58%] top-[42%] text-center">
-                    <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#5f564c]">retention</div>
-                    <div className="mt-0.5 text-[13px] font-semibold text-[#5f564c]">69%</div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#6B6794]">retention</div>
+                    <div className="mt-0.5 text-[13px] font-semibold text-[#6B6794]">69%</div>
                   </div>
                 </div>
               </section>
 
               <section className="grid h-full gap-4">
-                <div className="flex h-full flex-col rounded-[26px] bg-white p-5 text-[#313238]">
+                <div className="flex h-full flex-col rounded-[26px] bg-white p-5 text-[#1E1C59]">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold">Mental state summary</div>
-                      <div className="mt-1 text-sm text-[#5f564c]">
+                      <div className="mt-1 text-sm text-[#6B6794]">
                         A cleaner snapshot of stress, recovery, and confidence.
                       </div>
                     </div>
-                    <div className="rounded-full bg-[#eef1f4] px-3 py-1 text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                    <div className="rounded-full bg-[#34268C]/8 px-3 py-1 text-[12px] font-bold uppercase tracking-[0.16em] text-[#6B6794]">
                       Live
                     </div>
                   </div>
@@ -468,18 +468,18 @@ export const QuizView = () => {
                       return (
                         <div
                           key={item.label}
-                          className={`flex h-full rounded-[16px] p-4 text-[#313238] ${item.tone}`}
+                          className={`flex h-full rounded-[16px] p-4 text-[#1E1C59] ${item.tone}`}
                         >
                           <div className="flex items-start gap-3">
                             <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/70">
                               <Icon size={18} />
                             </div>
                             <div>
-                              <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                              <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#6B6794]">
                                 {item.label}
                               </div>
                               <div className="mt-1 text-lg font-semibold">{item.value}</div>
-                              <div className="mt-1 text-sm leading-6 text-[#5f564c]">{item.detail}</div>
+                              <div className="mt-1 text-sm leading-6 text-[#6B6794]">{item.detail}</div>
                             </div>
                           </div>
                         </div>
@@ -496,10 +496,10 @@ export const QuizView = () => {
                 <section className="rounded-[22px] bg-white p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-sm font-semibold text-[#313238]">Emotional readiness</div>
-                      <div className="mt-1 text-sm text-[#5f564c]">Current state mix</div>
+                      <div className="text-sm font-semibold text-[#1E1C59]">Emotional readiness</div>
+                      <div className="mt-1 text-sm text-[#6B6794]">Current state mix</div>
                     </div>
-                    <HeartPulse size={18} className="text-[#be7d62]" />
+                    <HeartPulse size={18} className="text-[#0CF25D]" />
                   </div>
 
                   <div className="relative mx-auto mt-5 flex h-40 w-40 items-center justify-center">
@@ -568,10 +568,10 @@ export const QuizView = () => {
 
                     <div className="absolute flex h-[5.9rem] w-[5.9rem] items-center justify-center rounded-full border border-white/80 bg-white/95 text-center">
                       <div>
-                        <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                        <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#6B6794]">
                           readiness
                         </div>
-                        <div className="mt-1 text-2xl font-semibold text-[#313238]">74%</div>
+                        <div className="mt-1 text-2xl font-semibold text-[#1E1C59]">74%</div>
                       </div>
                     </div>
                   </div>
@@ -587,11 +587,11 @@ export const QuizView = () => {
                           activeEmotion === item.label ? 'bg-white/70' : 'hover:bg-white/40'
                         )}
                       >
-                        <div className="flex items-center gap-2 font-semibold text-[#313238]">
+                        <div className="flex items-center gap-2 font-semibold text-[#1E1C59]">
                           <span className={`h-3 w-3 rounded-full ${item.color}`} />
                           {item.label}
                         </div>
-                        <span className="text-[#5f564c]">{item.value}%</span>
+                        <span className="text-[#6B6794]">{item.value}%</span>
                       </button>
                     ))}
                   </div>
@@ -600,10 +600,10 @@ export const QuizView = () => {
                 <section className="rounded-[22px] bg-white p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-sm font-semibold text-[#313238]">Anxiety watch</div>
-                      <div className="mt-1 text-sm text-[#5f564c]">Trigger profile</div>
+                      <div className="text-sm font-semibold text-[#1E1C59]">Anxiety watch</div>
+                      <div className="mt-1 text-sm text-[#6B6794]">Trigger profile</div>
                     </div>
-                    <ShieldAlert size={18} className="text-[#455763]" />
+                    <ShieldAlert size={18} className="text-[#34268C]" />
                   </div>
 
                   <div className="mt-5 space-y-4">
@@ -612,12 +612,12 @@ export const QuizView = () => {
                         key={item.label}
                         className="block w-full rounded-[16px] px-2 py-1 text-left"
                       >
-                        <div className="flex items-center justify-between text-sm font-semibold text-[#313238]">
+                        <div className="flex items-center justify-between text-sm font-semibold text-[#1E1C59]">
                           <span>{item.label}</span>
-                          <span className="text-[#5f564c]">{item.value}%</span>
+                          <span className="text-[#6B6794]">{item.value}%</span>
                         </div>
-                        <div className="mt-2 h-2 rounded-full bg-[#e8e2da]">
-                          <div className="h-2 rounded-full bg-[#be7d62]" style={{ width: `${item.value}%` }} />
+                        <div className="mt-2 h-2 rounded-full bg-[#E2F263]/22">
+                          <div className="h-2 rounded-full bg-[#0CF25D]" style={{ width: `${item.value}%` }} />
                         </div>
                       </div>
                     ))}
@@ -637,12 +637,12 @@ export const QuizView = () => {
               <section className="rounded-[22px] bg-white p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <div className="text-sm font-semibold text-[#313238]">Learning signals</div>
-                    <div className="mt-1 text-sm text-[#5f564c]">
+                    <div className="text-sm font-semibold text-[#1E1C59]">Learning signals</div>
+                    <div className="mt-1 text-sm text-[#6B6794]">
                       Metrics that shape pace, confidence, and retention quality
                     </div>
                   </div>
-                  <div className="rounded-full bg-[#202127] px-3 py-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-white">
+                  <div className="rounded-full bg-[var(--brand-strong)] px-3 py-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--brand-strong-foreground)]">
                     Signal model
                   </div>
                 </div>
@@ -656,17 +656,17 @@ export const QuizView = () => {
                         key={item.label}
                         className="flex w-full items-center gap-4 rounded-[16px] bg-white px-4 py-4 text-left"
                       >
-                        <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${item.tint} text-[#313238]`}>
+                        <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${item.tint} text-[#1E1C59]`}>
                           <Icon size={20} />
                         </div>
 
                         <div className="min-w-0 flex-1">
-                          <div className="text-sm font-semibold text-[#313238]">{item.label}</div>
-                          <div className="mt-1 text-sm text-[#5f564c]">{item.owner}</div>
+                          <div className="text-sm font-semibold text-[#1E1C59]">{item.label}</div>
+                          <div className="mt-1 text-sm text-[#6B6794]">{item.owner}</div>
                         </div>
 
                         <div className="w-[180px]">
-                          <div className="flex items-center justify-between text-[12px] font-bold uppercase tracking-[0.14em] text-[#5f564c]">
+                          <div className="flex items-center justify-between text-[12px] font-bold uppercase tracking-[0.14em] text-[#6B6794]">
                             <span>signal</span>
                             <span>{item.score}%</span>
                           </div>
@@ -678,9 +678,9 @@ export const QuizView = () => {
                                   'h-7 flex-1 rounded-full',
                                   index < Math.round(item.score / 8.5)
                                     ? index > 8
-                                      ? 'bg-[#be7d62]'
-                                      : 'bg-[#455763]'
-                                    : 'bg-[#e8e2da]'
+                                      ? 'bg-[#0CF25D]'
+                                      : 'bg-[#34268C]'
+                                    : 'bg-[#E2F263]/24'
                                 )}
                               />
                             ))}
@@ -692,16 +692,16 @@ export const QuizView = () => {
                 </div>
 
                 <div className="mt-5 rounded-[18px] bg-[#faf8f4] p-5">
-                  <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5f564c]">
+                  <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#6B6794]">
                     Recommended intervention
                   </div>
                   <div className="mt-4 space-y-3">
                     {interventions.map((item, index) => (
                       <div key={item} className="flex gap-3">
-                        <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#202127] text-[12px] font-bold text-white">
+                        <div className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--brand-strong)] text-[12px] font-bold text-[var(--brand-strong-foreground)]">
                           {index + 1}
                         </div>
-                        <div className="text-sm leading-6 text-[#5f564c]">{item}</div>
+                        <div className="text-sm leading-6 text-[#6B6794]">{item}</div>
                       </div>
                     ))}
                   </div>
