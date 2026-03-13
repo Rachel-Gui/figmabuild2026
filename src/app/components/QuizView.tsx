@@ -327,6 +327,57 @@ const learningConditionParticles = [
   },
 ];
 
+const learningConditionMetricParticles = [
+  {
+    label: 'focus',
+    value: '74%',
+    left: '30%',
+    top: '58%',
+    size: '4.7rem',
+    surface: 'bg-[#34268C]/84',
+    labelClassName: 'text-white/78',
+    valueClassName: 'text-white',
+    shadow: 'shadow-[0_18px_32px_rgba(52,38,140,0.28)]',
+    delay: 0.3,
+    duration: 13.4,
+    x: [0, 16, -10, 6, 0],
+    y: [0, -14, 10, -5, 0],
+    scale: [1, 1.08, 0.95, 1.03, 1],
+  },
+  {
+    label: 'anxiety',
+    value: '31%',
+    left: '42%',
+    top: '63%',
+    size: '4.2rem',
+    surface: 'bg-[#f4d9c9]/84',
+    labelClassName: 'text-[#7f5342]/76',
+    valueClassName: 'text-[#6b4637]',
+    shadow: 'shadow-[0_18px_30px_rgba(164,109,88,0.22)]',
+    delay: 1.1,
+    duration: 14.1,
+    x: [0, -14, 18, -4, 0],
+    y: [0, 12, -15, 5, 0],
+    scale: [1, 1.1, 0.93, 1.04, 1],
+  },
+  {
+    label: 'retention',
+    value: '69%',
+    left: '59%',
+    top: '44%',
+    size: '5rem',
+    surface: 'bg-[#eef3b8]/84',
+    labelClassName: 'text-[#6B6794]/74',
+    valueClassName: 'text-[#6B6794]',
+    shadow: 'shadow-[0_18px_32px_rgba(174,184,76,0.18)]',
+    delay: 0.7,
+    duration: 15.2,
+    x: [0, 18, -13, 7, 0],
+    y: [0, -18, 12, -6, 0],
+    scale: [1, 1.06, 0.94, 1.02, 1],
+  },
+];
+
 export const QuizView = () => {
   const [isPlanOpen, setIsPlanOpen] = useState(false);
   const [activeEmotion, setActiveEmotion] = useState(emotionalStates[0].label);
@@ -359,13 +410,13 @@ export const QuizView = () => {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid h-full min-h-0 gap-5 overflow-hidden"
+      className="app-page-shell grid h-full min-h-0 gap-3 overflow-hidden"
     >
-      <section className="app-surface flex min-h-0 flex-col overflow-hidden rounded-[30px] p-4 sm:p-5">
+      <section className="flex min-h-0 flex-col overflow-hidden rounded-[30px]">
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
-          <div className="grid gap-4">
-            <div className="flex flex-col gap-3 rounded-[24px] bg-white px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
+          <div className="grid gap-3">
+            <div className="app-panel flex flex-col gap-3 rounded-[24px] sm:flex-row sm:items-center sm:justify-between">
+              <div className="pl-4 pt-3 sm:pl-5 sm:pt-4">
                 <div className="text-[1.75rem] font-semibold tracking-[-0.04em] text-[#1E1C59]">Hi, Rachel.</div>
                 <div className="mt-1 text-sm leading-6 text-[#6B6794]">
                   Here is today&apos;s learning state, with attention, emotion, and anxiety signals in one place.
@@ -375,21 +426,21 @@ export const QuizView = () => {
               <button
                 type="button"
                 onClick={() => setIsPlanOpen((prev) => !prev)}
-                className="self-start rounded-full bg-[var(--brand-strong)] px-5 py-3 text-sm font-semibold text-[var(--brand-strong-foreground)] transition hover:bg-[var(--brand-strong-hover)] sm:self-auto"
+                className="mb-3 mr-3 self-start rounded-full bg-[var(--brand-strong)] px-5 py-3 text-sm font-semibold text-[var(--brand-strong-foreground)] transition hover:bg-[var(--brand-strong-hover)] sm:mb-4 sm:mr-4 sm:self-auto"
               >
                 {isPlanOpen ? 'Hide plan' : 'Review plan'}
               </button>
             </div>
 
             {isPlanOpen && (
-              <div className="rounded-[18px] bg-white px-5 py-4 text-sm leading-6 text-[#6B6794]">
+              <div className="app-panel rounded-[18px] text-sm leading-6 text-[#6B6794]">
                 The current plan prioritizes one guided example, one low-pressure recall task, and one short reflection to keep anxiety contained while retention improves.
               </div>
             )}
 
-            <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(0,1.2fr)_320px]">
-              <section className="relative h-full overflow-hidden rounded-[20px] bg-[#34268C]/6 p-3">
-                <div className="max-w-[30rem] pr-4">
+            <div className="grid items-stretch gap-3 lg:grid-cols-[minmax(0,1.2fr)_320px]">
+              <section className="app-frost relative h-full rounded-[20px]">
+                <div className="max-w-[30rem] pl-3 pt-3 pr-3 sm:pl-4 sm:pt-4 sm:pr-4">
                   <div className="text-[12px] font-semibold text-[#1E1C59]">Today&apos;s learning condition</div>
                   <div className="mt-1 text-[12px] leading-4.5 text-[#6B6794]">
                     The learner is receptive and focused, but anxiety rises when task pressure becomes visible.
@@ -431,24 +482,54 @@ export const QuizView = () => {
                         }}
                       />
                     ))}
-                  </div>
-                  <div className="absolute left-[29%] top-[57%] text-center">
-                    <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/80">focus</div>
-                    <div className="mt-0.5 text-[13px] font-semibold text-white">2.4h</div>
-                  </div>
-                  <div className="absolute left-[40%] top-[62%] text-center">
-                    <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#5d443d]">anxiety</div>
-                    <div className="mt-0.5 text-[13px] font-semibold text-[#5d443d]">31%</div>
-                  </div>
-                  <div className="absolute left-[58%] top-[42%] text-center">
-                    <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#6B6794]">retention</div>
-                    <div className="mt-0.5 text-[13px] font-semibold text-[#6B6794]">69%</div>
+                    {learningConditionMetricParticles.map((particle) => (
+                      <motion.div
+                        key={particle.label}
+                        className={clsx(
+                          'absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full backdrop-blur-sm',
+                          particle.surface,
+                          particle.shadow
+                        )}
+                        style={{
+                          left: particle.left,
+                          top: particle.top,
+                          width: particle.size,
+                          height: particle.size,
+                        }}
+                        animate={{
+                          x: particle.x,
+                          y: particle.y,
+                          scale: particle.scale,
+                        }}
+                        transition={{
+                          duration: particle.duration,
+                          delay: particle.delay,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                      >
+                        <div className="absolute inset-[10%] rounded-full border border-white/12" />
+                        <div className="relative text-center">
+                          <div
+                            className={clsx(
+                              'text-[9px] font-bold uppercase tracking-[0.14em]',
+                              particle.labelClassName
+                            )}
+                          >
+                            {particle.label}
+                          </div>
+                          <div className={clsx('mt-0.5 text-[13px] font-semibold', particle.valueClassName)}>
+                            {particle.value}
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
               </section>
 
-              <section className="grid h-full gap-4">
-                <div className="flex h-full flex-col rounded-[26px] bg-white p-5 text-[#1E1C59]">
+              <section className="grid h-full gap-3">
+                <div className="app-panel flex h-full flex-col rounded-[26px] p-5 text-[#1E1C59]">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold">Mental state summary</div>
@@ -491,9 +572,9 @@ export const QuizView = () => {
               </section>
             </div>
 
-            <div className="grid gap-4 lg:grid-cols-[260px_minmax(0,1fr)]">
-              <div className="grid gap-4">
-                <section className="rounded-[22px] bg-white p-5">
+            <div className="grid gap-3 lg:grid-cols-[260px_minmax(0,1fr)]">
+              <div className="grid gap-3">
+                <section className="app-panel rounded-[22px] p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold text-[#1E1C59]">Emotional readiness</div>
@@ -597,7 +678,7 @@ export const QuizView = () => {
                   </div>
                 </section>
 
-                <section className="rounded-[22px] bg-white p-5">
+                <section className="app-panel rounded-[22px] p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-sm font-semibold text-[#1E1C59]">Anxiety watch</div>
@@ -623,7 +704,7 @@ export const QuizView = () => {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-[16px] bg-[#ece7ff] px-4 py-4">
+                  <div className="app-frost mt-5 rounded-[16px] px-4 py-4">
                     <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#5a60d6]">
                       Anxiety trend
                     </div>
@@ -634,7 +715,7 @@ export const QuizView = () => {
                 </section>
               </div>
 
-              <section className="rounded-[22px] bg-white p-5">
+              <section className="app-panel rounded-[22px] p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="text-sm font-semibold text-[#1E1C59]">Learning signals</div>
@@ -654,7 +735,7 @@ export const QuizView = () => {
                     return (
                       <div
                         key={item.label}
-                        className="flex w-full items-center gap-4 rounded-[16px] bg-white px-4 py-4 text-left"
+                        className="app-frost flex w-full items-center gap-4 rounded-[16px] px-4 py-4 text-left"
                       >
                         <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${item.tint} text-[#1E1C59]`}>
                           <Icon size={20} />
@@ -691,7 +772,7 @@ export const QuizView = () => {
                   })}
                 </div>
 
-                <div className="mt-5 rounded-[18px] bg-[#faf8f4] p-5">
+                <div className="app-frost mt-5 rounded-[18px] p-5">
                   <div className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#6B6794]">
                     Recommended intervention
                   </div>

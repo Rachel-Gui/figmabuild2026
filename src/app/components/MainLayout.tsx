@@ -47,7 +47,7 @@ export const MainLayout = () => {
         {showSidebar && (
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="app-frost fixed left-4 top-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-xl text-[#1E1C59] lg:hidden"
+            className="app-frost fixed left-2 top-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-xl text-[#1E1C59] lg:hidden"
             aria-label="Open navigation"
           >
             <Menu size={22} />
@@ -64,14 +64,14 @@ export const MainLayout = () => {
         {showSidebar && (
           <aside
             className={clsx(
-              'app-surface fixed inset-y-4 left-4 z-40 flex h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[24px] p-4 transition-all duration-300 lg:static lg:m-4 lg:h-[calc(100dvh-2rem)] lg:self-start lg:translate-x-0',
+              'app-surface fixed top-2 bottom-6 left-0 z-40 flex flex-col overflow-hidden rounded-[24px] px-4 pt-3 pb-4 transition-all duration-300 sm:top-2 sm:bottom-7 lg:static lg:mt-2 lg:mb-7 lg:h-[calc(100dvh-2.25rem)] lg:self-start lg:translate-x-0',
               isSidebarCollapsed ? 'w-[92px]' : 'w-[180px]',
               isSidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'
             )}
           >
             <div
               className={clsx(
-                'mb-8 shrink-0 px-2 pt-2',
+                'mb-8 shrink-0 px-2 pt-0',
                 isSidebarCollapsed ? 'flex justify-center' : 'relative'
               )}
             >
@@ -208,7 +208,7 @@ export const MainLayout = () => {
         <div
           className={clsx(
             'flex min-h-0 min-w-0 flex-1 flex-col p-4',
-            showSidebar ? 'pt-20 lg:pl-0 lg:pt-4' : 'pt-4'
+            showSidebar ? 'pt-20 lg:p-0' : 'pt-4 lg:p-0'
           )}
         >
           <main className="h-full min-h-0 flex-1 overflow-hidden rounded-[28px]">

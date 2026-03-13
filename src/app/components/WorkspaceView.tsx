@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { useLocation } from 'react-router';
 import {
   AlertCircle,
-  Bot,
   Check,
   Dna,
   FlaskConical,
@@ -106,24 +105,6 @@ const buildKnowledgePages = (
       'State the concept clearly.',
       'Identify the supporting idea.',
       'Recall one example without notes.',
-    ],
-  },
-  {
-    id: 'examples',
-    title: 'Worked Examples',
-    subtitle: 'Application-first page',
-    definition:
-      'This page is for learning by example. It shows how the concept behaves in practice before the learner attempts it alone.',
-    focus: 'Translate theory into one visible process.',
-    mistake:
-      'Looking at the answer too early prevents the learner from noticing where their reasoning broke down.',
-    exampleTitle: 'Practice sequence',
-    exampleBody:
-      'Read the prompt, predict the result, compare with the worked solution, then explain why the correct answer makes sense.',
-    keyPoints: [
-      'Predict before checking.',
-      'Compare your reasoning with the model answer.',
-      'Write down the step that changed your answer.',
     ],
   },
 ];
@@ -256,16 +237,16 @@ export const WorkspaceView = () => {
   useEffect(() => {
     if (messages.length > 0) return;
 
-    let initialBotMessage = "I'm ready. Tell me where you're stuck and I'll help organize the next step.";
+    let initialBotMessage = "Let's start building your study plan.";
     let initialUserMessage = '';
 
     if (state) {
       if (state.isFreeMode && state.freeText) {
         initialUserMessage = state.freeText;
-        initialBotMessage = `I mapped your request into a working brief. We can break "${state.freeText}" into a clear study sequence and start with the part that matters most.`;
+        initialBotMessage = "I have your learning request. Let's start building your study plan.";
       } else if (!state.isFreeMode && (state.topic || state.goal || state.time)) {
-        initialUserMessage = `I want to study ${state.topic || 'something new'} so I can ${state.goal || 'improve'}, and I have ${state.time || 'some time'} available.`;
-        initialBotMessage = `Good brief. I set up a focused workspace for ${state.topic || 'your topic'}, with your goal and study window guiding the recommendations.`;
+        initialUserMessage = `Hi Cogi, I want to learn ${state.topic || 'something new'}. My goal is to ${state.goal || 'improve'}, and I plan to study for ${state.time || 'some time'}.`;
+        initialBotMessage = "I have your topic, goal, and study time. Let's start building your study plan.";
       }
     }
 
@@ -297,17 +278,6 @@ export const WorkspaceView = () => {
         },
       ]);
     }, 700);
-  };
-
-  const handleAddPage = () => {
-    const newPage = buildNewKnowledgePage(
-      knowledgePages.length + 1,
-      topicName,
-      goalText,
-      estimatedTime
-    );
-    setKnowledgePages((prev) => [...prev, newPage]);
-    setActivePageId(newPage.id);
   };
 
   const handleRemovePage = (pageId: string) => {
@@ -359,65 +329,67 @@ export const WorkspaceView = () => {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid h-full min-h-0 gap-5 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)] xl:grid-rows-[minmax(0,1fr)]"
+      className="app-page-shell grid h-full min-h-0 gap-3 overflow-hidden xl:grid-cols-[minmax(360px,1fr)_minmax(0,2fr)] xl:grid-rows-[minmax(0,1fr)]"
     >
-      <div className="flex min-h-0 flex-col gap-2 overflow-hidden">
-        <section className="app-surface shrink-0 rounded-[26px] p-3">
-          <div className="grid gap-3 sm:grid-cols-[112px_minmax(0,1fr)]">
-            <div className="app-frost flex min-h-[132px] flex-col items-center justify-center rounded-[18px] px-3 py-3">
-              <div className="relative h-22 w-22">
-                <svg viewBox="0 0 80 80" className="h-full w-full -rotate-90">
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r={todoProgressRingRadius}
-                    fill="none"
-                    stroke="rgba(49,50,56,0.08)"
-                    strokeWidth="8"
-                  />
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r={todoProgressRingRadius}
-                    fill="none"
-                    stroke="#34268C"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    strokeDasharray={todoProgressRingCircumference}
-                    strokeDashoffset={todoRingOffset}
-                  />
-                </svg>
+      <div className="flex min-h-0 flex-col gap-3 overflow-hidden">
+        <section className="app-surface shrink-0 rounded-[26px]">
+          <div className="app-content">
+            <div className="grid gap-3 sm:grid-cols-[112px_minmax(0,1fr)]">
+              <div className="app-frost flex min-h-[132px] flex-col items-center justify-center rounded-[18px] px-3 py-3">
+                <div className="relative h-22 w-22">
+                  <svg viewBox="0 0 80 80" className="h-full w-full -rotate-90">
+                    <circle
+                      cx="40"
+                      cy="40"
+                      r={todoProgressRingRadius}
+                      fill="none"
+                      stroke="rgba(49,50,56,0.08)"
+                      strokeWidth="8"
+                    />
+                    <circle
+                      cx="40"
+                      cy="40"
+                      r={todoProgressRingRadius}
+                      fill="none"
+                      stroke="#34268C"
+                      strokeWidth="8"
+                      strokeLinecap="round"
+                      strokeDasharray={todoProgressRingCircumference}
+                      strokeDashoffset={todoRingOffset}
+                    />
+                  </svg>
 
-                <div className="absolute inset-[0.9rem] flex items-center justify-center rounded-full bg-white">
-                  <div className="text-center">
-                    <div className="text-lg font-semibold leading-none text-[#1E1C59]">{todoProgress}%</div>
-                    <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#6B6794]">
-                      done
+                  <div className="absolute inset-[0.9rem] flex items-center justify-center rounded-full bg-white">
+                    <div className="text-center">
+                      <div className="text-lg font-semibold leading-none text-[#1E1C59]">{todoProgress}%</div>
+                      <div className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#6B6794]">
+                        done
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6794]">
+                  {completedTodoCount}/{todoItems.length} complete
+                </div>
               </div>
 
-              <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#6B6794]">
-                {completedTodoCount}/{todoItems.length} complete
-              </div>
-            </div>
+              <div className="min-w-0">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-sm font-semibold text-[#1E1C59]">To do list</div>
+                  <div className="text-[12px] font-semibold text-[#6B6794]">{todoItems.length} items</div>
+                </div>
 
-            <div className="min-w-0">
-              <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-semibold text-[#1E1C59]">To do list</div>
-                <div className="text-[12px] font-semibold text-[#6B6794]">{todoItems.length} items</div>
-              </div>
-
-              <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
-                {todoItems.map((item) => (
-                  <TodoRow
-                    key={item.label}
-                    label={item.label}
-                    value={item.value}
-                    completed={item.completed}
-                  />
-                ))}
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {todoItems.map((item) => (
+                    <TodoRow
+                      key={item.label}
+                      label={item.label}
+                      value={item.value}
+                      completed={item.completed}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -427,10 +399,10 @@ export const WorkspaceView = () => {
           <img
             src={doodle}
             alt=""
-            className="pointer-events-none absolute right-[-2rem] top-[-3rem] w-64 rotate-[10deg] opacity-[0.05]"
+            className="pointer-events-none absolute bottom-[-3rem] left-[-2rem] w-80 rotate-[10deg] opacity-[0.06] [filter:hue-rotate(210deg)_saturate(0.55)_brightness(1.12)]"
           />
 
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-4 py-4">
+          <div className="app-content flex min-h-0 flex-1 flex-col overflow-hidden">
             <div className="min-h-0 flex-1 overflow-y-auto pr-1">
               <div className="space-y-4">
                 {messages.map((msg) => (
@@ -441,8 +413,8 @@ export const WorkspaceView = () => {
                     className={clsx('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}
                   >
                     {msg.role === 'bot' && (
-                      <div className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#34268C] text-[#F2F2F2]">
-                        <Bot size={18} />
+                      <div className="mt-1 inline-flex h-10 w-10 overflow-hidden rounded-xl bg-white/90">
+                        <img src={doodle} alt="Chatbot avatar" className="h-full w-full object-cover" />
                       </div>
                     )}
 
@@ -451,7 +423,7 @@ export const WorkspaceView = () => {
                         'max-w-[85%] rounded-[18px] px-5 py-4 text-[15px] leading-7 sm:text-base',
                         msg.role === 'user'
                           ? 'rounded-br-[10px] bg-[#34268C] text-[#F2F2F2]'
-                          : 'rounded-bl-[10px] bg-white text-[#1E1C59]'
+                          : 'app-panel rounded-bl-[10px] text-[#1E1C59]'
                       )}
                     >
                       {msg.text}
@@ -480,7 +452,7 @@ export const WorkspaceView = () => {
                   }}
                   rows={1}
                   placeholder="Ask a follow-up..."
-                  className="min-h-[70px] max-h-32 flex-1 resize-none rounded-[16px] bg-white/42 px-4 py-3 text-base text-[#1E1C59] outline-none placeholder:text-[#6B6794] backdrop-blur-xl"
+                  className="app-glass-field min-h-[56px] max-h-32 flex-1 resize-none rounded-[16px] px-4 py-2.5 text-base text-[#1E1C59] outline-none placeholder:text-[#6B6794]"
                 />
                 <button
                   onClick={handleSend}
@@ -495,12 +467,17 @@ export const WorkspaceView = () => {
         </section>
       </div>
 
-      <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[26px]">
+      <section
+        className={clsx(
+          'relative flex min-h-0 flex-col overflow-hidden rounded-[26px]',
+          'app-surface'
+        )}
+      >
         <div
           className={clsx(
             'border-b border-[#1E1C59]/8 px-5',
             activeBoardSection === 'definition'
-              ? 'bg-[#34268C]/6 pt-4 pb-0'
+              ? 'app-frost px-0 pt-4 pb-0'
               : 'bg-[#34268C]/6 py-4'
           )}
         >
@@ -515,10 +492,10 @@ export const WorkspaceView = () => {
                 <div
                   key={page.id}
                   className={clsx(
-                    'relative -mb-px flex max-w-[260px] items-center gap-2 rounded-t-[14px] border border-transparent border-b-0 px-3 py-2 text-left text-sm font-semibold whitespace-nowrap transition',
+                    'relative -mb-px flex max-w-[260px] items-center gap-2 rounded-t-[14px] px-3 py-2 text-left text-sm font-semibold whitespace-nowrap transition',
                     activePageId === page.id
-                      ? 'border-[#1E1C59]/8 bg-white text-[#1E1C59]'
-                      : 'bg-[#34268C]/8 text-[#6B6794] hover:bg-[#34268C]/12'
+                      ? 'app-panel text-[#1E1C59]'
+                      : 'app-frost text-[#8B879D] hover:text-[#5C5874]'
                   )}
                 >
                   <button
@@ -539,7 +516,7 @@ export const WorkspaceView = () => {
                         ? 'cursor-not-allowed text-[#aaa5bf]'
                         : activePageId === page.id
                           ? 'text-[#6B6794] hover:bg-[#34268C]/8'
-                          : 'text-[#8D8AB0] hover:bg-[#34268C]/12 hover:text-[#1E1C59]'
+                          : 'text-[#A39FB5] hover:bg-[#34268C]/12 hover:text-[#676381]'
                     )}
                     aria-label={`Delete ${page.title}`}
                   >
@@ -547,13 +524,6 @@ export const WorkspaceView = () => {
                   </button>
                 </div>
               ))}
-              <button
-                onClick={handleAddPage}
-                className="ml-1 -mb-px rounded-t-[14px] border border-transparent border-b-0 bg-[#34268C]/8 px-4 py-3 text-sm font-bold text-[#6B6794] transition hover:bg-[#34268C]/12"
-                aria-label="Create new page"
-              >
-                +
-              </button>
             </div>
 
           </div>
@@ -563,30 +533,30 @@ export const WorkspaceView = () => {
           className={clsx(
             'min-h-0 flex-1 overflow-hidden',
             activeBoardSection === 'definition'
-              ? 'bg-white'
+              ? 'bg-[#34268C]/6'
               : 'bg-[#34268C]/6',
-            activeBoardSection === 'definition' ? 'p-0' : 'p-4'
+            'p-0'
           )}
         >
           <div
             className={clsx(
-              'h-full bg-white',
+              'h-full',
               activeBoardSection === 'definition'
-                ? 'flex min-h-0 flex-col overflow-hidden rounded-none p-0'
+                ? 'flex min-h-0 flex-col overflow-hidden rounded-none bg-transparent p-0'
                 : 'overflow-y-auto rounded-[22px] p-5'
             )}
           >
             <div
               className={clsx(
                 activeBoardSection === 'definition'
-                  ? 'flex min-h-0 flex-1 flex-col bg-white p-0'
-                  : 'rounded-[18px] bg-white p-5'
+                  ? 'flex min-h-0 flex-1 flex-col bg-transparent p-0'
+                  : 'app-panel rounded-[18px] p-5'
               )}
             >
               {activeBoardSection === 'definition' && (
                 <>
                   <div className="grid min-h-0 flex-1 items-stretch gap-4 overflow-hidden xl:gap-0 xl:grid-cols-[minmax(0,1.45fr)_320px]">
-                    <div className="flex min-h-0 h-full flex-col overflow-hidden rounded-[18px] bg-white xl:rounded-r-none">
+                    <div className="flex min-h-0 h-full flex-col overflow-hidden bg-white">
                       <div className="border-b border-[#1E1C59]/8 bg-[#F2F2F2] px-5 py-3">
                         <a
                           href={embeddedArticle.url}
@@ -645,7 +615,7 @@ export const WorkspaceView = () => {
 
               {activeBoardSection === 'summary' && (
                 <>
-                  <div className="rounded-[20px] bg-white p-5">
+                  <div className="app-panel rounded-[20px] p-5">
                     <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                       {activePage.title}
                     </div>
@@ -655,8 +625,8 @@ export const WorkspaceView = () => {
                     </div>
                   </div>
 
-                  <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_320px]">
-                    <div className="rounded-[20px] bg-white p-5">
+                  <div className="mt-3 grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_320px]">
+                    <div className="app-panel rounded-[20px] p-5">
                       <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                         Key points
                       </div>
@@ -674,15 +644,15 @@ export const WorkspaceView = () => {
                       </div>
                     </div>
 
-                    <div className="grid gap-4">
-                      <div className="rounded-[20px] bg-white p-5">
+                    <div className="grid gap-3">
+                      <div className="app-panel rounded-[20px] p-5">
                         <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                           Study focus
                         </div>
                         <div className="mt-3 text-sm leading-7 text-[#1E1C59]">{activePage.focus}</div>
                       </div>
 
-                      <div className="rounded-[20px] bg-white p-5">
+                      <div className="app-panel rounded-[20px] p-5">
                         <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
                           Watch out
                         </div>
@@ -699,12 +669,12 @@ export const WorkspaceView = () => {
                     <BookOpenCheck size={16} />
                     Worked examples
                   </div>
-                  <div className="mt-4 rounded-[16px] bg-white p-5">
+                  <div className="app-panel mt-3 rounded-[16px] p-5">
                     <div className="text-lg font-semibold text-[#1E1C59]">{activePage.exampleTitle}</div>
                     <div className="mt-2 text-sm leading-7 text-[#6B6794]">{activePage.exampleBody}</div>
                   </div>
 
-                  <div className="mt-4 grid gap-3 md:grid-cols-3">
+                  <div className="mt-3 grid gap-3 md:grid-cols-3">
                     {[
                       'Read the prompt carefully',
                       'Predict the answer before checking',
@@ -714,7 +684,7 @@ export const WorkspaceView = () => {
                       const Icon = icons[index];
 
                       return (
-                        <div key={step} className="rounded-[16px] bg-white p-4">
+                        <div key={step} className="app-panel rounded-[16px] p-4">
                           <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#E2F263]/32 text-[#1E1C59]">
                             <Icon size={18} />
                           </div>
@@ -727,12 +697,12 @@ export const WorkspaceView = () => {
                     })}
                   </div>
 
-                  <div className="mt-4 grid gap-3 lg:grid-cols-3">
+                  <div className="mt-3 grid gap-3 lg:grid-cols-3">
                     {examplePanels.map((item) => {
                       const Icon = item.icon;
 
                       return (
-                        <div key={item.title} className="rounded-[16px] bg-white/70 p-5">
+                        <div key={item.title} className="app-panel rounded-[16px] p-5">
                           <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0CF25D]/18 text-[#1E1C59]">
                             <Icon size={19} />
                           </div>

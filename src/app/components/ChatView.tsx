@@ -9,8 +9,6 @@ import {
   Target,
 } from 'lucide-react';
 
-import doodle from '@/assets/c66905e9277bdd045c5911a8ef1f9bc6131f4a00.png';
-
 const folders = [
   {
     title: 'Biology review',
@@ -93,23 +91,18 @@ export const ChatView = () => {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid h-full min-h-0 gap-4 overflow-hidden lg:grid-cols-[minmax(0,1.2fr)_360px]"
+      className="app-page-shell grid h-full min-h-0 gap-3 overflow-hidden lg:grid-cols-[minmax(0,1.2fr)_360px]"
     >
-      <section className="app-surface relative flex min-h-0 flex-col overflow-hidden rounded-[26px] p-6 sm:p-8">
-        <img
-          src={doodle}
-          alt=""
-          className="pointer-events-none absolute right-[-3rem] top-[-2rem] w-64 rotate-[14deg] opacity-[0.06]"
-        />
+      <section className="flex min-h-0 flex-col overflow-hidden rounded-[26px]">
         <div className="min-h-0 flex-1 overflow-y-auto pr-1">
-          <div className="rounded-[22px] bg-[#34268C]/6 p-3">
-            <div className="flex items-center gap-3 rounded-[16px] bg-white px-4 py-4 text-sm text-[#6B6794]">
+          <div className="app-surface rounded-[22px]">
+            <div className="app-panel flex items-center gap-3 rounded-[16px] px-4 py-4 text-sm text-[#6B6794]">
               <Search size={18} className="text-[#1E1C59]" />
               Search previous topics, notes, or saved boards
             </div>
           </div>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {archiveStats.map((item) => (
               <div key={item.label} className="app-frost rounded-[16px] px-4 py-4">
                 <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#6B6794]">
@@ -120,11 +113,11 @@ export const ChatView = () => {
             ))}
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
             {folders.map((folder) => (
               <div
                 key={folder.title}
-                className={`rounded-[22px] border border-[#1E1C59]/10 p-5 transition hover:-translate-y-0.5 ${folder.tone}`}
+                className="app-panel rounded-[22px] p-5 transition hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand-strong)] text-[var(--brand-strong-foreground)]">
@@ -141,7 +134,7 @@ export const ChatView = () => {
             ))}
           </div>
 
-          <div className="mt-8 rounded-[24px] bg-white p-5">
+          <div className="app-surface mt-3 rounded-[24px] p-5">
             <div className="flex items-center gap-3">
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#E2F263] text-[#1E1C59]">
                 <History size={18} />
@@ -175,44 +168,50 @@ export const ChatView = () => {
         </div>
       </section>
 
-      <aside className="grid min-h-0 content-start gap-4 overflow-y-auto pr-1">
-        <section className="app-surface shrink-0 rounded-[24px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#E2F263]/32 text-[#1E1C59]">
-            <BookmarkCheck size={18} />
-          </div>
-          <h3 className="mt-4 text-xl font-semibold text-[#1E1C59]">Pinned notes</h3>
-          <div className="mt-4 space-y-3">
-            {pinnedItems.map((item) => (
-              <div key={item} className="app-panel rounded-[18px] p-4 text-sm leading-6 text-[#1E1C59]">
-                {item}
-              </div>
-            ))}
+      <aside className="grid min-h-0 content-start gap-3 overflow-y-auto pr-1">
+        <section className="app-surface shrink-0 rounded-[24px]">
+          <div className="app-content pl-6 sm:pl-7">
+            <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#E2F263]/32 text-[#1E1C59]">
+              <BookmarkCheck size={18} />
+            </div>
+            <h3 className="mt-4 text-xl font-semibold text-[#1E1C59]">Pinned notes</h3>
+            <div className="mt-4 space-y-3">
+              {pinnedItems.map((item) => (
+                <div key={item} className="app-panel rounded-[18px] p-4 text-sm leading-6 text-[#1E1C59]">
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="app-surface shrink-0 rounded-[24px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#34268C]/10 text-[#1E1C59]">
-            <FileClock size={18} />
+        <section className="app-surface shrink-0 rounded-[24px]">
+          <div className="app-content pl-6 sm:pl-7">
+            <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#34268C]/10 text-[#1E1C59]">
+              <FileClock size={18} />
+            </div>
+            <h3 className="mt-4 text-xl font-semibold text-[#1E1C59]">Archive logic</h3>
+            <p className="mt-3 text-sm leading-6 text-[#6B6794]">
+              Each saved board acts like a snapshot of an earlier session, so the learner can reopen
+              explanations and past mistakes without mixing them into the live workspace.
+            </p>
           </div>
-          <h3 className="mt-4 text-xl font-semibold text-[#1E1C59]">Archive logic</h3>
-          <p className="mt-3 text-sm leading-6 text-[#6B6794]">
-            Each saved board acts like a snapshot of an earlier session, so the learner can reopen
-            explanations and past mistakes without mixing them into the live workspace.
-          </p>
         </section>
 
-        <section className="app-surface shrink-0 rounded-[24px] p-5">
-          <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0CF25D]/18 text-[#1E1C59]">
-            <Target size={18} />
-          </div>
-          <h3 className="mt-4 text-xl font-semibold text-[#1E1C59]">Future learning goals</h3>
-          <div className="mt-4 space-y-3">
-            {futureGoals.map((goal) => (
-              <div key={goal.title} className="app-panel rounded-[18px] p-4">
-                <div className="text-sm font-semibold leading-6 text-[#1E1C59]">{goal.title}</div>
-                <p className="mt-2 text-sm leading-6 text-[#6B6794]">{goal.note}</p>
-              </div>
-            ))}
+        <section className="app-surface shrink-0 rounded-[24px]">
+          <div className="app-content pl-6 sm:pl-7">
+            <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0CF25D]/18 text-[#1E1C59]">
+              <Target size={18} />
+            </div>
+            <h3 className="mt-4 text-xl font-semibold text-[#1E1C59]">Future learning goals</h3>
+            <div className="mt-4 space-y-3">
+              {futureGoals.map((goal) => (
+                <div key={goal.title} className="app-panel rounded-[18px] p-4">
+                  <div className="text-sm font-semibold leading-6 text-[#1E1C59]">{goal.title}</div>
+                  <p className="mt-2 text-sm leading-6 text-[#6B6794]">{goal.note}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </aside>

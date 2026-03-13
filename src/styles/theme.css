@@ -2,7 +2,10 @@
 
 :root {
   --font-size: 15px;
-  --background: #f2f2f2;
+  --background: #ddd9d7;
+  --glass-lilac: 201, 166, 214;
+  --glass-indigo: 94, 73, 229;
+  --glass-amber: 219, 175, 82;
   --foreground: #1e1c59;
   --card: rgba(255, 255, 255, 0.96);
   --card-foreground: #1e1c59;
@@ -129,7 +132,13 @@
 
   body {
     @apply bg-background text-foreground;
-    background: var(--background);
+    background:
+      radial-gradient(circle at 10% 11%, rgba(var(--glass-indigo), 0.24), transparent 18%),
+      radial-gradient(circle at 53% 17%, rgba(var(--glass-lilac), 0.3), transparent 20%),
+      radial-gradient(circle at 77% 87%, rgba(var(--glass-amber), 0.34), transparent 18%),
+      radial-gradient(circle at 24% 88%, rgba(255, 255, 255, 0.18), transparent 24%),
+      linear-gradient(180deg, #e5e1df 0%, #ddd8d5 100%);
+    background-attachment: fixed;
     font-family:
       'Manrope',
       'Avenir Next',
@@ -233,17 +242,35 @@
 
 @layer utilities {
   .app-surface {
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(30, 28, 89, 0.08);
-    box-shadow: none;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(var(--glass-lilac), 0.12), transparent 34%),
+      radial-gradient(circle at 76% 18%, rgba(var(--glass-indigo), 0.1), transparent 32%),
+      radial-gradient(circle at 82% 86%, rgba(var(--glass-amber), 0.1), transparent 36%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.42) 100%);
+    backdrop-filter: blur(24px) saturate(118%);
+    -webkit-backdrop-filter: blur(24px) saturate(118%);
+    box-shadow:
+      0 18px 42px rgba(85, 85, 98, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.52);
   }
 
   .app-panel {
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(30, 28, 89, 0.08);
-    box-shadow: none;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 15% 18%, rgba(var(--glass-lilac), 0.1), transparent 30%),
+      radial-gradient(circle at 80% 20%, rgba(var(--glass-indigo), 0.08), transparent 28%),
+      radial-gradient(circle at 78% 86%, rgba(var(--glass-amber), 0.08), transparent 32%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.36) 100%);
+    backdrop-filter: blur(22px) saturate(114%);
+    -webkit-backdrop-filter: blur(22px) saturate(114%);
+    box-shadow:
+      0 14px 32px rgba(85, 85, 98, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
   .app-grid {
@@ -251,10 +278,98 @@
   }
 
   .app-frost {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(30, 28, 89, 0.06);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: none;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 16% 18%, rgba(var(--glass-lilac), 0.08), transparent 28%),
+      radial-gradient(circle at 78% 22%, rgba(var(--glass-indigo), 0.07), transparent 28%),
+      radial-gradient(circle at 80% 86%, rgba(var(--glass-amber), 0.07), transparent 32%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0.32) 100%);
+    backdrop-filter: blur(20px) saturate(112%);
+    -webkit-backdrop-filter: blur(20px) saturate(112%);
+    box-shadow:
+      0 12px 26px rgba(85, 85, 98, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.48);
+  }
+
+  .app-glass-field {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 15% 18%, rgba(var(--glass-lilac), 0.06), transparent 26%),
+      radial-gradient(circle at 80% 18%, rgba(var(--glass-indigo), 0.05), transparent 24%),
+      radial-gradient(circle at 78% 84%, rgba(var(--glass-amber), 0.05), transparent 30%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.34) 100%);
+    backdrop-filter: blur(20px) saturate(110%);
+    -webkit-backdrop-filter: blur(20px) saturate(110%);
+    box-shadow:
+      0 8px 20px rgba(85, 85, 98, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(188, 188, 196, 0.18);
+  }
+
+  .app-glass-cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 18% 18%, rgba(var(--glass-lilac), 0.24), transparent 36%),
+      radial-gradient(circle at 74% 18%, rgba(var(--glass-indigo), 0.26), transparent 34%),
+      radial-gradient(circle at 82% 84%, rgba(var(--glass-amber), 0.22), transparent 36%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0.24) 100%);
+    backdrop-filter: blur(26px) saturate(130%);
+    -webkit-backdrop-filter: blur(26px) saturate(130%);
+    box-shadow:
+      0 14px 34px rgba(86, 82, 118, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      inset 0 -1px 0 rgba(126, 118, 172, 0.18);
+  }
+
+  .app-glass-cta:hover {
+    background:
+      radial-gradient(circle at 18% 18%, rgba(var(--glass-lilac), 0.28), transparent 36%),
+      radial-gradient(circle at 74% 18%, rgba(var(--glass-indigo), 0.3), transparent 34%),
+      radial-gradient(circle at 82% 84%, rgba(var(--glass-amber), 0.25), transparent 36%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.28) 100%);
+    box-shadow:
+      0 16px 38px rgba(86, 82, 118, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78),
+      inset 0 -1px 0 rgba(126, 118, 172, 0.2);
+  }
+
+  .app-content {
+    padding: 1.125rem;
+  }
+
+  .app-content-lg {
+    padding: 1.5rem;
+  }
+
+  .app-scroll-content {
+    padding: 1.125rem 0.5rem 1.125rem 1.125rem;
+  }
+
+  .app-page-shell {
+    padding: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .app-content {
+      padding: 1.25rem;
+    }
+
+    .app-content-lg {
+      padding: 1.75rem;
+    }
+
+    .app-scroll-content {
+      padding: 1.25rem 0.75rem 1.25rem 1.25rem;
+    }
+
+    .app-page-shell {
+      padding: 1.125rem;
+    }
   }
 }
